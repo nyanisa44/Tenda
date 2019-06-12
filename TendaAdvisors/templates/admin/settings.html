@@ -1,0 +1,71 @@
+﻿
+<h1>Settings</h1>
+<h3 class="col-xs-12">Adviser Commission Settings</h3>
+<div class="col-xs-12 admin import">
+    Manage commission percentages to advisers per licence type.
+</div>
+<div class="row" data-ng-controller="adminController">
+    <div class="col-xs-12 remindersCards" style="padding-top: 0px;">
+        <div class="col-xs-12 remindersCard">
+
+            <div class="col-xs-12">
+                <div class="col-xs-12">
+                    <div class="col-xs-12 remindersCards">
+
+                        <div class="col-xs-6 nopadding">
+                            Select Adviser:
+                        </div>
+                        <select class="col-xs-6 nopadding textEditable"
+                                ng-model="advisorId"
+                                ng-change="onAdvisorSelected()">
+                            <option ng-repeat="advisor in advisors" value="{{advisor.id}}">{{advisor.contact.firstName}} {{advisor.contact.middleName}} {{advisor.contact.lastName}}</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-12 remindersCards">
+                        <div class="col-xs-6 nopadding">
+                            Select Licence Type:
+                        </div>
+                        <select class="col-xs-6 nopadding textEditable"
+                                ng-model="licenseId"
+                                ng-change="onLicenseSelected()">
+                            <option ng-repeat="license in licenses" value="{{license.licenseTypeId}}">{{license.licenseTypeName}} </option>
+                        </select>
+                    </div>
+                    <div class="col-xs-12 remindersCards">
+
+                        <div class="col-xs-6 nopadding">
+                            Share percentage
+                        </div>
+
+                        <div class="col-xs-6 nopadding">
+                            <input class="col-xs-6 nopadding textEditable" placeholder="share percentage" type="text" ng-model="advisorShare" /> %
+                        </div>
+                    </div>
+                    <div class="col-xs-12 remindersCards">
+
+                        <div class="col-xs-6 nopadding">
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <hr class="col-xs-12" />
+            <button class="col-xs-1 nopadding btn btn-sm btn-success" title="Save" style="float: right;" ng-click="putAdvisorShare()">
+                Save
+            </button>
+        </div>
+        <div class="col-xs-12 remindersCard">
+            <h3 class="col-xs-12 subHeading">System Settings</h3>
+            <div class="col-xs-12 remindersCard" ng-repeat="setting in systemsettings"  ng-model="setting">
+                <div class="col-xs-7 nopadding"> {{ setting.settingName }} </div>
+                <div class="col-xs-4 nopadding "><input class="nopadding textEditable" placeholder="Input Value" type="text" ng-model="setting.settingValue" /></div>
+                <button class="col-xs-1 nopadding btn btn-sm btn-success" title="Save" style="float: right;" ng-click="putSystemSettings(setting)">
+                    Save
+                </button>
+            </div>            
+        </div>
+    </div>
+</div>

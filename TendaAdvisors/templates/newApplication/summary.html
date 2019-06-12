@@ -1,0 +1,108 @@
+﻿
+<h3 class="col-xs-12 smallHeading">Step 4: Summary</h3>
+<div class="col-xs-12 registrationDescription">
+    Here is a summary of the new application, you can change it later in the applications tab.
+</div>
+<div class="col-xs-12 nopadding">
+
+    <div class="col-xs-12 col-sm-6">
+        <div class="col-xs-12 remindersCards nopadding">
+            <div class="col-xs-12 remindersCard">
+                <h4 class="col-xs-12 cardHeading">Client Details</h4>
+                <div class="col-xs-12">
+                    <div class="col-xs-12 nopadding">
+                        <div class="col-xs-12 cardHeading cardVia" style="text-align:left; padding-left: 0px; font-weight: bold; padding-bottom: 10px;">Personal Details</div>
+                        <div class="col-xs-6 nopadding">Title</div><input type="text" ng-model="application.client.title" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                        <div class="col-xs-6 nopadding">First Name</div><input type="text" ng-model="application.client.firstName" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                        <div class="col-xs-6 nopadding">Middle Name</div><input type="text" ng-model="application.client.middleName" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                        <div class="col-xs-6 nopadding">Last Name</div><input type="text" ng-model="application.client.lastName" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                        <div class="col-xs-6 nopadding">ID Number</div><input type="text" ng-model="application.client.idNumber" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                        <div class="col-xs-6 nopadding">Member Number</div><input type="text" ng-model="application.client.memberId" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                        <div class="col-xs-6 nopadding">Employer Name</div><input type="text" ng-model="application.client.employerName" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                        <div class="col-xs-6 nopadding">Job Title</div><input type="text" ng-model="application.client.jobTitle" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+
+                        <div class="col-xs-12 cardHeading cardVia" style="text-align:left; padding-left: 0px; font-weight: bold; padding-bottom: 10px;">Contact Details</div>
+                        <div class="col-xs-6 nopadding">Email 1</div><input type="text" ng-model="application.client.email" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                        <div class="col-xs-6 nopadding">Email 2</div><input type="text" ng-model="application.client.email2" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                        <div class="col-xs-6 nopadding">Cell 1</div><input type="text" ng-model="application.client.cell1" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                        <div class="col-xs-6 nopadding">Cell 2</div><input type="text" ng-model="application.client.cell2" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+
+                        <div class="col-xs-6 nopadding">Tel 1</div><input type="text" ng-model="application.client.tel1" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                        <div class="col-xs-6 nopadding">Tel 2</div><input type="text" ng-model="application.client.tel2" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 remindersCard">
+                <div class="col-xs-12" ng-repeat="address in application.client.addresses">
+                    <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left;">Address {{ application.client.addresses.length > 1 ? $index + 1 : "" }}</div><!--Contact Details Summary-->
+                    <div class="col-xs-6 nopadding">Address Type:</div>
+                    <input type="text" class="col-xs-6 nopadding textEditable" value="{{ getAddressType(address.addressType.Id) }}" disabled />
+                    <div class="col-xs-6 nopadding">Description:</div>
+                    <input type="text" class="col-xs-6 nopadding textEditable" value="{{ address.description }}" disabled />
+
+                    <div class="col-xs-12 breakLine"></div>
+
+                    <div class="col-xs-6 nopadding">Street 1:</div>
+                    <input type="text" class="col-xs-6 nopadding textEditable" value="{{ address.street1 }}" disabled />
+                    <div class="col-xs-6 nopadding">Street 2:</div>
+                    <input type="text" class="col-xs-6 nopadding textEditable" value="{{ address.street2 }}" disabled />
+                    <div class="col-xs-6 nopadding">Street 3:</div>
+                    <input type="text" class="col-xs-6 nopadding textEditable" value="{{ address.street3 }}" disabled />
+
+                    <div class="col-xs-12 breakLine"></div>
+
+                    <div class="col-xs-6 nopadding">Suburb:</div>
+                    <input type="text" class="col-xs-6 nopadding textEditable" value="{{ address.suburb }}" disabled />
+                    <div class="col-xs-6 nopadding">Postal Code:</div>
+                    <input type="text" class="col-xs-6 nopadding textEditable" value="{{ address.postalCode }}" disabled />
+                    <div class="col-xs-6 nopadding">City:</div>
+                    <input type="text" class="col-xs-6 nopadding textEditable" value="{{ address.city }}" disabled />
+                    <div class="col-xs-6 nopadding">Map Url:</div>
+                    <input type="text" class="col-xs-6 nopadding textEditable" value="{{ address.apUrl }}" disabled />
+
+                    <div class="col-xs-12 breakLine"></div>
+
+                    <div class="col-xs-6 nopadding">Province:</div>
+                    <input type="text" class="col-xs-6 nopadding textEditable" value="{{ getProvince(address.province.Id) }}" disabled />
+                    <div class="col-xs-6 nopadding">Country:</div>
+                    <input type="text" class="col-xs-6 nopadding textEditable" value="{{ getCountry(address.country.Id) }}" disabled />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-6">
+        <div class="col-xs-12 remindersCards nopadding" ng-repeat="product in application.products">
+            <div class="col-xs-12 remindersCard">
+                <h4 class="col-xs-12 cardHeading">{{ product.name }} ({{ product.supplier.name }}):</h4>
+                <div class="col-xs-12 nopadding documentCard"
+                     ng-repeat="doc in product.applicationDocuments"
+                     file-dropzone="[image/png, image/jpeg, image/gif]"
+                     file="doc.file"
+                     file-name="doc.location"
+                     data-max-file-size="10">
+                    <div class="col-xs-12">
+                        <div class="col-xs-2">
+                            <img ng-src="{{getDocumentPic(doc.documentType)}}" class="iconImage" />
+                        </div>
+                        <div class="col-xs-10">
+                            <input class="col-xs-12 nopadding textEditable"
+                                   placeholder="Document Title"
+                                   style="margin-top: 8px;"
+                                   ng-model="doc.title"
+                                   disabled />
+                            <input class="col-xs-12 nopadding textEditable"
+                                   placeholder="Document Title"
+                                   style="margin-top: 8px;"
+                                   ng-model="doc.location"
+                                   disabled />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-12"><button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right;" ng-click="gotoPage(5)">Submit</button></div>

@@ -1,0 +1,38 @@
+﻿
+<link href="css/index.css" rel="stylesheet">
+
+<div class="row">
+    <div class="col-xs-12 col-sm-5 leftBar">
+        <div>
+            <img class="fullLogo" style="width:500px"  src="img/Tendahealth logo.png" />
+        </div>
+        <div class="largePadding">
+           <div style="font-size:xx-large;font-style:oblique">Sound Advice - Smart Solutions </div>
+           
+            <div>Authorised financial services provider (FSP 44680)</div>
+            <div>CMS accredited (Org4268)</div>
+            </div>
+    </div>
+    <div class="col-sm-1 RightLine"></div>
+    <div class="col-sm-1"></div>
+    <div class="col-xs-12 horizontalLine"></div>
+    <div class="col-xs-12 col-sm-5 rightBar">
+        <div>
+            <div>
+                Tendahealth offers integrated insurance, investment and health solutions to protect and enhance your health and financial wellness.
+                <br></br>
+                Our vast industry knowledge and inquisitive approach ensure that we find and present our clients with relevant advice and sound insurance and health solutions. We pride ourselves in building enduring individual and corporate relationships through our personal approach and ongoing support.
+            </div>
+            <div class="loginInputFields largePadding">
+                <form class="form-signin" ng-submit="Login()">
+                    <ul>
+                        <li><input id="username" type="text" placeholder="Enter a username" ng-model="Model.Username" /></li>
+                        <li><input id="password" type="password" placeholder="Enter a password" ng-model="Model.Password" /></li>
+                        <li><input id="submitButton" class="btn btn-primary" type="submit" value="SIGN IN"  /></li>
+                    </ul>
+                </form>
+                <div ng-if="LoggingIn == false" style="margin-left:100px"> {{ErrorMessage}}</div>
+            </div>
+        </div>
+    </div>
+</div>

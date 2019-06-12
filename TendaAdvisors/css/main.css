@@ -1,0 +1,670 @@
+﻿/*Main stuff*/
+
+body {
+    font-family: Calibri, Arial, sans-serif;
+    padding-top: 90px;
+    background: #ebebeb;
+}
+
+.container-fluid {
+    max-width: 1024px;
+}
+
+a {
+    cursor: pointer;
+}
+
+h1, h2, h3, h4, h5, h6, h3.smallHeading, .profileWelcomeHeading {
+    color: #7f7f7f;
+}
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.container {
+    width: 100% !important;
+    max-width: 1100px;
+}
+
+.errormessage {
+    color: maroon;
+}
+
+/*LOGONVA*/
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+}
+
+.navbar-fixed-top .nav {
+    padding: 15px 0;
+}
+
+.navbar-fixed-top .navbar-brand {
+    padding: 0 15px;
+}
+
+@media(min-width:768px) {
+    body {
+        padding-top: 100px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+    }
+
+    .navbar-fixed-top .navbar-brand {
+        padding: 15px 0;
+    }
+}
+
+/*THEOTHERONE*/
+html, body, p, li, a, div {
+    font-family: Calibri, Arial;
+}
+
+h1, h2, h3, h4, h5, h6, h3.smallHeading, .profileWelcomeHeading {
+    color: #7f7f7f;
+}
+
+body {
+    padding-top: 90px !important;
+    background: #ebebeb;
+}
+
+.nav.navbar-nav {
+    float: right;
+    padding-bottom: 0;
+    padding-top: 0px;
+}
+
+    .nav.navbar-nav li:hover {
+    }
+
+    .nav.navbar-nav li a:hover {
+        border-bottom: 4px solid #90caf9;
+        color: #fff;
+    }
+
+.navbar-inverse {
+
+    background: rgba(255,255,255,1);
+    background: -moz-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 36%, rgba(13,71,161,1) 56%, rgba(13,71,161,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,255,255,1)), color-stop(36%, rgba(255,255,255,1)), color-stop(56%, rgba(13,71,161,1)), color-stop(100%, rgba(13,71,161,1)));
+    background: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 36%, rgba(13,71,161,1) 56%, rgba(13,71,161,1) 100%);
+    background: -o-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 36%, rgba(13,71,161,1) 56%, rgba(13,71,161,1) 100%);
+    background: -ms-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 36%, rgba(13,71,161,1) 56%, rgba(13,71,161,1) 100%);
+    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 36%, rgba(13,71,161,1) 56%, rgba(13,71,161,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#0d47a1', GradientType=1 );
+
+    border: none;
+    -webkit-box-shadow: 0px -2px 10px 2px rgba(179,179,179,1);
+    -moz-box-shadow: 0px -2px 10px 2px rgba(179,179,179,1);
+    box-shadow: 0px -2px 10px 2px rgba(179,179,179,1);
+}
+
+.currentSelectedPage {
+    border-bottom: 4px solid #90caf9 !important;
+    color: #fff !important;
+}
+
+.navbar-inverse .navbar-toggle {
+    background: #EBEBEB;
+}
+
+.navContainer {
+    padding-right: 0px;
+}
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    font-weight: bold;
+    padding-left: 11px;
+    padding-right: 12px;
+    color: #6586d3;
+    font-size: 12pt;
+    text-transform: uppercase;
+    border-bottom: 4px solid transparent;
+}
+
+.navbar-header {
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    background-image: url("/img/Tenda_Header.png");
+}
+
+.imageIcon img {
+    width: 130px;
+    margin: auto;
+    background: #fff;
+}
+
+.displayInlineClass {
+    display: inline;
+}
+
+@media (max-width: 374px) {
+    .profileWelcomeHeading {
+        margin-top: 14px !important;
+    }
+
+    .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+.container {
+    width: 100% !important;
+    max-width: 1100px;
+}
+
+
+@media (min-width: 768px) {
+    .navbar-nav {
+    }
+
+    .navbar-header {
+        padding-left: 15px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    .container.navContainer {
+        padding-left: 0px;
+    }
+
+    .nav.navbar-nav {
+        padding-bottom: 0;
+        padding-top: 30px;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-nav {
+        float: right !important;
+    }
+
+    .container.mainContainer {
+        padding-top: 0px;
+    }
+}
+
+.profileWelcomeHeading {
+    font-size: 16pt;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    text-align: left;
+    vertical-align: middle;
+    margin-top: 40px;
+    margin-bottom: 10%;
+}
+
+.profileLastLoggedOn {
+    font-size: 12pt;
+    font-style: italic;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    text-align: left;
+    vertical-align: middle;
+    margin-top: 70px;
+    margin-bottom: 10%;
+}
+
+.navbar-toggle {
+    margin-right: 30px;
+}
+
+.circleWithText {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    font-size: 16px;
+    color: #fff;
+    line-height: 98px;
+    text-align: center;
+    vertical-align: middle;
+    margin: auto;
+    cursor: pointer;
+}
+
+.PendingCircle {
+    background: #00b0ff;
+}
+
+.ActiveCircle {
+    background: #7bbb00;
+}
+
+.InactiveCircle {
+    background: #ff5252;
+}
+
+h3.smallHeading {
+    font-size: 12pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-left: 10px;
+    margin-top: 12px;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #7f7f7f;
+    border-color: #7f7f7f;
+    padding: 3px 8px;
+    font-weight: bold;
+}
+
+.btn-primary:hover
+{
+
+}
+
+.remindersCards {
+    padding-top: 10px;
+    margin-bottom: 30px;
+}
+
+.remindersCards.hoverable .remindersCard:hover {
+    background: #fbfbfb;
+}
+
+.remindersCard {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 2px;
+    -webkit-box-shadow: 0px 2px 2px 0px rgba(184,184,184,1);
+    -moz-box-shadow: 0px 2px 2px 0px rgba(184,184,184,1);
+    box-shadow: 0px 2px 2px 0px rgba(184,184,184,1);
+    background: #fff;
+
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+    .remindersCard .activityCode {
+        font-weight: bold;
+        font-size: 12pt;
+        color: #7f7f7f;
+        text-transform: uppercase;
+        padding: 0;
+    }
+
+    .remindersCard .activityName {
+        font-size: 10pt;
+        color: #7f7f7f;
+        text-transform: uppercase;
+        padding: 0;
+    }
+
+    .remindersCard .activityDateSubmitted {
+        font-size: 10pt;
+        color: #7f7f7f;
+        text-transform: uppercase;
+        font-style: italic;
+        padding: 0;
+        padding-top: 10px;
+        
+        text-align: center;
+    }
+
+    .remindersCard .activityStatus {
+        color: orange;
+        text-transform: uppercase;
+        font-weight: bold;
+        padding: 0;
+
+        text-align: center;
+    }
+
+    .remindersCard .activityStatusPending {
+        color: #00b0ff;
+    }
+
+    .remindersCard .activityStatusActive {
+        color: #7bbb00;
+    }
+
+    .remindersCard .activityStatusInactive {
+        color: #ff5252;
+    }
+
+h4.cardHeading {
+    font-size: 12pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.remindersCard .cardVia {
+    font-weight: normal;
+    font-style: italic;
+    float: right;
+    text-align: right;
+    padding-bottom: 10px;
+}
+
+.remindersCard .cardViaBolder
+{
+    font-weight: bold;
+    padding-left: 0px;
+}
+
+.remindersCard p {
+    margin: 0;
+}
+
+.remindersCards .subHeading {
+    font-style: italic;
+    font-size: 12pt;
+    padding-left: 0px;
+    margin-top: 0;
+}
+
+.nopadding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.navbar-inverse .navbar-toggle, .navbar-inverse .navbar-toggle {
+    background-color: #1968b3;
+}
+
+    .navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+        background-color: #231f20;
+    }
+
+@media (max-width: 512px) {
+    .remindersCard .cardVia {
+        float: left;
+        text-align: left;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-nav {
+        margin-right: 20px;
+    }
+
+    .remindersCard .cardVia {
+        float: left;
+        text-align: left;
+    }
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: #888888;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 50%;
+    margin-top: 2px;
+}
+
+
+
+
+
+
+
+/*LOGIN*/
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+    .form-signin .form-signin-heading,
+    .form-signin .checkbox {
+        margin-bottom: 10px;
+    }
+
+    .form-signin .checkbox {
+        font-weight: normal;
+    }
+
+    .form-signin .form-control {
+        position: relative;
+        height: auto;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+        .form-signin .form-control:focus {
+            z-index: 2;
+        }
+
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+.textEditable
+{
+    text-align: right;
+    height: 20px;
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid rgba(179,179,179,1);
+}
+
+.doNotDisplay
+{
+    display: none;
+}
+
+input[type="text"]:disabled {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(197,197,197,0.3);
+}
+
+.iconImage
+{
+    width: 40px;
+}
+
+.documentCard
+{
+    background: rgba(235, 235, 235, 0.21);
+    margin-bottom: 5px;
+    padding: 10px;
+}
+
+.newDocumentCard
+{
+    /*height: 200px;*/
+    text-align: center;
+    border: 1px dashed black !important;
+}
+
+.dragAndDrop
+{
+    /*padding-top: 40px;*/
+    text-transform: uppercase;
+}
+
+.documentCard:hover
+{
+    background: rgba(235, 235, 235, 0.7);
+}
+
+.crossButton
+{
+    font-weight: bold;
+    font-size: 14pt;
+    text-align: right;
+    padding-top: 6px;
+}
+
+input:focus
+{
+    background: transparent;
+    border-color: transparent;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    /* padding: 3px 0px 3px 3px; */
+    margin: 0px 0px 0px 0px;
+    border-bottom: 1px solid #0d47a1;
+}
+
+.nextButtonRegister
+{
+    margin-top: 16px;
+    min-width: 70px;
+    max-width: 100px;
+}
+
+.registerAdvisor .summaryCards .col-xs-6
+{
+    min-height: 22px;
+    border-bottom: 1px solid rgba(235, 235, 235, 0.15);
+}
+
+.registrationDescription
+{
+
+}
+
+.breakLine
+{
+    height: 6px;
+    background: transparent;
+    border: 1px solid #fbfbfb;
+    border-left: none;
+    border-right: none;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.uberbreak
+{
+    margin-top: 10px;
+    border: 1px solid rgba(187, 187, 187, 0.2);
+}
+
+.disabledButton, .disabledButton:hover, .disabledButton:focus
+.disabledButton:active
+{
+    background: #868686;
+    cursor:default;
+}
+
+.ng-invalid {
+    color: red;
+}
+
+.ng-valid-said {
+    color: black;
+    border-bottom-color: aquamarine;
+}
+
+.validationError
+{
+    border-bottom: 1px solid #ff5252;
+}
+
+.selectedDocument
+{
+    font-weight: bold;
+    font-size: 19px;
+    background: #ebebeb;
+}
+
+.bottomSpacing
+{
+    height: 40px;
+}
+
+.applicationDetailMassiveCard
+{
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+h3.bigPageLink
+{
+    text-align: center;
+    cursor: pointer;
+    margin: 0;
+    padding: 14px;
+}
+
+h3.selectedTab
+{
+    border-bottom: 4px solid #90caf9;
+}
+
+h3.bigPageLink:hover
+{
+    border-bottom: 4px solid #90caf9;
+}
+
+/* File Upload Drag and Drop: */
+
+.dropzone {
+  width: 250px;
+  height: 45px;
+  border: 1px solid #ccc;
+  text-align: center;
+  padding: 30px;
+  margin: 20px;
+  font-family: Arial;
+}
+
+.image-container {
+    width: 300px;
+    height: 300px;
+}
+
+.image-container img {
+   max-width: 100%;   
+}
+
+.file-name {
+   font-family: Arial;   
+}
+
+.bg-danger
+{
+    padding:10px;
+}
+
+form.ng-invalid
+{
+    color:#000 !important;
+}
+
+.no-padding-left
+{
+    padding-left:0;
+}
+.no-padding-right
+{
+    padding-right:0;
+}

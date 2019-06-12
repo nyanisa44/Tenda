@@ -1,0 +1,785 @@
+namespace TendaAdvisors.Migrations
+{
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Models;
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Diagnostics;
+    using System.Linq;
+
+    internal sealed class Configuration : DbMigrationsConfiguration<TendaAdvisors.Models.ApplicationDbContext>
+    {
+        private readonly bool _pendingMigrations;
+        private static object _seedlock = new object();
+
+        public Configuration()
+        {
+            AutomaticMigrationsEnabled = false;
+
+            var migrator = new DbMigrator(this);
+            _pendingMigrations = migrator.GetPendingMigrations().Any();
+        }
+
+        protected override void Seed(TendaAdvisors.Models.ApplicationDbContext context)
+        {
+            if (!_pendingMigrations) return;
+            lock(_seedlock)
+            {
+                SeedData(context);
+            }
+        }
+
+        public static void SeedData(TendaAdvisors.Models.ApplicationDbContext context)
+        {
+
+            if (System.Diagnostics.Debugger.IsAttached == false)
+                System.Diagnostics.Debugger.Launch();
+
+            var addrtype1 = new AddressType() { Id = 1, Name = "Home" };
+            var addrtype2 = new AddressType() { Id = 2, Name = "Postal" };
+            var addrtype3 = new AddressType() { Id = 3, Name = "Office" };
+
+            var advstat1 = new AdvisorStatus() { Id = 1, Name = "Invalid" };
+            var advstat2 = new AdvisorStatus() { Id = 2, Name = "Not Registered" };
+            var advstat3 = new AdvisorStatus() { Id = 3, Name = "Under Supervision" };
+            var advstat4 = new AdvisorStatus() { Id = 4, Name = "Active" };
+            var advstat5 = new AdvisorStatus() { Id = 5, Name = "Disabled" };
+            
+
+
+            var doctype1 = new DocumentType() { Id = 1, Name = "FAIS Certificate" };
+            var doctype2 = new DocumentType() { Id = 2, Name = "ID Document" };
+            var doctype3 = new DocumentType() { Id = 3, Name = "Formal Qualification" };
+            var doctype4 = new DocumentType() { Id = 4, Name = "Proof of Residence" };
+            var doctype5 = new DocumentType() { Id = 5, Name = "FICA Supporting Document" };
+            var doctype6 = new DocumentType() { Id = 6, Name = "Broker Advice" };
+            var doctype7 = new DocumentType() { Id = 7, Name = "Broker Note" };
+            var doctype8 = new DocumentType() { Id = 8, Name = "Commission Statement" };
+
+            var doctype9 = new DocumentType() { Id = 9, Name = "CMS Application" };
+            var doctype10 = new DocumentType() { Id = 10, Name = "CMS (BR) Certificate" };
+            var doctype11 = new DocumentType() { Id = 11, Name = "ID Document" };
+            var doctype12 = new DocumentType() { Id = 12, Name = "Grade 12 Certificate" };
+            var doctype13 = new DocumentType() { Id = 13, Name = "Banking Details" };
+            var doctype14 = new DocumentType() { Id = 14, Name = "Supervision Plan" };
+            var doctype15 = new DocumentType() { Id = 15, Name = "Supervision Agreement" };
+            var doctype16 = new DocumentType() { Id = 16, Name = "FSB Declaration" };
+            var doctype17 = new DocumentType() { Id = 17, Name = "Letter of Intent" };
+            var doctype18 = new DocumentType() { Id = 18, Name = "Brokerage Appointment Contract" };
+            var doctype19 = new DocumentType() { Id = 19, Name = "New User Form" };
+            var doctype20 = new DocumentType() { Id = 20, Name = "Quarterly Fit and Proper declaration(Every 3 months)" };
+            var doctype21 = new DocumentType() { Id = 21, Name = "Qualifictions(Adviser Training Page)" };
+            var doctype22 = new DocumentType() { Id = 22, Name = "Qualification(In Progress)-(Adviser Training Page)-Must obtain within 6 years from appointment date" };
+            var doctype23 = new DocumentType() { Id = 23, Name = "Quarterly Fit and Proper declaration(Every 3 months)" };
+            var doctype24 = new DocumentType() { Id = 24, Name = "RE" };
+            var doctype25 = new DocumentType() { Id = 25, Name = "RE(In Progress)-Must obtain within 2 years from appointment date" };
+
+            var doctype26 = new DocumentType() { Id = 26, Name = "FSB Certificate" };
+            var doctype27 = new DocumentType() { Id = 27, Name = "CMS Certificate(ORG)" };
+            var doctype28 = new DocumentType() { Id = 28, Name = "Cipro Document" };
+            var doctype29 = new DocumentType() { Id = 29, Name = "PI Cover" };
+            var doctype30 = new DocumentType() { Id = 30, Name = "SARS Document" }; 
+            var doctype31 = new DocumentType() { Id = 31, Name = "Vat Certificate" };
+            var doctype32 = new DocumentType() { Id = 32, Name = "Risk Management Plan" };
+            var doctype33 = new DocumentType() { Id = 33, Name = "Contracts" };
+            var doctype34 = new DocumentType() { Id = 34, Name = "Complaints Resolution Policy" };
+            var doctype35 = new DocumentType() { Id = 35, Name = "FICA Internal Rules" };
+            var doctype36 = new DocumentType() { Id = 36, Name = "Conflict of Interest" };
+
+            var advtype1 = new AdvisorType() { Id = 1, Title = "Key Individual", DocumentTypes = new List<DocumentType>() };
+            var advtype2 = new AdvisorType() { Id = 2, Title = "Adviser", DocumentTypes = new List<DocumentType>() };
+            var advtype3 = new AdvisorType() { Id = 3, Title = "Compliance Officer", DocumentTypes = new List<DocumentType>() };
+            var advtype4 = new AdvisorType() { Id = 4, Title = "Support", DocumentTypes = new List<DocumentType>() };
+            var advtype5 = new AdvisorType() { Id = 5, Title = "Company-Private", DocumentTypes = new List<DocumentType>() };
+
+            advtype1.DocumentTypes.Add(doctype1);
+            advtype1.DocumentTypes.Add(doctype2);
+            advtype1.DocumentTypes.Add(doctype3);
+
+            //Add Advisor (2) to documentType (9-25)
+
+            advtype2.DocumentTypes = new List<DocumentType>();
+            advtype2.DocumentTypes.Add(doctype9);
+            advtype2.DocumentTypes.Add(doctype10);
+            advtype2.DocumentTypes.Add(doctype11);
+            advtype2.DocumentTypes.Add(doctype12);
+            advtype2.DocumentTypes.Add(doctype13);
+            advtype2.DocumentTypes.Add(doctype14);
+            advtype2.DocumentTypes.Add(doctype15);
+            advtype2.DocumentTypes.Add(doctype16);
+            advtype2.DocumentTypes.Add(doctype17);
+            advtype2.DocumentTypes.Add(doctype18);
+            advtype2.DocumentTypes.Add(doctype19);
+            advtype2.DocumentTypes.Add(doctype20);
+            advtype2.DocumentTypes.Add(doctype21);
+            advtype2.DocumentTypes.Add(doctype22);
+            advtype2.DocumentTypes.Add(doctype23);
+            advtype2.DocumentTypes.Add(doctype24);
+            advtype2.DocumentTypes.Add(doctype25);
+
+            advtype5.DocumentTypes.Add(doctype26);
+            advtype5.DocumentTypes.Add(doctype27);
+            advtype5.DocumentTypes.Add(doctype28);
+            advtype5.DocumentTypes.Add(doctype29);
+            advtype5.DocumentTypes.Add(doctype30);
+            advtype5.DocumentTypes.Add(doctype31);
+            advtype5.DocumentTypes.Add(doctype32);
+            advtype5.DocumentTypes.Add(doctype33);
+            advtype5.DocumentTypes.Add(doctype34);
+            advtype5.DocumentTypes.Add(doctype35);
+            advtype5.DocumentTypes.Add(doctype36);
+
+            var applstat1 = new ApplicationStatus() { Id = 1, Status = "New" };
+            var applstat2 = new ApplicationStatus() { Id = 2, Status = "Pending" };
+            var applstat3 = new ApplicationStatus() { Id = 3, Status = "Expired" };
+            var applstat4 = new ApplicationStatus() { Id = 4, Status = "Cancelled" };
+            var applstat5 = new ApplicationStatus() { Id = 5, Status = "Payment Failed" };
+            var applstat6 = new ApplicationStatus() { Id = 6, Status = "Complete" };
+
+
+            var conttype1 = new ContactType() { Id = 1, Name = "Private Individual" };
+            var conttype2 = new ContactType() { Id = 2, Name = "Company" };
+            var conttype3 = new ContactType() { Id = 3, Name = "Government Employee" };
+
+            var country1 = new Country() { Id = 1, Name = "South Africa", Code = "ZA" };
+
+            var prov1 = new Province() { Id = 1, Name = "Gauteng", Code = "GP" };
+            var prov2 = new Province() { Id = 2, Name = "NorthWest", Code = "NW" };
+            var prov3 = new Province() { Id = 3, Name = "Mpumulanga", Code = "MP" };
+            var prov4 = new Province() { Id = 4, Name = "Limpopo", Code = "LP" };
+            var prov5 = new Province() { Id = 5, Name = "KwaZulu-Natal", Code = "KZN" };
+            var prov6 = new Province() { Id = 6, Name = "Free State", Code = "FS" };
+            var prov7 = new Province() { Id = 7, Name = "Northern Cape", Code = "NC" };
+            var prov8 = new Province() { Id = 8, Name = "Eastern Cape", Code = "EC" };
+            var prov9 = new Province() { Id = 9, Name = "Western Cape", Code = "WC" };
+
+            var importType1 = new ImportType() { Id = 1, Type = "Commission Statement", ActionUrl = "Commission", Enabled = true };
+            var importType2 = new ImportType() { Id = 2, Type = "Applications with Members List", ActionUrl = "ApplicationsMembers", Enabled = true };
+            var importType3 = new ImportType() { Id = 2, Type = "Members", ActionUrl = "Members", Enabled = true };
+
+            var company1 = new Company() { Name = "RetroRabbit", ImageUrl = "http://retrorabbit.co.za/Resources/retrorabbit-logo.png", VatNumber = "123456789Umm" };
+            var company2 = new Company() { Name = "TendaHealth (Pty) Ltd", ImageUrl = "/img/Tendahealth%20logo.png", VatNumber = "123456789", FsbNumber = "44680" };
+
+            var supplier1 = new Supplier() { Id = 1, Name = "MediHelp", Deleted = false, Licenses = new List<LicenseType>() };
+            var supplier2 = new Supplier() { Id = 2, Name = "FedScheme", Deleted = false, Licenses = new List<LicenseType>() };
+
+            var licCategory1 = new LicenseCategory() { Id = 1, Name = "CATEGORY I" };
+            var licCategory2 = new LicenseCategory() { Id = 2, Name = "CATEGORY II - Discretionary FSP" };
+            var licCategory3 = new LicenseCategory() { Id = 3, Name = "CATEGORY III - Administrative FSP" };
+            var licCategory4 = new LicenseCategory() { Id = 4, Name = "CATEGORY IV Assistance business FSP" };
+
+            var licTypeC1S1 = new LicenseType() { Id = 1, LicenseCategoryId = 1, SubCategory = "1", Description = "Long - term Insurance: Category A", };
+            var licTypeC1S2 = new LicenseType() { Id = 2, LicenseCategoryId = 1, SubCategory = "2", Description = "Short - Term Insurance: Personal Lines", };
+            var licTypeC1S3 = new LicenseType() { Id = 3, LicenseCategoryId = 1, SubCategory = "3", Description = "Long - Term Insurance: Category B1", };
+            var licTypeC1S20 = new LicenseType() { Id = 4, LicenseCategoryId = 1, SubCategory = "20", Description = "Long - Term Insurance: Category B2", };
+            var licTypeC1S4 = new LicenseType() { Id = 5, LicenseCategoryId = 1, SubCategory = "4", Description = "Long - Term Insurance: Category C", };
+            var licTypeC1S5 = new LicenseType() { Id = 6, LicenseCategoryId = 1, SubCategory = "5", Description = "Retail Pension Benefits", };
+            var licTypeC1S6 = new LicenseType() { Id = 7, LicenseCategoryId = 1, SubCategory = "6", Description = "Short - Term Insurance: Commercial Lines", };
+            var licTypeC1S7 = new LicenseType() { Id = 8, LicenseCategoryId = 1, SubCategory = "7", Description = "Pension Funds Benefits(excluding retail)", };
+            var licTypeC1S8 = new LicenseType() { Id = 9, LicenseCategoryId = 1, SubCategory = "8", Description = "Securities and Instruments: Shares", };
+            var licTypeC1S9 = new LicenseType() { Id = 10, LicenseCategoryId = 1, SubCategory = "9", Description = "Securities and Instruments: Money market instruments", };
+            var licTypeC1S10 = new LicenseType() { Id = 11, LicenseCategoryId = 1, SubCategory = "10", Description = "Securities and Instruments: Debentures and securitised debt", };
+            var licTypeC1S11 = new LicenseType() { Id = 12, LicenseCategoryId = 1, SubCategory = "11", Description = "Securities and Instruments: Warrants, certificates and other instruments", };
+            var licTypeC1S12 = new LicenseType() { Id = 13, LicenseCategoryId = 1, SubCategory = "12", Description = "Securities and Instruments: Bonds", };
+            var licTypeC1S13 = new LicenseType() { Id = 14, LicenseCategoryId = 1, SubCategory = "13", Description = "Securities and Instruments: Derivative instruments", };
+            var licTypeC1S14 = new LicenseType() { Id = 15, LicenseCategoryId = 1, SubCategory = "14", Description = "Participatory interests in Collective Investment Schemes", };
+            var licTypeC1S15 = new LicenseType() { Id = 16, LicenseCategoryId = 1, SubCategory = "15", Description = "Foreign currency denominated investment instruments", };
+            var licTypeC1S16 = new LicenseType() { Id = 17, LicenseCategoryId = 1, SubCategory = "16", Description = "Health Service Benefits", };
+            var licTypeC1S17 = new LicenseType() { Id = 18, LicenseCategoryId = 1, SubCategory = "17", Description = "Deposits Defined in the Banks Act - exceeding 12 months", };
+            var licTypeC1S18 = new LicenseType() { Id = 19, LicenseCategoryId = 1, SubCategory = "18", Description = "Deposits defined in the Banks act - 12 months or less", };
+            var licTypeC1S19 = new LicenseType() { Id = 20, LicenseCategoryId = 1, SubCategory = "19", Description = "Friendly Society Benefits", };
+
+            var licTypeC2S1 = new LicenseType() { Id = 21, LicenseCategoryId = 2, SubCategory = "1", Description = "Long - Term Insurance: Category B1", };
+            var licTypeC2S16 = new LicenseType() { Id = 22, LicenseCategoryId = 2, SubCategory = "16", Description = "Long - Term Insurance: Category B2", };
+            var licTypeC2S2 = new LicenseType() { Id = 23, LicenseCategoryId = 2, SubCategory = "2", Description = "Long - Term Insurance: Category C", };
+            var licTypeC2S3 = new LicenseType() { Id = 24, LicenseCategoryId = 2, SubCategory = "3", Description = "Retail Pension Benefits", };
+            var licTypeC2S4 = new LicenseType() { Id = 25, LicenseCategoryId = 2, SubCategory = "4", Description = "Pension Funds Benefits(excluding retail pension benefits)", };
+            var licTypeC2S5 = new LicenseType() { Id = 26, LicenseCategoryId = 2, SubCategory = "5", Description = "Securities and Instruments: Shares", };
+            var licTypeC2S6 = new LicenseType() { Id = 27, LicenseCategoryId = 2, SubCategory = "6", Description = "Securities and Instruments: Money market instruments", };
+            var licTypeC2S7 = new LicenseType() { Id = 28, LicenseCategoryId = 2, SubCategory = "7", Description = "Securities and Instruments: Debentures and securitised debt", };
+            var licTypeC2S8 = new LicenseType() { Id = 29, LicenseCategoryId = 2, SubCategory = "8", Description = "Securities and Instruments: Warrants, certificates and other instruments", };
+            var licTypeC2S9 = new LicenseType() { Id = 30, LicenseCategoryId = 2, SubCategory = "9", Description = "Securities and Instruments: Bonds", };
+            var licTypeC2S10 = new LicenseType() { Id = 31, LicenseCategoryId = 2, SubCategory = "10", Description = "Securities and Instruments: Derivative instruments", };
+            var licTypeC2S11 = new LicenseType() { Id = 32, LicenseCategoryId = 2, SubCategory = "11", Description = "Participatory interests in Collective Investment Schemes", };
+            var licTypeC2S12 = new LicenseType() { Id = 33, LicenseCategoryId = 2, SubCategory = "12", Description = "Foreign currency denominated investment instruments", };
+            var licTypeC2S13 = new LicenseType() { Id = 34, LicenseCategoryId = 2, SubCategory = "13", Description = "Long - term Deposits", };
+            var licTypeC2S14 = new LicenseType() { Id = 35, LicenseCategoryId = 2, SubCategory = "14", Description = "Short - term Deposits", };
+            var licTypeC2SA = new LicenseType() { Id = 36, LicenseCategoryId = 2, SubCategory = "A", Description = "Hedge Fund Manager", };
+
+            var licTypeC3S1 = new LicenseType() { Id = 37, LicenseCategoryId = 3, SubCategory = "1", Description = "Long - Term Insurance: Category B1", };
+            var licTypeC3S15 = new LicenseType() { Id = 38, LicenseCategoryId = 3, SubCategory = "15", Description = "Long - Term Insurance: Category B2", };
+            var licTypeC3S2 = new LicenseType() { Id = 39, LicenseCategoryId = 3, SubCategory = "2", Description = "Long - Term Insurance: Category C", };
+            var licTypeC3S3 = new LicenseType() { Id = 40, LicenseCategoryId = 3, SubCategory = "3", Description = "Retail Pension Benefits", };
+            var licTypeC3S4 = new LicenseType() { Id = 41, LicenseCategoryId = 3, SubCategory = "4", Description = "Pension Funds Benefits(excluding retail pension benefits)", };
+            var licTypeC3S5 = new LicenseType() { Id = 42, LicenseCategoryId = 3, SubCategory = "5", Description = "Securities and Instruments: Shares", };
+            var licTypeC3S6 = new LicenseType() { Id = 43, LicenseCategoryId = 3, SubCategory = "6", Description = "Securities and Instruments: Money market instruments", };
+            var licTypeC3S7 = new LicenseType() { Id = 44, LicenseCategoryId = 3, SubCategory = "7", Description = "Securities and Instruments: Debentures and securitised debt", };
+            var licTypeC3S8 = new LicenseType() { Id = 45, LicenseCategoryId = 3, SubCategory = "8", Description = "Securities and Instruments: Warrents, certificates and other instruments", };
+            var licTypeC3S9 = new LicenseType() { Id = 46, LicenseCategoryId = 3, SubCategory = "9", Description = "Securities and Instruments: Bonds", };
+            var licTypeC3S10 = new LicenseType() { Id = 47, LicenseCategoryId = 3, SubCategory = "10", Description = "Securities and Instruments: Derivative instruments", };
+            var licTypeC3S11 = new LicenseType() { Id = 48, LicenseCategoryId = 3, SubCategory = "11", Description = "Participatory interests in Collective Investment Schemes", };
+            var licTypeC3S12 = new LicenseType() { Id = 49, LicenseCategoryId = 3, SubCategory = "12", Description = "Foreign currency denominated investment instruments", };
+            var licTypeC3S13 = new LicenseType() { Id = 50, LicenseCategoryId = 3, SubCategory = "13", Description = "Long - term Deposits", };
+            var licTypeC3S14 = new LicenseType() { Id = 51, LicenseCategoryId = 3, SubCategory = "14", Description = "Short - term Deposits", };
+
+            var licTypeC4S1 = new LicenseType() { Id = 52, LicenseCategoryId = 4, SubCategory = "1", Description = "Assistance business FSP", };
+
+
+            var address1 = new Address()
+            {
+                City = "Pretoria",
+                Country = country1,
+                Description = "Ring bell?",
+                PostalCode = "0184",
+                Province = prov2,
+                Street1 = "171 Clifford Rd",
+                Suburb = "Murrayfield Ext. 1",
+                MapUrl = "http://maps.google.com/",
+                AddressType = addrtype1
+            };
+            var address2 = new Address()
+            {
+                City = "Pretoria",
+                Country = country1,
+                Description = "Please knock 2 and then turn in a circle and knock again three times.",
+                PostalCode = "0040",
+                Province = prov2,
+                Street1 = "116 Camellia Ave",
+                Suburb = "Murrayfield Ext. 1",
+                MapUrl = "https://www.google.co.za/maps/place/Retro+Rabbit/@-25.7598715,28.2932057,18.43z/data=!4m5!3m4!1s0x0:0x688d465f509c535d!8m2!3d-25.7593317!4d28.2930317",
+                AddressType = addrtype2
+            };
+            var address3 = new Address()
+            {
+                City = "Johannesburg",
+                Country = country1,
+                Description = "Please knock once and then jump up and down and knock again two times.",
+                PostalCode = "2090",
+                Province = prov2,
+                Street1 = "90 Grayston Ave",
+                Suburb = "Blairegowry",
+                MapUrl = "",
+                AddressType = addrtype2
+            };
+
+
+            Contact contact1 = new Contact()
+            {
+                Id = 1,
+                ContactType = conttype1,
+                EmployerName = "Tenda Health",
+                JobTitle = "Advisor",
+                Tel1 = "0124240435",
+                Title = "Mr.",
+                FirstName = "Jaco",
+                Initial = "JJ",
+                MiddleName = "Jaco",
+                LastName = "Klopper",
+                Email = "jaco@tendaonline.co.za",
+                Cell1 = "0722267418",
+                IdNumber = "8181818181810",
+                Addresses = new Collection<Address>(),
+                ModifiedDate = DateTime.Now,
+                CreatedDate = DateTime.Now,
+                BenefitCode = "Fed1",
+                BirthDate = DateTime.Parse("1981/04/02"),
+                BusinessUnit = "13",
+                ChronicPMB = false,
+                Deleted = false,
+                DependantsAdult = 1,
+                DependantsChild = 0,
+                GroupCode = "8161 - PRIVATE INDIVIDUALS: ADVANCE",
+                Language = "Afrikaans",
+                LinkDate = DateTime.Parse("1981/04/03"),              
+                MonthlyFeeCurrent = 3900.01m,
+                Network = "Non newtork",
+                photoUrl = "img/Eddie-01.png",
+                SalaryCode = "A",
+                SalaryScale = "1 - 99999",
+                SchemeRegisterDate = DateTime.Parse("1981/04/04"),
+                SchemeTerminatedDate = DateTime.Parse("1981/04/01"),
+                Upsell = false
+            };
+
+            Contact contact2 = new Contact()
+            {
+                Id = 2,
+                ContactType = conttype1,
+                EmployerName = "RetroRabbit",
+                JobTitle = "Bunny",
+                Tel1 = "+27 12 803 3068",
+                Title = "Mr.",
+                FirstName = "Stacy",
+                LastName = "Jose",
+                Email = "stacy@retrorabbit.co.za",
+                Cell1 = "+27 76 9656891",
+                IdNumber = "8104025058084",
+                Addresses = new Collection<Address>() { address3 },
+                ModifiedDate = DateTime.Now,
+                CreatedDate = DateTime.Now
+            };
+
+            var advisor1 = new Advisor()
+            {
+                Id = 1,
+                IsActive = true,
+                IsKeyIndividual = false,
+                Deleted = false,
+                LastLoginDate = null,
+                ModifiedDate = DateTime.Now,
+                CreatedDate = DateTime.Now,
+                Company = company2,
+                FsbCode = "0083",
+                CmsCode = "1123",
+<<<<<<< HEAD
+                RegNumber = "3456",
+                DateAuthorized = null,
+                ComplianceOfficer = "jefff",
+                ComplianceOffficerNumber = "07896523",
+=======
+                RegNumber = "123654789",
+                //DateAuthorized = null,
+                //ComplianceOfficer = "Jessi Markums",
+                //ComplianceOffficerNumber = "0729491978",
+>>>>>>> 77f0ebdf0d905eb201d1010f3009ab39fa83fdcf
+                Contact = contact1,
+                AdvisorStatus = advstat1,
+                AdvisorType = advtype1,
+                AdvisorDocuments = new Collection<AdvisorDocument>(),
+                Applications = new Collection<Application>()
+            };
+
+            var advisor2 = new Advisor()
+            {
+                Id = 2,
+                IsActive = true,
+                IsKeyIndividual = false,
+                Deleted = false,
+                LastLoginDate = null,
+                ModifiedDate = DateTime.Now,
+                CreatedDate = DateTime.Now,
+                Company = company1,
+                FsbCode = "5569",
+                CmsCode = "7456",
+                RegNumber = "123654789",
+                //DateAuthorized = null,
+                //ComplianceOfficer = "Jessi Markums",
+                //ComplianceOffficerNumber = "0729491978",
+                Contact = contact2,
+                AdvisorStatus = advstat1,
+                AdvisorType = advtype2,
+                AdvisorDocuments = new Collection<AdvisorDocument>(),
+                Applications = new Collection<Application>()
+            };
+
+            var advisor3 = new Advisor()
+            {
+                Id = 3,
+                IsActive = true,
+                IsKeyIndividual = false,
+                Deleted = false,
+                LastLoginDate = null,
+                ModifiedDate = DateTime.Now,
+                CreatedDate = DateTime.Now,
+                Company = company1,
+                FsbCode = "5569",
+                CmsCode = "7456",
+<<<<<<< HEAD
+                RegNumber = "156329",
+                DateAuthorized = null,
+                ComplianceOfficer= "molly",
+                ComplianceOffficerNumber= "03251978",
+=======
+                RegNumber = "123654789",
+                //DateAuthorized = null,
+                //ComplianceOfficer= "Jessi Markums",
+                //ComplianceOffficerNumber= "0729491978",
+>>>>>>> 77f0ebdf0d905eb201d1010f3009ab39fa83fdcf
+                Contact = contact2,
+                AdvisorStatus = advstat4,
+                AdvisorType = advtype5,
+                AdvisorDocuments = new Collection<AdvisorDocument>(),
+                Applications = new Collection<Application>()
+            };
+
+
+            company1.ContactDetails = contact2;
+            company2.ContactDetails = contact1;
+
+            var querytype1 = new QueryType() { Id = 1, QueryName = "Complaint" };
+            var querytype2 = new QueryType() { Id = 2, QueryName = "Update" };
+
+            var query1 = new Query() { Id = 1, UserUID = "Steve Thompson", Note = "Amount is incorrect", Deleted = false, QueryType = querytype1, Advisor = advisor1 };
+            var query2 = new Query() { Id = 2, UserUID = "Bob Van Der Walt", Note = "Update Address", Deleted = false, QueryType = querytype2, Advisor = advisor1 };
+            var query3 = new Query() { Id = 3, UserUID = "James Gobay", Note = "Wrong Policy", Deleted = false, QueryType = querytype1, Advisor = advisor1 };
+
+            var transaction1 = new Transaction() { Id = 1, TransactionDate = DateTime.Parse("2016-01-13 14:00:04 PM"), AccountId = 1, ContraAccountId = 2, DebitAmount = 0m, CreditAmount = 500.001m, Note = "Payment" };
+            var transaction2 = new Transaction() { Id = 2, TransactionDate = DateTime.Parse("2016-01-13 14:00:06 PM"), AccountId = 2, ContraAccountId = 1, DebitAmount = 500.001m, CreditAmount = 0m, Note = "BC:1141577" };
+
+            var account1 = new Account() { Id = 1, Note = "Final Payment", Advisor = advisor1, Supplier = supplier2, Transactions = new Collection<Transaction>() { transaction1 } };
+            var account2 = new Account() { Id = 2, Note = "Allowance", Advisor = advisor1, Supplier = supplier1, Transactions = new Collection<Transaction>() { transaction2 } };
+
+            var advdoc1 = new AdvisorDocument()
+            {
+                Advisor = advisor1,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now.AddDays(25),
+                Deleted = false,
+                Id = 1,
+                IsExpired = false,
+                IsRequired = true,
+                Uploaded = true,
+                Location = "C:\\Users\\sjj98\\Desktop\\TH1\\TendaAdvisors\\TendaAdvisors\\Uploads\\AdvisorDocuments\\iddoc1.pdf",
+                OriginalFileName="iddoc1.pdf",
+                Title = "ID Document 1",
+                ValidFromDate = DateTime.Now.AddDays(-366),
+                ValidToDate = DateTime.Now.AddDays(75),
+                DocumentType = doctype2
+            };
+
+            var advdoc2 = new AdvisorDocument()
+            {
+                Advisor = advisor1,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now.AddDays(25),
+                Deleted = false,
+                Id = 1,
+                IsExpired = true,
+                IsRequired = true,
+                Uploaded = true,
+                Location = "C:\\Users\\sjj98\\Desktop\\TH1\\TendaAdvisors\\TendaAdvisors\\Uploads\\AdvisorDocuments\\iddoc2.pdf",
+                OriginalFileName = "iddoc2.pdf",
+                Title = "ID Document 2",
+                ValidFromDate = DateTime.Now.AddDays(-366),
+                ValidToDate = DateTime.Now.AddDays(75),
+                DocumentType = doctype2
+            };
+
+            var advdoc3 = new AdvisorDocument()
+            {
+                Advisor = advisor1,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now.AddDays(25),
+                Deleted = false,
+                Id = 1,
+                IsExpired = true,
+                IsRequired = true,
+                Uploaded = true,
+                Location = "C:\\Users\\sjj98\\Desktop\\TH1\\TendaAdvisors\\TendaAdvisors\\Uploads\\AdvisorDocuments\\iddoc3.pdf",
+                OriginalFileName = "iddoc3.pdf",
+                Title = "ID Document 3",
+                ValidFromDate = DateTime.Now.AddDays(-366),
+                ValidToDate = DateTime.Now.AddDays(75),
+                DocumentType = doctype2
+            };
+
+
+            //var client1 = new Client()
+            //{
+            //    Id = 2
+            //};
+
+            var client1 = new Contact
+            {
+                Id = 2,
+                ContactType = conttype2,
+                EmployerName = "KPMG",
+                JobTitle = "Consultant",
+                Tel1 = "+27 11 1234 123",
+                Title = "Mrs.",
+                FirstName = "Stacey",
+                LastName = "da Silva",
+                Email = "sdasilva@kpmg.co.za",
+                Cell1 = "+27 76 567 7778",
+                IdNumber = "8505035068081",
+                Addresses = new Collection<Address>() { address1, address2 },
+                ModifiedDate = DateTime.Now,
+                CreatedDate = DateTime.Now
+            };
+
+            //var client2 = new Client()
+            //{
+            //    Id = 2,
+            //};
+
+            var client2 = new Contact
+            {
+                Id = 3,
+                ContactType = conttype3,
+                EmployerName = "PSG Consulting",
+                JobTitle = "Manager",
+                Tel1 = "+27 13 2254 823",
+                Title = "Mr.",
+                FirstName = "Peter",
+                LastName = "Peterson",
+                Email = "ppeterson@psg.co.za",
+                Cell1 = "+27 79 565 7278",
+                IdNumber = "7505036068084",
+                Addresses = new Collection<Address>() { address3 },
+                ModifiedDate = DateTime.Now,
+                CreatedDate = DateTime.Now
+            };
+
+            var product1 = new Product()
+            {
+                Id = 1,
+                Name = "Product1",
+                Applications = new Collection<Application>(),
+                LicenseType = licTypeC1S1,
+                Supplier = supplier1,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now,
+            };
+            var product2 = new Product()
+            {
+                Id = 2,
+                Name = "Product2",
+                Applications = new Collection<Application>(),
+                LicenseType = licTypeC2S1,
+                Supplier = supplier1,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now,
+            };
+            var product3 = new Product()
+            {
+                Id = 3,
+                Name = "ProductA",
+                Applications = new Collection<Application>(),
+                LicenseType = licTypeC3S1,
+                Supplier = supplier2,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now,
+            };
+
+
+            var application1 = new Application()
+            {
+                ApplicationStatus = applstat6,
+                ApplicationDocuments = new Collection<ApplicationDocument>() {
+                    new ApplicationDocument() {
+                        Id = 1,
+                        Title = "Document title of a document in an application.",
+                        CreatedDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now,
+                        IsExpired = false,
+                        IsRequired = true,
+                        Location = "a:\\autoexec.bat",
+                        DocumentType = doctype1,
+                        Product = product1,
+                        ValidFromDate = DateTime.Now,
+                        ValidToDate = DateTime.Now.AddDays(30),
+                    },
+                },
+
+                Products = new Collection<Product>(),
+                Client = client1,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now,
+                Deleted = false,
+                Queries = new Collection<Query>()
+            };
+
+            application1.Products.Add(product1);
+            application1.Products.Add(product2);
+            application1.Products.Add(product3);
+
+            var a2l1 = new Advisor2LicenseTypes { AdvisorId = 1, LicenseTypeId = 1, Share = 5 };
+            var a2l2 = new Advisor2LicenseTypes { AdvisorId = 1, LicenseTypeId = 10, Share = 10 };
+            var a2l3 = new Advisor2LicenseTypes { AdvisorId = 1, LicenseTypeId = 11, Share = 15 };
+
+            context.Products.AddOrUpdate(
+                p => p.Id,
+                product1, product2, product3
+                );
+
+            context.AddressTypes.AddOrUpdate(
+                p => p.Id,
+                addrtype1, addrtype2, addrtype3
+                );
+
+            context.AdvisorStatuses.AddOrUpdate(
+                p => p.Id,
+                advstat1, advstat2, advstat3, advstat4
+            );
+
+            context.AdvisorTypes.AddOrUpdate(
+                p => p.Id,
+                advtype1, advtype2, advtype3, advtype4, advtype5
+                );
+
+            context.ApplicationStatuses.AddOrUpdate(
+                p => p.Id,
+            applstat1, applstat2, applstat3, applstat4, applstat5, applstat6
+            );
+
+            context.ContactTypes.AddOrUpdate(
+                p => p.Id,
+                conttype1, conttype2, conttype3
+                );
+
+            context.Countries.AddOrUpdate(
+                p => p.Id,
+                country1
+                );
+
+            context.DocumentTypes.AddOrUpdate(
+                p => p.Id,
+                doctype1, doctype2, doctype3, doctype4, doctype5,
+                doctype6, doctype7, doctype8, doctype9, doctype10,
+                doctype11, doctype12, doctype13, doctype14, doctype15,
+                doctype16, doctype17, doctype18, doctype19, doctype20,
+                doctype21, doctype22, doctype23, doctype24, doctype25
+                );
+
+            context.LicenseCategories.AddOrUpdate(c => c.Id,
+                licCategory1,
+                licCategory2,
+                licCategory3,
+                licCategory4
+                );
+
+            context.LicenseTypes.AddOrUpdate(
+                c => c.Id,
+                licTypeC1S1, licTypeC1S2, licTypeC1S3, licTypeC1S20, licTypeC1S4, licTypeC1S5, licTypeC1S6, licTypeC1S7,
+                licTypeC1S8, licTypeC1S9, licTypeC1S10, licTypeC1S11, licTypeC1S12, licTypeC1S13, licTypeC1S14, licTypeC1S15,
+                licTypeC1S16, licTypeC1S17, licTypeC1S18, licTypeC1S19, licTypeC2S1, licTypeC2S16, licTypeC2S2, licTypeC2S3,
+                licTypeC2S4, licTypeC2S5, licTypeC2S6, licTypeC2S7, licTypeC2S8, licTypeC2S9, licTypeC2S10, licTypeC2S11,
+                licTypeC2S12, licTypeC2S13, licTypeC2S14, licTypeC2SA, licTypeC3S1, licTypeC3S15, licTypeC3S2, licTypeC3S3,
+                licTypeC3S4, licTypeC3S5, licTypeC3S6, licTypeC3S7, licTypeC3S8, licTypeC3S9, licTypeC3S10, licTypeC3S11,
+                licTypeC3S12, licTypeC3S13, licTypeC3S14, licTypeC4S1
+                );
+
+            context.Provinces.AddOrUpdate(
+                p => p.Id,
+                prov1, prov2, prov3, prov4, prov5, prov6, prov7, prov8, prov9
+                );
+
+            context.Companies.AddOrUpdate(
+                p => p.Id,
+                company1, company2
+                );
+
+            supplier1.Licenses.Add(licTypeC1S1);
+
+            context.Suppliers.AddOrUpdate(
+                p => p.Id,
+                supplier1, supplier2
+                );
+
+            context.Advisors.AddOrUpdate(
+              p => p.Id,
+              advisor1, advisor2,advisor3
+            );
+
+            context.Accounts.AddOrUpdate(
+                p => p.Id,
+                account1, account2
+                );
+
+            context.ImportTypes.AddOrUpdate(i => i.Id,
+                importType1, importType2
+                );
+
+            //context.Transactions.AddOrUpdate(
+            //    p => p.Id,
+            //    transaction1, transaction2
+            //    );
+
+            //context.Queries.AddOrUpdate(
+            //    p => p.Id,
+            //    query1, query2, query3
+            //    );
+
+            context.QueryTypes.AddOrUpdate(
+                p => p.Id,
+                querytype1, querytype2
+                );
+
+
+
+            //context.Clients.AddOrUpdate(
+            //    p => p.Id,
+            //    client1, client2
+            //);
+            application1.Queries.Add(query1);
+            application1.Queries.Add(query2);
+            application1.Queries.Add(query3);
+
+            advisor1.Applications.Add(
+                application1
+            );
+
+            advisor1.AdvisorDocuments.Add(advdoc1);
+            advisor1.AdvisorDocuments.Add(advdoc2);
+            advisor1.AdvisorDocuments.Add(advdoc3);
+
+            context.Advisors.AddOrUpdate(advisor1);
+            context.Advisors.AddOrUpdate(advisor2);
+            context.Advisors.AddOrUpdate(advisor3);
+
+            context.AdvisorLicenseTypes.AddOrUpdate(a => a.AdvisorId, a2l1, a2l2, a2l3);
+            //advisor1.Contact.Addresses.Add(address1);
+            //advisor1.Contact.Addresses.Add(address2);
+
+            //application1.Products.Add(product1);
+            //application1.Products.Add(product2);
+            //application1.Products.Add(product3);
+
+            //context.Products.AddOrUpdate(
+            //    p => p.Id,
+            //    product1, product2, product3
+            //    );
+
+            context.SaveChanges();
+
+            List<string> userRoles = new List<string>();
+
+            userRoles.Add("Admin");
+            userRoles.Add("Advisor");
+
+            using (var rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext())))
+            {
+                using (var um = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
+                {
+
+                    foreach (var item in userRoles)
+                    {
+                        if (!rm.RoleExists(item))
+                        {
+                            var roleResult = rm.Create(new IdentityRole(item));
+                            if (!roleResult.Succeeded)
+                                throw new ApplicationException("Creating role " + item + "failed with error(s): " + roleResult.Errors);
+                        }
+                    }
+
+                    if (um.FindByName("admin") == null)
+                    {
+                        ApplicationUser user = new ApplicationUser
+                        {
+                            UserName = "admin",
+                            Email = context.Advisors.First().Contact.Email,
+                            JoinDate = DateTime.Now,
+                            LastLoginDate = null,
+                            AdvisorId = context.Advisors.First().Id,
+                            EmailConfirmed = true
+                        };
+
+                        IdentityResult result = um.Create(user, "admin123");
+                        result.ThrowOnFailure();
+
+                        if (!um.IsInRole(user.Id, userRoles[0]))
+                        {
+                            var userResult = um.AddToRole(user.Id, userRoles[0]);
+                            if (!userResult.Succeeded)
+                                throw new ApplicationException("Adding user '" + user.Id + "' to '" + userRoles[0] + "' role failed with error(s): " + userResult.Errors);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

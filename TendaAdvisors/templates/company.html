@@ -1,0 +1,41 @@
+﻿<div class="col-xs-12">
+    <div class="col-xs-1"></div><button style="margin-top:40px;float:right" class="btn btn-sm btn-primary" ng-click="goToAdvisorsPage()">New Company</button>
+</div>
+
+<h4 style="font-size:x-large;color:red;margin-top:20px ">Companies:</h4>
+<div class="row" style="margin-top:40px">
+    <div class="col-xs-12">
+
+        <input size="100" list="clientList" type="search" placeholder="Type atleast 4 characters" ng-model="searchTerm" ng-change="doSearch(searchTerm)" style="margin-top:15px;">
+        <datalist id="clientList">
+            <select ng-model="advisor.contact"
+                    ng-options="adv as (adv.name + ' ' +adv.lastName) for adv in advisors track by adv.name ">
+                <option value="">-- Please select a user --</option>
+            </select>
+        </datalist>
+
+        <div style="margin-top:60px;font-size:medium" ng-show="(!!searchTerm && searchTerm.trim().length >= 4)  && isAdvisorContact">You have selected  <span style="font-weight:800">{{advisor.contact.firstName}}</span></div>
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="col-xs-12 remindersCards nopadding hoverable" ng-show="!!searchTerm && searchTerm.trim().length >= 4 && isAdvisorContact">
+            <div class="col-xs-12 remindersCard " ng-click="advisorClickedGetId(advisor.contact.id)">
+                <div class="col-xs-4">
+                    <div class="col-xs-4">
+                        <div class="col-xs-12 activityCode">{{ advisor.contact.firstName}}</div>
+                    </div>
+                </div>
+                <button ng-hide="notAdvisorEditing" class="btn btn-sm btn-primary" style="float:right" ng-click="deleteAdvisor(advisor.contact.id)">Delete</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+

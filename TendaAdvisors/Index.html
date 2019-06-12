@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html ng-app="tendaApp">
+<head>
+
+    <base href="/">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tenda Health</title>
+
+    <!-- For loading bar -->
+    <link href="/Properties/css/loading-bar.min.css" rel="stylesheet" />
+
+    <link href="/Properties/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Properties/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="/Properties/css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script src="/js/custom/angular.min.js"></script>
+    <script src="/js/custom/angular-ui-router.min.js"></script>
+    <script src="/js/custom/ngStorage.min.js"></script>
+    <!--For loading bar -->
+    <script src="/Scripts/loading-bar.min.js"></script>
+
+</head>
+<body ng-controller="mainController">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container navContainer" style="min-height: 85px;">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header" style="min-height: 85px;">
+                <button id="popupMenu" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" style="padding-left: 15px; padding-right: 15px;">
+                    <img src="img/Tendahealth logo.png" style="width: 110px; height: 50px;" alt="">
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="min-height: 85px; background-image: url('/img/Tenda_Header.png');">
+                <ul class="nav navbar-nav  pull-left" ng-show="LoggedIn" ng-cloak>
+                    <li>
+                        <a ng-click="about()" ng-class='currentSelectedPage(10)' id="aboutMainLink">About</a>
+                    </li>
+                    <li ng-show="Supervisor">
+                        <a ng-click="company()" ng-class='currentSelectedPage(11)' id="companyMainLink">Company</a>
+                    </li>
+                    <li>
+                        <a ng-click="dashboard()" ng-class='currentSelectedPage(0)' id="overviewMainLink">Dashboard</a>
+                    </li>
+                    <li ng-show="Supervisor">
+                        <a ng-click="advisors()" ng-class='currentSelectedPage(6)' id="advisorsMainLink">Representative</a>
+                    </li>
+                    <li>
+                        <a ng-click="clients()" ng-class='currentSelectedPage(9)' id="clientsMainLink">Clients</a>
+                    </li>
+                    <li>
+                        <a ng-click="application()" ng-class='currentSelectedPage(1)' id="applicationsMainLink">Applications</a>
+                    </li>
+                    <li ng-show="Supervisor || AdvisorLog">
+                        <a ng-click="commission()" ng-class='currentSelectedPage(2)' id="commissionMainLink">Commission</a>
+                    </li>
+                    <li>
+                        <a ng-click="profile()" ng-class='currentSelectedPage(3)' id="reportsMainLink">Profile</a>
+                    </li>
+                    <li ng-show="Supervisor">
+                        <a ng-click="admin()" ng-class='currentSelectedPage(7)' id="adminMainLink">Admin</a>
+                    </li>
+                    <li>
+                        <a ng-click="logout()" ng-class='currentSelectedPage(4)' id="logOutMainLink">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <button ng-show="LoggedIn" ng-click="refresh()" class="btn btn-primary pull-right">Refresh</button>
+    <div class="container mainContainer" ui-view></div>
+    <script src="js/Model.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/advisors.js"></script>
+    <script src="js/advisor.js"></script>
+    <script src="js/application.js"></script>
+    <script src="js/commission.js"></script>
+    <script src="js/clients.js"></script>
+    <script src="js/newClient.js"></script>
+    <script src="js/basicClientDetails.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/applicationDetail.js"></script>
+    <script src="js/newApplication.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/about.js"></script>
+    <script src="js/company.js"></script>
+    <script src="js/queries.js"></script>
+    <script src="js/registerAdvisor.js"></script>
+    <script src="js/registerCompany.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/companyDetail.js"></script>
+    <script src="js/services/clients.js"></script>
+    <script src="js/services/admin.js"></script>
+    <script src="js/services/advisor.js"></script>
+    <script src="js/services/application.js"></script>
+    <script src="js/services/auth.js"></script>
+    <script src="js/services/commisssion.js"></script>
+    <script src="js/services/details.js"></script>
+    <script src="js/services/values.js"></script>
+
+    <!--Useful API:-->
+    <script src="js/api/jquery.js"></script>
+
+    <!--Custom Javascript:-->
+    <script src="js/custom/index.js"></script>
+
+</body>
+</html>

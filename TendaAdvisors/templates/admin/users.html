@@ -1,0 +1,104 @@
+﻿<div class="row" data-ng-controller="adminController" ng-init="initUserAdmin()">
+    <h1>Users</h1>
+    <h3 class="col-xs-12">Adviser login settings</h3>
+
+    <div class="col-xs-12 admin import">
+        Create new Admin users for system
+    </div>
+
+    <form name="newUserForm">
+        <div class="col-xs-12 remindersCards">
+            <div class="col-xs-12 remindersCard">
+                <div class="col-xs-12 col-md-6 margin-v-30 no-margin-top">
+                    <div class="col-xs-6 nopadding">
+                        Username
+                    </div>
+                    <input class="col-xs-6 nopadding textEditable" type="text" placeholder="Username" ng-model="newUser.username" required />
+                </div>
+
+                <div class="col-xs-12 col-md-6 margin-v-30 no-margin-top">
+                    <div class="col-xs-6 nopadding">
+                        Email
+                    </div>
+                    <input class="col-xs-6 nopadding textEditable" type="text" placeholder="Email" ng-model="newUser.email" required />
+                </div>
+
+                <div class="col-xs-12 col-md-6 margin-v-30 no-margin-top">
+                    <div class="col-xs-6 nopadding">
+                        Password
+                    </div>
+                    <input class="col-xs-6 nopadding textEditable" type="password" placeholder="Password" ng-model="newUser.password" ng-change="newUser.passwordChanged = true" ng-minlength="6" required />
+                </div>
+
+                <div class="col-xs-12 col-md-6 margin-v-30 no-margin-top">
+                    <div class="col-xs-6 nopadding">
+                        Confirm Password
+                    </div>
+                    <input class="col-xs-6 nopadding textEditable" type="password" placeholder="Confirm Password" ng-model="newUser.confirmPassword" ng-match="newUser.password" ng-minlength="6" ng-required="newUser.passwordChanged" />
+                </div>
+
+                <button class="col-xs-3 btn btn-sm btn-primary pull-right margin-v-30 no-margin-bottom" ng-disabled="newUserForm.$invalid && !newUserForm.confirmPassword" ng-click="updateUser(newUser)">
+                    Save
+                </button>
+            </div>
+        </div>
+    </form>
+    <div class="col-xs-12 admin import">
+        Manage and edit users for login
+    </div>
+
+    <div class="col-xs-12 col-md-6 remindersCards">
+        <div class="col-xs-12 col-md-6 remindersCard">
+            <select style="width:100%;" ng-model="selectedUser" ng-options="user as user.fullName for user in users">
+                <options selected value="">-- Please select a user --</options>
+            </select>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+
+    <form name="editUserForm">
+        <div class="col-xs-12 remindersCards">
+            <div class="col-xs-12 remindersCard" ng-show="hasUserSelected()">
+                <div class="col-xs-12 col-md-6 margin-v-30 no-margin-top">
+                    <div class="col-xs-6 nopadding">
+                        Username
+                    </div>
+                    <input class="col-xs-6 nopadding textEditable" type="text" placeholder="Username" ng-model="selectedUser.username" required />
+                </div>
+
+                <div class="col-xs-12 col-md-6 margin-v-30 no-margin-top">
+                    <div class="col-xs-6 nopadding">
+                        Email
+                    </div>
+                    <input class="col-xs-6 nopadding textEditable" type="text" placeholder="Email" ng-model="selectedUser.email" required />
+                </div>
+
+                <div class="col-xs-12 col-md-6 margin-v-30 no-margin-top">
+                    <div class="col-xs-6 nopadding">
+                        Password
+                    </div>
+                    <input class="col-xs-6 nopadding textEditable" type="password" placeholder="Password" ng-model="selectedUser.password" ng-change="selectedUser.passwordChanged = true" ng-minlength="6" required />
+                </div>
+
+                <div class="col-xs-12 col-md-6 margin-v-30 no-margin-top">
+                    <div class="col-xs-6 nopadding">
+                        Confirm Password
+                    </div>
+                    <input class="col-xs-6 nopadding textEditable" type="password" placeholder="Confirm Password" ng-model="selectedUser.confirmPassword" ng-match="selectedUser.password" ng-minlength="6" ng-required="selectedUser.passwordChanged" />
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+                    <div class="col-xs-6 no-padding">
+                        Admin
+                    </div>
+                    <input class="col-xs-6 nopadding textEditable no-margin-top" type="checkbox" placeholder="Admin" ng-model="selectedUser.isAdmin" />
+                </div>
+
+                <button class="col-xs-3 btn btn-sm btn-primary pull-right margin-v-30 no-margin-bottom" ng-disabled="editUserForm.$invalid && !selectedUser.confirmPassword" ng-click="updateUser(selectedUser)">
+                    Save
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

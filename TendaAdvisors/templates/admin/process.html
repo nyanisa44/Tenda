@@ -1,0 +1,172 @@
+﻿
+<div class="col-xs-12 remindersCard">
+    <h4 class="col-xs-12 cardHeading">Choose type of process to run:</h4>
+    <div class="col-xs-12 remindersCards">
+        <select class="col-xs-6 col-xs-offset-4" id="importTypeChoiceSelect" name="importTypeChoiceSelect" ng-model="importTypeChoice"
+                ng-options="import.type for import in importTypes | orderBy:'id' track by import.id"
+                ng-change="getFilesToImport(importTypeChoice.id)"></select>
+    </div>
+</div>
+
+<h3>{{importTypeChoice.type}}</h3>
+<div class="row remindersCards" ng-repeat="file in importedFiles">
+    <div class="row">
+        <div class="remindersCards" ng-if="importTypes[0].id == importTypeChoice.id">
+            <div class="nopadding importFileName">[{{file.id}}] {{file.fileName}}</div>
+
+            <div>
+                <select ng-model="supplier"
+                        ng-options="supplier as (supplier.name) for supplier in suppliers.supplierList"
+                        ng-change="">
+                    <option value="">-- Please select a user --</option>
+                </select>
+            </div>
+
+            <div ng-if="(supplier.id > 0)" style="padding-bottom:10px;">
+                <div>
+                    <button class="btn btn-sm btn-primary addMarginTopBottom"
+                            title="Clear commission exceptions"
+                            ng-click="clearCommissionExceptions()">
+                        Clear commission exception list 
+                    </button>
+                </div>
+                <div class="text-center width200">
+                    <div>
+                        Commission Run From:
+                    </div>
+                    <input datepicker name="CommissionRunDateFrom" ng-model="CommissionRunDateFromProcess" />
+                    <div class="clearfix" />
+
+                    <div>
+                        Commission Run To
+                    </div>
+                    <div class="clearfix" />
+
+                    <input datepicker name="CommissionRunDateTo" ng-model="CommissionRunDateToProcess" />
+                    <div class="clearfix" />
+
+                </div>
+
+                <button ng-if="file.status != 'Processed'&& processStatus !='Started processing'"
+                        class="btn btn-sm width200 addMarginTopBottom"
+                        ng-class="{ 'disabledButton': file.status == 'Processed' }"
+                        title="Process"
+                        ng-click="FunctionResult = processImport(file.id, supplier.id ,CommissionRunDateFromProcess,CommissionRunDateToProcess)">
+                    Process
+                </button>
+                <button ng-if="file.status == 'Processed' || processStatus =='Started processing'"
+                        class="btn btn-sm width200 addMarginTopBottom"
+                        ng-class="{ 'disabledButton': file.status == 'Processed' || processStatus =='Started processing'}">
+                    Process
+                </button>
+                <span class="help-inline" ng-show="FunctionResult.success" ng-view="FunctionResult.message"></span>
+            </div>
+            
+            <div class="clearfix" />
+            <div ng-if="(supplier.id > 0)" class="nopadding">
+                <div class="text-center text-danger width200"
+                     ng-if="ProcessError">
+                    {{ProcessError}}
+                </div>
+                <div class="text-center text-success width200"
+                     ng-if="processStatus">
+                    {{processStatus}}
+                </div>
+                <div class="panel panel-primary width200">
+                    <div class="text-center panel-heading panel-primary">
+                        Status
+                    </div>
+                    <div class="text-center panel-body panel-primary">
+                        {{file.status}}
+                    </div>
+                </div>
+            </div>
+            <div ng-if="(supplier.id > 0)" class="width200" style="padding-bottom:10px;">
+                <div class="text-center width200">
+                    <div>
+                        Commission Run From:
+                    </div>
+                    <input datepicker name="ComissionRunDateFrom" ng-model="ComissionRunDateFrom" />
+                    <div class="clearfix" />
+
+                    <div>
+                        Commission Run To
+                    </div>
+                    <div class="clearfix" />
+
+                    <input datepicker name="ComissionRunDateTo" ng-model="ComissionRunDateTo" />
+                    <div class="clearfix" />
+
+                </div>
+                <div class="clearfix" />
+                <button class="pull-left btn btn-sm btn-primary width200" title="Approve" ng-click="refreshUnmatched()">
+                    Refresh Unmatched commissions
+                </button>
+                <div class="clearfix" />
+                <button class="pull-left btn btn-sm btn-success width200" title="Approve" ng-click="approveImport(file.id,supplier.id ,ComissionRunDateFrom,ComissionRunDateTo)">
+                    Approve
+                </button>
+            </div>
+
+        </div>
+        <!-- ImportType 1 - Applications (including member data) -->
+        <div class="remindersCard" ng-if="importTypes[1].id == importTypeChoice.id">
+            <h3 class="cardHeading">Choose column names</h3>
+            <h4>Please select the row that contains the Column Headings:</h4>
+            <div class="col-xs-12 col-sm-12">
+                <div class="">
+                    <div class="col-xs-12 importFileName">
+                        File: {{
+                            file.fileName
+                        }}
+                    </div>
+                    <div class="col-xs-12">Worksheet: {{file.fieldMap.FirstWorksheetName}}</div>
+                    <div class="col-xs-12 nopadding importFileName">Skipping {{file.fieldMap.skipLines}} lines</div>
+                </div>
+                <div ng-repeat="row in file.fieldMap.fileFields track by $index">
+                    <div class="col-xs-12 documentCard">
+                        <input class="col-xs-1"
+                               type="radio"
+                               ng-model="file.fieldMap.skipLines"
+                               value="{{$index}}"
+                               ng-change="clearfieldMap(file)" />
+                        <div class="col-xs-11"
+                             style="white-space:nowrap; overflow-x: scroll;">
+                            <input type="text"
+                                   value="{{field}}"
+                                   ng-repeat="field in row track by $index" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h3 class="cardHeading">Field Mapper</h3>
+                <h4>Please map fields from the import File to destinations in the Database.</h4>
+                <div class="col-xs-offset-1 col-xs-10" ng-repeat="chosenRowField in file.fieldMap.fileFields[file.fieldMap.skipLines] track by $index">
+                    <div class="col-xs-6 text-right">{{ !chosenRowField ? "Empty" : chosenRowField}}</div>
+                    <select class="col-xs-6" ng-model="file.fieldMap.mappingData['i'+$index]"
+                            ng-options="k as v for (k,v) in file.fieldMap.dbFields | orderBy:v track by 'j'+k">
+                        <option value="">- Do not import</option>
+                    </select>
+                </div>
+                <div class="col-xs-12"></div>
+                <div class="col-xs-12">
+                    <button class="col-xs-2 col-xs-offset-10 btn btn-sm" style="float:right" title="Process" ng-click="putFieldMap(file.id, file.fieldMap, importTypeChoice.actionUrl);">
+                        Process
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 remindersCards" style="padding-top: 0px;" ng-if="importTypes[2].id == importTypeChoice.id || importTypes[3].id == importTypeChoice.id || importTypes[4].id == importTypeChoice.id || importTypes[5].id == importTypeChoice.id || importTypes[6].id == importTypeChoice.id">
+            <div class="col-xs-12 remindersCard">
+                <div class="nopadding importFileName" style="font-weight: bold;">{{file.fileName}}</div>
+                <div class="nopadding importFileName">Date Imported: {{file.dateImported}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-xs-12 remindersCards" style="padding-top: 0px;" ng-if="importTypeChoice.id && !importedFiles.length">
+    <div class="col-xs-12 remindersCard">
+        No files to import for this process. Please upload a file or choose a different process.
+    </div>
+</div>

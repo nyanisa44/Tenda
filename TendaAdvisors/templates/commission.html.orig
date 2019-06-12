@@ -1,0 +1,224 @@
+﻿
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="col-lg-12 nopadding">
+            <div class="col-lg-12 remindersCards nopadding hoverable">
+                <div class="row">
+                    <div class="bg-danger" ng-if="!commissionList || commissionList.length < 1">
+                        There are no commissisions to display.
+                    </div>
+                </div>
+                <div class="row"><h3 class="col-xs-3 cardHeading nopadding">Commission Transactions</h3></div>
+            
+                    <div class="col-xs-5">
+                        <select ng-show="advisorList.length > 1" ng-model="advisorId" ng-options="adv.id as adv.name for adv in advisorListTypeTwo track by adv.id">
+                            <option value="">-- Please select an Adviser --</option>
+                        </select>
+                    </div>
+
+
+                    <div class="col-xs-7">
+                        From: <input datepicker name="paging.config.dateFrom" ng-model="paging.config.dateFrom" />
+                        To: <input datepicker name="paging.config.dateTo" ng-model="paging.config.dateTo" />
+                        <span class="btn btn-sm btn-primary" ng-click="getCommissionList(advisorId, paging.config)">Filter</span>
+                        <span class="btn btn-sm btn-warning pull-right" ng-click="exportCommision(advisorId, paging.config)">Export Commission Transactions</span>
+                    </div>
+             
+                <div class="btn btn-sm btn-primary" ng-if="commissionList.length > 1" style="width: 120px; margin-bottom: 10px;float:right" ng-click="addAdvisor()">Add new Adviser</div>
+                <div class="col-xs-12" ng-if="commissionList.length > 1">
+                    <h3 class="col-xs-4 smallHeading nopadding">Client</h3>
+                    <h3 class="col-xs-2 smallHeading nopadding">Date</h3>
+                    <h3 class="col-xs-2 smallHeading nopadding">Supplier</h3>
+                    <h3 class="col-xs-2 smallHeading nopadding">Comm.</h3>
+                    <h3 class="col-xs-2 smallHeading nopadding">Adviser</h3>
+
+                </div>
+
+                <div class="row"><h3 class="col-xs-3 cardHeading nopadding">Commission For Advisor</h3></div>
+
+                <div class="col-xs-5">
+                    <select ng-show="advisorList.length > 1" ng-model="advisorCommissionId" ng-options="adv.id as adv.name for adv in advisorList track by adv.id">
+                        <option value="">-- Please select an Advisor --</option>
+                    </select>
+                </div>
+
+                <div class="col-xs-7">
+                    From: <input datepicker name="dateFromCommissionForAdvisor" ng-model="dateFromCommissionForAdvisor" />
+                    To: <input datepicker name="dateToCommissionForAdvisor" ng-model="dateToCommissionForAdvisor" />
+                    <span class="btn btn-sm btn-warning pull-right" ng-click="exportCommisionForAdvisor(advisorCommissionId, dateFromCommissionForAdvisor,dateToCommissionForAdvisor)">Export Commission ForAdvisor</span>
+                </div>
+
+                <div class="col-xs-12" ng-repeat="commission in commissionList">
+                    <div class="col-xs-4"><span class="memberGroupCode">{{commission.idNumber}}</span> - <span class="activityName">{{commission.initial}} {{commission.surname}}</span></div>
+                    <div class="col-xs-2 "> {{commission.transactionDate | date }}</div>
+                    <div class="col-xs-2 "> {{commission.supplierName}}</div>
+                    <div class="col-xs-2 "> {{commission.advisorCommission | currency : 'R'}}</div>
+
+                    <!--  <div class="col-xs-2" ng-if="commission.advisorId == 0"> -->
+                    <div class="col-xs-2" ng-if="setAdvisor">
+                        <select ng-show="advisorList.length > 1" ng-model="advisorId" ng-options="adv.id as adv.name for adv in advisorList track by adv.id">
+                            <option value="">-- Please select an Adviser --</option>
+                        </select>
+                        <span class="btn btn-sm btn-primary" ng-click="linkAdvisor(advisorId,commission.id)">Link</span>
+                    </div>
+
+
+                    <div class="col-xs-4" ng-if="commission.clientId == 0">
+                        <select ng-show="clientList.length > 1" ng-model="clientId" ng-options="cl.id as cl.lastName +' , ' + cl.firstName  for cl in clientList track by cl.id">
+                            <option value="">-- Please select a Client --</option>
+                        </select>
+                        <span class="btn btn-sm btn-primary" ng-click="linkClient(clientId,commission.id)">Link</span>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <h3 class="col-xs-12 smallHeading nopadding" ng-if="commissionList.length > 1">Transaction Period Totals</h3>
+                    <div class="col-xs-12" ng-if="commissionList.length > 1">
+                        <h3 class="col-xs-2 smallHeading nopadding">Adviser</h3>
+                        <h3 class="col-xs-2 smallHeading nopadding">Tax Total</h3>
+                        <h3 class="col-xs-2 smallHeading nopadding">Rate</h3>
+                        <h3 class="col-xs-2 smallHeading nopadding">Incl.</h3>
+                        <h3 class="col-xs-2 smallHeading nopadding">Excl.</h3>
+                        <h3 class="col-xs-2 smallHeading nopadding">Company</h3>
+                    </div>
+                    <div class="col-xs-12" ng-if="commissionList.length > 1">
+                        <h3 class="col-xs-2 nopadding">{{advisorTotal | currency : 'R'}}</h3>
+                        <h3 class="col-xs-2 nopadding">{{advisorTaxTotal | currency : 'R'}}</h3>
+                        <h3 class="col-xs-2 nopadding">{{AdvisorTaxRate | currency : '%'}}</h3>
+                        <h3 class="col-xs-2 nopadding">{{commissionInclVATTotal | currency : 'R'}}</h3>
+                        <h3 class="col-xs-2 nopadding">{{commissionExclVATTotal | currency : 'R'}}</h3>
+                        <h3 class="col-xs-2 nopadding">{{companyTotal | currency : 'R'}}</h3>
+                    </div>
+
+                </div>
+
+                    <div class="row"><h3 class="col-xs-3 cardHeading nopadding">Exception List</h3></div>
+                    <div class="col-xs-12">
+                        <div class="btn btn-sm btn-primary" style="width: 120px; margin-bottom: 10px" ng-click="viewExceptionList()" ng-hide="closeExceptionList">View Exception List</div>
+                        <div class="btn btn-sm btn-primary" style="width: 120px; margin-bottom: 10px" ng-click="closeExceptionListFunc()" ng-show="closeExceptionList">Close Exception List</div>
+                        <span class="btn btn-sm btn-warning pull-right" ng-click="exceptionList()">Export Exception List</span>
+                    </div>
+
+                <div class="col-xs-12" ng-if="setExceptionList">
+                    <h3 class="col-xs-2 smallHeading nopadding">Initial</h3>
+                    <h3 class="col-xs-2 smallHeading nopadding">Surname</h3>
+                    <h3 class="col-xs-2 smallHeading nopadding">Member/Id No.</h3>
+                    <h3 class="col-xs-2 smallHeading nopadding">Supplier Name</h3>
+
+                </div>
+
+                <div class="col-xs-12" ng-if="setExceptionList" ng-repeat="exception in expectionList">
+                    <div class="col-xs-2">{{exception.initial}}</div>
+                    <div class="col-xs-2 "> {{exception.surname }}</div>
+                    <div class="col-xs-2 "> {{exception.memberNumber}}</div>
+                    <div class="col-xs-2 "> {{exception.supplierName}}</div>
+                </div>
+
+                <div class="row"><h3 class="col-xs-3 cardHeading nopadding">Commission for VIP</h3></div>
+                <div><span class="btn btn-sm btn-warning pull-left" ng-click="commissionSummaryListVIP()">Export Commission for VIP</span></div>
+
+                <div class="clearfix" />
+                <div class="row"><h3 class="col-xs-3 cardHeading nopadding">Representative List</h3></div>
+                <div><span class="btn btn-sm btn-warning pull-left" ng-click="representativeList()">Export Representative List</span></div>
+
+                <div class="clearfix" />
+
+                <div class="row"><h3 class="col-xs-6 cardHeading nopadding">Applications</h3></div>
+                <div class="col-xs-12">
+                    From: <input datepicker name="dateFromTotalBusinessSelect" ng-model="dateFromTotalBusinessApps" />
+                    To: <input datepicker name="dateToTotalBusinessSelect" ng-model="dateToTotalBusinessApps" />
+                    <span class="btn btn-sm btn-warning pull-right" ng-click="applicationsExport(dateFromTotalBusinessApps,dateToTotalBusinessApps)">Export Applications</span>
+                </div>
+
+
+                <div class="row"><h3 class="col-xs-6 cardHeading nopadding">Applications per Representative</h3></div>
+                <div>
+
+                    <div class="col-xs-6">
+
+                        <select ng-show="advisorList.length > 1" ng-model="advisorSelectId" ng-options="adv.id as adv.name for adv in advisorList track by adv.id">
+<<<<<<< HEAD
+                            <option value="">-- Please Select an Advisor --</option>
+=======
+                            <option value="">-- Adviser --</option>
+>>>>>>> 3bbfe51f4d3afe6f0a21e8d8e4908f8ac16b5d08
+                        </select>
+
+                        <select ng-model="advisorStatusId" ng-options="advStatList.id as advStatList.name for advStatList in advisorStatusList track by advStatList.id">
+                            <option value="">-- Status --</option>
+                        </select>
+
+                        <select ng-model="advisorSupplierId" ng-options="advSupList.id as advSupList.name for advSupList in advisorSupplierList track by advSupList.id">
+                            <option value="">-- Supplier --</option>
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="col-xs-6">
+                        From: <input datepicker name="dateFromSelect" ng-model="dateFromSelect" />
+                        To: <input datepicker name="dateToSelect" ng-model="dateToSelect" />
+                        <span class="btn btn-sm btn-warning pull-right" ng-click="applicationsPerRepresentativeList(advisorSelectId, advisorStatusId,advisorSupplierId,dateFromSelect,dateToSelect)">Export Applications per Rep</span>
+                    </div>
+
+                </div>
+
+
+                <div class="clearfix" />
+                <div class="row"><h3 class="col-xs-6 cardHeading nopadding">Applications per Supplier</h3></div>
+                    <div class="col-xs-5">
+                        <select ng-model="advisorTotalBusinessSupplierId" ng-options="advSupTotalBusinessList.id as advSupTotalBusinessList.name for advSupTotalBusinessList in advisorSupplierList track by advSupTotalBusinessList.id">
+                            <option value="">-- Supplier --</option>
+                        </select>
+                    </div>
+
+                    <div class="col-xs-7">
+                        From: <input datepicker name="dateFromTotalBusinessSelect" ng-model="dateFromTotalBusinessSelect" />
+                        To: <input datepicker name="dateToTotalBusinessSelect" ng-model="dateToTotalBusinessSelect" />
+                        <span class="btn btn-sm btn-warning pull-right" ng-click="TotalBusiness(advisorTotalBusinessSupplierId, dateFromTotalBusinessSelect,dateToTotalBusinessSelect)">Export Applications per Supplier</span>
+                    </div>
+
+                <div class="clearfix" />
+                <div class="row"><h3 class="col-xs-6 cardHeading nopadding">Company Details</h3></div>
+                    <div class="col-xs-5">
+                        <select ng-model="companyNameId" ng-options="companyName.id as companyName.name for companyName in advisorCompany track by companyName.id">
+                            <option value="">-- Company Name --</option>
+                        </select>
+                    </div>
+
+                    <div class="col-xs-7">
+                        <span class="btn btn-sm btn-warning pull-right" ng-click="CompanyDetailsList(companyNameId)">Export Company Details</span>
+                    </div>
+
+                <div class="clearfix" />
+                <div class="row"><h3 class="col-xs-3 cardHeading nopadding">Company Advisers</h3></div>
+                <div><span class="btn btn-sm btn-warning pull-left" ng-click="companyAdvisers()">Export Company Advisers</span></div>
+
+                <div class="clearfix" />
+                <div class="row"><h3 class="col-xs-3 cardHeading nopadding">Company Key Individuals</h3></div>
+                <div><span class="btn btn-sm btn-warning pull-left" ng-click="companyKeyIndividuals()">Export Company Key Individuals</span></div>
+
+                <div class="clearfix" />
+                <div class="row"><h3 class="col-xs-3 cardHeading nopadding">Company Licenses</h3></div>
+                <div><span class="btn btn-sm btn-warning pull-left" ng-click="companyLicenses()">Export Company Licenses</span></div>
+
+
+                <div class="clearfix"/>
+                <div class="row"><h3 class="col-xs-6 cardHeading nopadding">Company Documents</h3></div>
+                <div>
+
+                    <div class="col-xs-12">
+                        <select ng-show="advisorList.length > 1" ng-model="advisorCompanyDocumentsId" ng-options="adv.id as adv.name for adv in advisorCompany track by adv.id">
+                            <option value="">-- Company Name --</option>
+                        </select>
+                        <span class="btn btn-sm btn-warning pull-right" ng-click="companyDocuments(advisorCompanyDocumentsId)">Export Company Documents</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

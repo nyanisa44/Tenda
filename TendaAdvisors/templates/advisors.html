@@ -1,0 +1,143 @@
+﻿<div class="row">
+    <div class="col-xs-12 bottomTopMargin">
+        <div class="col-xs-2 btn btn-primary" ng-click="goToNewAdvisorPage()">New Representive</div>
+    </div>
+</div>
+
+<!-- - - - - - - - - - - - - - -ADVISORS- - - - - - - - - - - - - - -->
+<h4 class="representativeHeadings">Advisers:</h4>
+<div class="row">
+    <div class="col-xs-12">
+        <input size="100"
+               list="clientList"
+               type="search"
+               placeholder="Type atleast 4 characters"
+               ng-model="searchTerm"
+               ng-change="doSearch(searchTerm,2)"
+               class="autoCursor"
+               style="margin-top:15px;">
+        <div class="bottomTopMargin"
+             style="font-size:medium"
+             ng-show="(!!searchTerm && searchTerm.trim().length >= 4)&& isAdvisorContact">
+            You have selected  <span style="font-weight:800">{{contact.firstName + ' ' + contact.lastName +'('+ contact.idNumber +')' }}</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="col-xs-12 remindersCards nopadding hoverPointer"
+             ng-show="!!searchTerm && searchTerm.trim().length >= 4 && isAdvisorContact">
+            <div class="col-xs-12 remindersCard"
+                 ng-click="advisorClickedGetId(advisorId); registerItem = 0;">
+                <div class="col-xs-4">
+                    <div class="col-xs-12 activityName nopadding">{{ contact.firstName}} {{contact.middleName}} {{ contact.lastName}}</div>
+                    <div class="col-xs-12 nopadding">ID: {{ contact.idNumber }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- - - - - - - - - - - - - - -ADMIN- - - - - - - - - - - - - - -->
+<h4 class="representativeHeadings">Admin:</h4>
+<div class="row">
+    <div class="col-xs-12">
+        <input size="100"
+               list="clientListadmin"
+               type="search"
+               placeholder="Type atleast 4 characters"
+               ng-model="searchTermAdmin"
+               ng-change="doSearch(searchTermAdmin,6)"
+               style="margin-top:15px;">
+        <div class="bottomTopMargin"
+             style="font-size:medium"
+             ng-show="(!!searchTermAdmin && searchTermAdmin.trim().length >= 4 && isAdminContact)">
+            You have selected  <span style="font-weight:800">{{contact.firstName + ' ' + contact.lastName +'('+ contact.idNumber +')' }}</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="col-xs-12 remindersCards hoverPointer"
+             ng-show="!!searchTermAdmin && searchTermAdmin.trim().length >= 4 && isAdminContact">
+            <div class="col-xs-12 remindersCard"
+                 ng-click="adminClickedGetId(advisorId)">
+                <div class="col-xs-4">
+                    <div class="col-xs-12 activityName nopadding">{{ contact.firstName}} {{contact.middleName}} {{ contact.lastName}}</div>
+                    <div class="col-xs-12 nopadding">ID: {{ contact.idNumber }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- - - - - - - - - - - - - - -KEY INDIVIDUAL- - - - - - - - - - - - - - -->
+<h4 class="representativeHeadings">Key Individual:</h4>
+<div class="row">
+    <div class="col-xs-12">
+        <input size="100"
+               list="clientListkey"
+               type="search"
+               placeholder="Type atleast 4 characters"
+               ng-model="searchTermkey"
+               ng-change="doSearch(searchTermkey,1)"
+               style="margin-top:15px;">
+        <div class="bottomTopMargin"
+             style="font-size:medium"
+             ng-show="(!!searchTermKey && searchTermKey.trim().length >= 4)&& isKeyContact">
+            You have selected  <span style="font-weight:800">{{contact.firstName + ' ' + contact.lastName +'('+ contact.idNumber +')' }}</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="col-xs-12 remindersCards nopadding hoverPointer"
+             ng-show="!!searchTermkey && searchTermkey.trim().length >= 4 && isKeyContact">
+            <div class="col-xs-12 remindersCard"
+                 ng-click="keyClickedGetId(advisorId)">
+                <div class="col-xs-4">
+                    <div class="col-xs-12 activityName nopadding">{{ contact.firstName}} {{contact.middleName}} {{ contact.lastName}}</div>
+                    <div class="col-xs-12 nopadding">ID: {{ contact.idNumber }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- - - - - - - - - - - - - - -DIRECTOR- - - - - - - - - - - - - - -->
+<h4 class="representativeHeadings">Director:</h4>
+<div class="row">
+    <div class="col-xs-12">
+        <input size="100"
+               list="clientListdir"
+               type="search"
+               placeholder="Type atleast 4 characters"
+               ng-model="searchTermdir"
+               ng-change="doSearch(searchTermdir,7)"
+               style="margin-top:15px;">
+        <div class="bottomTopMargin"
+             style="font-size:medium"
+             ng-show="(!!searchTermdir && searchTermdir.trim().length >= 4)&& isDirContact">
+            You have selected  <span style="font-weight:800">{{contact.firstName + ' ' + contact.lastName +'('+ contact.idNumber +')' }}</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="col-xs-12 remindersCards nopadding hoverPointer"
+             ng-show="!!searchTermdir && searchTermdir.trim().length >= 4  && isDirContact">
+            <div class="col-xs-12 remindersCard"
+                 ng-click="dirClickedGetId(advisorId)">
+                <div class="col-xs-4">
+                    <div class="col-xs-12 activityName nopadding">{{ contact.firstName}} {{contact.middleName}} {{ contact.lastName}}</div>
+                    <div class="col-xs-12 nopadding">ID: {{ contact.idNumber }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bottomSpacing" />

@@ -1,0 +1,33 @@
+﻿<div class="row">
+    <div class="col-xs-12">
+        <div class="col-xs-2 btn btn-primary"
+             style="margin-top:10px"
+             ng-click="goToNewClientPage()">New Client
+        </div>
+        <input size="100"
+               list="clientList"
+               type="search"
+               placeholder="Type atleast 4 characters"
+               ng-model="searchTerm"
+               ng-change="doSearch(searchTerm)"
+               style="margin-top:15px; margin-left:50px;">
+        <div style="margin-top:60px;font-size:medium;"
+             ng-show="(!!searchTerm && searchTerm.trim().length >= 4) && foundClient">You have selected  <span style="font-weight:800">{{application.client.firstName + ' ' + application.client.lastName +'('+ application.client.idNumber +')' }}</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="col-xs-12 remindersCards nopadding hoverable" ng-show="(!!searchTerm && searchTerm.trim().length >= 4 && foundClient)">
+            <div class="col-xs-12 clientCard" ng-click="clientClicked(application.client.id)">
+                <div class="col-xs-4">
+                    <div class="col-xs-12 clientName nopadding">{{ application.client.firstName}} {{application.client.middleName}} {{ application.client.lastName}}</div>
+                    <div class="col-xs-12 nopadding">ID: {{ application.client.idNumber }}</div>   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,85 @@
+﻿<h3 class="col-xs-12">Suppliers &amp; Products</h3>
+<div class="col-xs-12 admin import">
+    Manage suppliers and products.
+</div>
+<div class="row">
+    <hr class="col-xs-12" />
+    <div class="col-xs-12"><button class="col-xs-offset-2 col-xs-8 btn btn-sm btn-primary" ng-click="addSupplier()">+ New Supplier</button></div>
+</div>
+<div class="col-xs-12 remindersCards" style="padding-top: 0px;" ng-repeat="supplier in suppliers.supplierList">
+    <div class="col-xs-12 remindersCard">
+        <input class="col-xs-12 text-left" style="font-size:large;" placeholder="New Supplier Name" type="text" ng-model="supplier.name" />
+        <div class="col-xs-12" style="font-size:large;">
+            <label>Supplier - Input File Mapping.</label>
+        </div>
+        <div class="col-xs-12" style="font-size:small;">
+            <label>Set the [1] based column index for the input filex.</label>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="nopadding"><label class="nopadding">"ID# Column Index"                      </label><input class="nopadding textEditable" placeholder="ID# Column Index" type="text" ng-model="supplier.idNumberColumn" /></div>
+                <div class="nopadding"><label class="nopadding">"ID# Column Name"                       </label><input class="nopadding textEditable" placeholder="ID# Column Name" type="text" ng-model="supplier.idNumberColumnName" /></div>
+                <div class="nopadding"><label class="nopadding">"Policy# Column Map Index"              </label><input class="nopadding textEditable" placeholder="Policy# Column Map Index" type="text" ng-model="supplier.policyNumberColumn" /></div>
+                <div class="nopadding"><label class="nopadding">"Policy# Column Name"                   </label><input class="nopadding textEditable" placeholder="Policy# Column Name" type="text" ng-model="supplier.policyNumberColumnName" /></div>
+                <div class="nopadding"><label class="nopadding">"Member# Column Map Index"              </label><input class="nopadding textEditable" placeholder="Member# Column Map Index" type="text" ng-model="supplier.memberNumberColumn" /></div>
+                <div class="nopadding"><label class="nopadding">"Member# Column Name"                   </label><input class="nopadding textEditable" placeholder="Member# Column Name" type="text" ng-model="supplier.memberNumberColumnName" /></div>
+                <div class="nopadding"><label class="nopadding">"Adviser Name Column Index"             </label><input class="nopadding textEditable" placeholder="Advisor Name Column Index" type="text" ng-model="supplier.advisorNameColumn" /></div>
+                <div class="nopadding"><label class="nopadding">"Adviser Name Column Name"              </label><input class="nopadding textEditable" placeholder="Advisor Name Column Name" type="text" ng-model="supplier.advisorNameColumnName" /></div>
+                <div class="nopadding"><label class="nopadding">"Adviser Surname Column Index"          </label><input class="nopadding textEditable" placeholder="Advisor Surname Column Index" type="text" ng-model="supplier.advisorSurnameColumn" /></div>
+                <div class="nopadding"><label class="nopadding">"Adviser Surname Column Name"           </label><input class="nopadding textEditable" placeholder="Advisor Surname Column Name" type="text" ng-model="supplier.advisorSurnameColumnName" /></div>
+                <div class="nopadding"><label class="nopadding">"Surname Column Map Index"              </label><input class="nopadding textEditable" placeholder="Surname Column Map Index" type="text" ng-model="supplier.surnameColumn" /></div>
+                <div class="nopadding"><label class="nopadding">"Surname Column Name"                   </label><input class="nopadding textEditable" placeholder="Surname Column Name" type="text" ng-model="supplier.surnameColumnName" /></div>
+                <div class="nopadding"><label class="nopadding">"Initial Column Map Index"              </label><input class="nopadding textEditable" placeholder="Initial Column Map Index" type="text" ng-model="supplier.initialColumn" /></div>
+                <div class="nopadding"><label class="nopadding">"Initial Column Name"                   </label><input class="nopadding textEditable" placeholder="Initial Column" type="text" ng-model="supplier.initialColumnName" /></div>
+                <div class="nopadding"><label class="nopadding">"Enrollment Date Column Map Index"      </label><input class="nopadding textEditable" placeholder="Enrollment Date Column Map Index" type="text" ng-model="supplier.enrollmentDateColumn" /></div>
+                <div class="nopadding"><label class="nopadding">"Enrollment Date Column Name"           </label><input class="nopadding textEditable" placeholder="Enrollment Date Column" type="text" ng-model="supplier.enrollmentDateColumnName" /></div>
+                <div class="nopadding"><label class="nopadding">"Termination Date Map Index"            </label><input class="nopadding textEditable" placeholder="Termination Date Map Index" type="text" ng-model="supplier.terminationDateColumn" /></div>
+                <div class="nopadding"><label class="nopadding">"Termination Date Column Name"          </label><input class="nopadding textEditable" placeholder="Termination Date Column Name" type="text" ng-model="supplier.terminationDateColumnName" /></div>
+                <div class="nopadding"><label class="nopadding">"Transaction Date Index"                </label><input class="nopadding textEditable" placeholder="Transaction Date" type="text" ng-model="supplier.transactionDateColumn" /></div>
+                <div class="nopadding"><label class="nopadding">"Transaction Date Name"                 </label><input class="nopadding textEditable" placeholder="Transaction Date Map Index" type="text" ng-model="supplier.transactionDateColumnName" /></div>
+                <div class="nopadding"><label class="nopadding">"Subscription Due Map Index"            </label><input class="nopadding textEditable" placeholder="Subscription Due Map Index" type="text" ng-model="supplier.subscriptionDueColumn" /></div>
+                <div class="nopadding"><label class="nopadding">"Subscription Due Column Name"          </label><input class="nopadding textEditable" placeholder="Subscription Due Column Map Index" type="text" ng-model="supplier.subscriptionDueColumnName" /></div>
+                <div class="nopadding"><label class="nopadding">"Subscription Received Column Map Index"</label><input class="nopadding textEditable" placeholder="Subscription Received Column Map Index" type="text" ng-model="supplier.subscriptionReceivedColumn" /></div>
+                <div class="nopadding"><label class="nopadding">"Subscription Received Column Name"     </label><input class="nopadding textEditable" placeholder="Subscription Received Column Map Index" type="text" ng-model="supplier.subscriptionReceivedColumnName" /></div>
+                <div class="nopadding"><label class="nopadding">"Commision excl Column Map Index"       </label><input class="nopadding textEditable" placeholder="Commision excl Column Map Index" type="text" ng-model="supplier.commissionExclVatColumn" /></div>
+                <div class="nopadding"><label class="nopadding">"Commision excl Name"                   </label><input class="nopadding textEditable" placeholder="Commision excl Map Index" type="text" ng-model="supplier.commissionExclVatColumnName" /></div>
+                <div class="nopadding"><label class="nopadding">"Commision incl Column Map Index"       </label><input class="nopadding textEditable" placeholder="Commision excl Column Map Index" type="text" ng-model="supplier.commissionInclVatColumn" /></div>
+                <div class="nopadding"><label class="nopadding">"Commision incl Column Name"            </label><input class="nopadding textEditable" placeholder="Commision excl Column Map Index" type="text" ng-model="supplier.commissionInclVatColumnName" /></div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="col-xs-12">
+                <div class="col-xs-12 nopadding" style="margin-top: 2px;" ng-repeat="product in supplier.products">
+                    <div class="col-xs-6 nopadding"><input class="col-xs-10 nopadding textEditable" placeholder="New product name" type="text" ng-model="product.name" /></div>
+                    <select class="col-xs-6 nopadding textEditable"
+                            ng-model="product.licenseType"
+                            ng-options="licenseType as ( licenseType.licenseCategoryId + '.' + licenseType.subCategory + ' - ' + licenseType.description) for licenseType in licenseTypes track by licenseType.id">
+                        <option value="">Choose FSB License:</option>
+                    </select>
+                    <hr />
+
+
+                    <!--<button class="col-xs-1 nopadding btn btn-sm btn-danger" title="X" ng-click="deleteProduct(product.id)">
+                        X
+                    </button>-->
+                    <button class="col-xs-6 nopadding btn btn-sm btn-success" title="Save" ng-click="saveProduct(product, supplier.id)">
+                        Save
+                    </button>
+
+                </div>
+                <hr />
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <button class="col-xs-offset-1 col-xs-7 nopadding btn btn-sm btn-success btn-primary" title="Save" ng-click="saveSupplier(supplier)">
+            Save {{supplier.name}} products
+        </button>
+        <button class="col-xs-offset-1 col-xs-3 btn btn-sm btn-primary" ng-click="addProduct(supplier)">+ New Product</button>
+    </div>
+    <hr class="col-xs-12" />
+</div>
+<div class="row">
+    <hr class="col-xs-12" />
+    <div class="col-xs-12"><button class="col-xs-offset-2 col-xs-8 btn btn-sm btn-primary" ng-click="addSupplier()">+ New Supplier</button></div>
+</div>

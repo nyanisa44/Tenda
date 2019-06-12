@@ -1,0 +1,61 @@
+﻿
+<h3 class="col-xs-12 smallHeading">Import: Upload File</h3>
+<div class="col-xs-12 admin import bottomTopMargin">
+    Choose a data type to upload to the server.
+    <div ng-if="importErrorMessage != ''" class="alert-danger">
+        Error: {{importErrorMessage}}
+    </div>
+</div>
+
+<div class="col-xs-12 remindersCards" style="padding-top: 0px;" ng-repeat="file in uploads">
+    <div class="col-xs-12 remindersCard">
+        <h4 class="col-xs-12 cardHeading">Upload file to import:</h4>
+        <div class="col-xs-12 nopadding documentCard newDocumentCard"
+             file-dropzone="[application/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet]"
+             file="file.data"
+             file-name="file.fileName"
+             data-max-file-size="10">
+            <div class="col-xs-12">
+                <div class="row nopadding" style="margin-top: 2px;">
+                    <div class="col-xs-12 nopadding selectedDocument">{{file.fileName}}</div>
+                </div>
+                <div class="col-xs-12 col-sm-offset-6 col-sm-6 nopadding" style="margin-top: 2px;">
+                    <div class="container-fliud">
+                        <select class="col-xs-12"
+                                id="importTypeSelect"
+                                name="importTypeSelect"
+                                ng-model="importTypeChoice"
+                                ng-options="import.type for import in importTypes | orderBy:'name' track by import.id"
+                                ng-change="updateFile({imporTypeId:importTypeChoice.id})"></select>
+                        <select class="col-xs-12"
+                                name="singleSelect"
+                                ng-model="supplier"
+                                style="float: right;"
+                                ng-change="updateProducts(supplier.id)"
+                                ng-options="supplier.name for supplier in suppliers.supplierList track by supplier.id"
+                                ng-show="applicationWithMemberListUploadCheck">
+                        </select>
+                        <button ng-class="{ 'disabledButton': file.fileName === '' }"
+                                class="col-xs-6 col-xs-offset-6 btn btn-sm btn-primary"
+                                title="Add Document"
+                                ng-click="file.fileName !== '' && uploadImport(file)">
+                            Upload
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <h4 class="col-xs-12 dragAndDrop">Drag and Drop Document</h4>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-12" ng-if="isNewApplication">
+    <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister"
+            style="float: left;"
+            ng-click="gotoPage(1)">Back
+    </button>
+    <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister"
+            style="float: right;"
+            ng-click="gotoPage(3)">Next
+    </button>
+</div>

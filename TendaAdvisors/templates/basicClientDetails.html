@@ -1,0 +1,118 @@
+﻿
+<h3 class="col-xs-12 smallHeading" style="padding-left: 10px; padding-right: 10px;">Client Information</h3>
+<div class="col-xs-12 col-sm-6 remindersCards summaryCards" style="padding-top: 0px;">
+    <div class="col-xs-12 remindersCard" style="margin-top: 0px;">
+        <!-- <h4 class="col-xs-12 cardHeading">Advisor Information<button class="col-xs-3 btn btn-sm btn-primary" ng-click="editAdvisorPageAndSave(false)" ng-show="notAdvisorEditing" style="float: right;">Edit</button><button class="col-xs-3 btn btn-sm btn-primary" ng-click="editAdvisorPageAndSave(true)" ng-hide="notAdvisorEditing" style="float: right;">Save</button></h4>-->
+        <div class="col-xs-12 nopadding">
+            <div class="cardHeading cardVia cardViaBolder" ng-class="{ 'col-xs-9': notAdvisorEditing, 'col-xs-6': !notAdvisorEditing }" style="float: left; text-align: left;">
+                Summary of Client Details
+            </div>
+            <button class="col-xs-3 pull-right btn btn-sm btn-primary" ng-click="editAdvisorPageAndSave(false)" ng-show="notAdvisorEditing">
+                Edit
+            </button>
+            <button class="col-xs-3 pull-right btn btn-sm btn-primary" ng-class="{ 'disabledButton': advisorDetails.$invalid }" ng-click="!advisorDetails.$invalid && editAdvisorPageAndSave(true)" ng-hide="notAdvisorEditing">
+                Save
+            </button>
+            <button class="col-xs-3 pull-right btn btn-sm btn-danger" ng-click="cancelEdit()" ng-hide="notAdvisorEditing">
+                Cancel
+            </button>
+        </div>
+
+
+        <div class="col-xs-6 nopadding">ID Number</div>
+        <input type="text" placeholder="ID Number" ng-model="contact.idNumber" ng-change="advisorTextChangeId(contact.idNumber)" class="col-xs-6 nopadding textEditable" ng-style="ErrorIdNumber.style" ng-disabled="notAdvisorEditing" />
+
+        <div class="col-xs-6 nopadding">Title:</div>
+        <select class="col-xs-6 nopadding textEditable" ng-model="contact.contactTitle_Name" style="float: right;" ng-disabled="notAdvisorEditing"
+                ng-options="name as name for name in Titles"></select>
+
+        <div class="col-xs-6 nopadding"> First Name:</div>
+        <input type="text" placeholder="Name" style="float:right" ng-change="checkCharaters(contact.firstName)" ng-model="contact.firstName"  class="col-xs-4 nopadding textEditable" ng-disabled="notAdvisorEditing" />
+        <div class="col-xs-2 nopadding " style="color: white; background-color:red;float:left" ng-show="incorrectEntry"><span>&#10060;</span>!</div>
+        <div class="col-xs-6 nopadding">Middle Name</div>
+        <input type="text" placeholder="Middle Name" ng-model="contact.middleName" ng-change="advisorTextChange(contact.middleName)" class="col-xs-6 nopadding textEditable" ng-disabled="notAdvisorEditing" />
+
+        <div class="col-xs-6 nopadding">Last Name</div>
+        <input type="text" placeholder="Last Name" ng-model="contact.lastName" ng-change="advisorTextChange(contact.lastName)" class="col-xs-6 nopadding textEditable" ng-disabled="notAdvisorEditing" />
+
+
+        <div class="col-xs-6 nopadding">Job Title:</div>
+        <input type="text" placeholder="Job Title" ng-model="contact.jobTitle" ng-change="advisorTextChange(contact.jobTitle)" class="col-xs-6 nopadding textEditable" ng-disabled="notAdvisorEditing" />
+
+
+    </div>
+
+    <div class="col-xs-12 remindersCard">
+        <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left;">Summary of Contact Info</div>
+
+        <div class="col-xs-6 nopadding">Cell 1:</div>
+        <input type="text" placeholder="Cellphone number 1" ng-model="contact.cell1" ng-change="advisorTextChange(contact.cell1 )" class="col-xs-6 nopadding textEditable" ng-disabled="notAdvisorEditing"  />
+
+        <div class="col-xs-6 nopadding">Cell 2:</div>
+        <input type="text" placeholder="Cellphone number 2" ng-model="contact.cell2" ng-change="advisorTextChange(contact.cell2 )" class="col-xs-6 nopadding textEditable" ng-disabled="notAdvisorEditing"  />
+
+        
+
+        <div class="col-xs-12 breakLine"></div>
+
+        <div class="col-xs-6 nopadding">Tel 1:</div>
+        <input type="text" placeholder="Telephone number 1" ng-model="contact.tel1" ng-change="advisorTextChange(contact.tel1 )" class="col-xs-6 nopadding textEditable" ng-disabled="notAdvisorEditing"  />
+
+        <div class="col-xs-6 nopadding">Tel 2:</div>
+        <input type="text" placeholder="Telephone number 2" ng-model="contact.tel2" ng-change="advisorTextChange(contact.tel2 )" class="col-xs-6 nopadding textEditable" ng-disabled="notAdvisorEditing"  />
+
+        
+
+        <div class="col-xs-12 breakLine"></div>
+
+        <div class="col-xs-6 nopadding">Email 1:</div>
+        <input type="text" placeholder="Email 1" ng-model="contact.email" ng-change="advisorTextChange(contact.email)" class="col-xs-6 nopadding textEditable" ng-disabled="notAdvisorEditing"  />
+
+        <div class="col-xs-6 nopadding">Email 2:</div>
+        <input type="text" placeholder="Email 2" ng-model="contact.email2" ng-change="advisorTextChange(contact.email2)" class="col-xs-6 nopadding textEditable" ng-disabled="notAdvisorEditing"  />
+    </div>
+</div>
+
+
+<div class="col-xs-12 col-sm-6 remindersCards summaryCards" style="padding-top: 0px;">
+    <div class="col-xs-12 remindersCard" style="margin-top: 0px;">
+
+            <div class="col-xs-2 btn crossButton" style="float: right;" title="Delete Document" ng-click="deleteAddress($index)" ng-show="editingApplicationDetail">X</div>
+            <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left;">Address {{contact.addresses.length > 1 ? $index + 1 : "" }}</div><!--Contact Details-->
+
+            <div  class="col-xs-6 nopadding">Address Type:</div>
+
+            <select style="float: right;" class="col-xs-6 nopadding" ng-model="contact.addressType" ng-disabled="!editingApplicationDetail"
+                    ng-options="name as name for name in AddressTypes">
+     
+              
+            </select>
+            <div  class="col-xs-6 nopadding">Description:</div><input ng-model="contact.addressDescription" placeholder="Description" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingApplicationDetail" />
+
+            <div class="col-xs-12 breakLine"></div>
+
+            <div  class="col-xs-6 nopadding">Street 1:</div><input   ng-model="contact.street1" placeholder="Street 1" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingApplicationDetail" />
+            <div  class="col-xs-6 nopadding">Street 2:</div><input ng-model="contact.street2" placeholder="Street 2" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingApplicationDetail" />
+            <div  class="col-xs-6 nopadding">Street 3:</div><input   ng-model="contact.street3" placeholder="Street 3" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingApplicationDetail" />
+
+            <div class="col-xs-12 breakLine"></div>
+
+            <div  class="col-xs-6 nopadding">Suburb:</div><input   ng-model="contact.suburb" placeholder="Suburb" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingApplicationDetail" />
+            <div  class="col-xs-6 nopadding">Postal Code:</div><input   ng-model="contact.postalCode" placeholder="Postal Code" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingApplicationDetail" />
+            <div class="col-xs-6 nopadding">City:</div><input  ng-model="contact.city" placeholder="City" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingApplicationDetail" />
+            <div  class="col-xs-6 nopadding">Map Url:</div><input   ng-model="contact.mapUrl" placeholder="Map Url" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingApplicationDetail" />
+            <div class="col-xs-12 breakLine"></div>
+
+            <div class="col-xs-6 nopadding">Province:</div>
+            <select style="float:right" class="col-xs-6 nopadding" ng-model="contact.province" ng-disabled="!editingApplicationDetail"
+                    ng-options="name as name for name in Province">
+               
+            </select>
+            <div class="col-xs-6 nopadding">Country:</div>
+            <select style="float:right" class="col-xs-6 nopadding" ng-model="contact.country" ng-disabled="!editingApplicationDetail"
+                    ng-options="name as name for name in Country ">
+               
+            </select>
+        </div>
+  
+</div>

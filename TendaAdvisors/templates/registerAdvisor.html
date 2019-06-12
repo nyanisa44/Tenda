@@ -1,0 +1,567 @@
+﻿<div>
+
+    <form name="newAdvisorForm0">
+
+
+
+        <div class="row registerAdvisor margin-v-30" ng-if="registerItem == 6 ? true : false">
+
+
+
+            <div class="col-xs-12 registrationDescription">Select existing representative</div>
+            <div class="col-xs-12 remindersCard">
+
+                <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left; padding-right: 0;">Representative Details</div>
+
+
+                <div class="col-xs-2 btn btn-sm btn-primary" style="float:right;" ng-click="gotoPage(0)">New Representative</div>
+
+                <div class="col-xs-6" style="margin-top:30px">
+
+                    <input size="100" list="clientList" type="search" placeholder="Type atleast 4 characters" ng-model="searchTerm" ng-change="doSearch(searchTerm)" style="margin-top:15px; margin-left:50px">
+ 
+
+
+                    <div style="margin-top:60px;font-size:medium" ng-show="(!!searchTerm && searchTerm.trim().length >= 4 && isAdvisorContact)">You have selected  <span style="font-weight:800">{{advisor.contact.firstName + ' ' + advisor.contact.lastName +'('+ advisor.contact.idNumber +')' }}</span></div>
+                    {{advisor.user.username}} {{advisor.user.password}}{{advisor.user.isAdmin}}
+                </div>
+
+
+                <div class="col-xs-2 btn btn-sm btn-primary" style="margin-top:140px;float:left" ng-click="oldClient()">Done</div>
+
+            </div>
+
+
+
+            <div ng-show="notNewApplication_check">
+                <div class="col-xs-12 remindersCard">
+
+                    <div class="col-xs-6 nopadding">Representative Type</div>
+
+                    <select class="col-xs-6 nopadding textEditable" ng-model="advisor.advisorType"
+                            ng-options="advisorType.title for advisorType in advisorTypes | orderBy:'title' track by advisorType.id"></select>
+
+                </div>
+
+
+
+                <div class="col-xs-12">
+                    <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right;" ng-click="gotoPage(1)">
+                        Next
+                    </button>
+                </div>
+           
+            </div>
+
+
+       </div>
+
+
+
+
+        <div class="row registerAdvisor margin-v-30" ng-if="registerItem == 0 ? true : false">
+
+            <div class="col-xs-6">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-10 nopadding">
+                    <h3 class="col-xs-12 smallHeading">Registration of the new Representative</h3>
+
+                    <div class="col-xs-12 remindersCards nopadding" style="padding-top: 0px;padding-bottom:20px">
+                        <div class="col-xs-12 remindersCard" style="margin-top: 0px;">
+                            <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left; padding-left: 0px;">Representative Details</div>
+
+                            <div class="col-xs-6 nopadding">Representative Type</div>
+
+                            <select class="col-xs-6 nopadding textEditable" ng-model="advisor.advisorType"
+                                    ng-options="advisorType.title for advisorType in advisorTypes | orderBy:'title' track by advisorType.id"></select>
+
+                            <div class="col-xs-6 nopadding">Job Title</div><input placeholder="Job Description" type="text" ng-model="advisor.contact.jobTitle" class="col-xs-6 nopadding textEditable" />
+
+                            <div class="col-xs-6 nopadding">Title:</div>
+                            <select class="col-xs-6 nopadding textEditable" ng-model="advisor.contact.contactTitle" style="float: right;"
+                                    ng-options="title.name for title in Titles track by title.id"></select>
+
+              
+                            <div class="col-xs-6 nopadding" >First Name</div><input style="float:right" ng-class="advisor.contact.firstName == null ? 'validationError' : ''" placeholder="First Name" type="text" ng-model="advisor.contact.firstName" class="col-xs-4 nopadding textEditable" ng-change="checkCharaters(advisor.contact.firstName)"   required />
+                            <div class="col-xs-2 nopadding " style="color: white; background-color:red;float:left" ng-show="incorrectEntry"><span>&#10060;</span>!</div>
+                            <div class="col-xs-6 nopadding">Last Name</div><input style="float:right" placeholder="Last Name" type="text" ng-class="advisor.contact.lastName == null ? 'validationError' : ''" ng-model="advisor.contact.lastName" ng-change="checkCharatersLast(advisor.contact.lastName)"  class="col-xs-4 nopadding textEditable" required />
+                            <div class="col-xs-2 nopadding " style="color: white; background-color:red;float:left" ng-show="incorrectEntryLastName"><span>&#10060;</span>!</div>
+                            <div class="col-xs-6 nopadding">Id Number</div><input style="float:right" placeholder="Id Number" type="text" rr-validate-said ng-change="checkDuplicateIds(advisor.contact.idNumber)" ng-model="advisor.contact.idNumber" ng-model-options="{ debounce: 500 }"
+                                                                                  class="col-xs-4 nopadding textEditable" required />
+                            <div class="col-xs-2 nopadding " style="color: white; background-color:red;float:left" ng-show="duplicateId"><span>&#10060;</span>Exists</div>
+                            <div class="col-xs-6 nopadding">Tax Directive Rate</div><input style="float:right" placeholder="Tax Directive Rate" type="text" ng-model="advisor.taxDirectiveRate" ng-change="checkTaxDirective(advisor.taxDirectiveRate)"class="col-xs-4 nopadding textEditable" />
+                            <div class="col-xs-2 nopadding " style="color: white; background-color:red;float:left" ng-show="incorrectEntryTax"><span>&#10060;</span>!</div>
+                        </div>
+                    </div>
+
+            <div class="col-xs-12 remindersCards nopadding" style="padding-top: 0px;padding-bottom:20px">
+                        <div class="col-xs-12 remindersCard" style="margin-top: 0px;">
+                            <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left; padding-left: 0px;">Login Details</div>
+
+                            <div class="col-xs-6 nopadding">Username</div><input placeholder="Username" type="text" ng-model="advisor.User.Username" class="col-xs-6 nopadding textEditable" ng-minlength="6" required />
+                            <div class="col-xs-6 nopadding">Password</div><input placeholder="Password" type="text" ng-model="advisor.User.Password" class="col-xs-6 nopadding textEditable" ng-minlength="6" required ng-change="advisor.User.passwordChanged = true" />
+                            
+                            <div style="font-size:large;color:red"> Please SELECT a Role </div>
+                            <div style="position: relative;display: inline-block; min-width: 50%;float:right" >
+                                <label><input type="radio"  name="firstchoice" ng-model="advisorRole.isAdmin"   value="false">Admin</label><br />
+                                <label><input type="radio"  name="firstchoice" ng-model="advisorRole.isAdvisor" value="true" >Adviser</label><br />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 remindersCard" style="margin-top: 0px;">
+                        <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left; padding-left: 0px;">Representative Contact Info</div>
+                        <div class="col-xs-6 nopadding">
+                            Contact Type
+                        </div>
+                        <select class="col-xs-6 nopadding textEditable" ng-model="advisor.contact.contactType"
+                                ng-options="ContactType.name for ContactType in contactTypes track by ContactType.id"></select>
+
+
+                        <div class="col-xs-6 nopadding">Cell 1</div><input placeholder="Cell 1" type="text" ng-model="advisor.contact.cell1" class="col-xs-6 nopadding textEditable" />
+                        <div class="col-xs-6 nopadding">Cell 2</div><input placeholder="Cell 2" type="text" ng-model="advisor.contact.cell2" class="col-xs-6 nopadding textEditable" />
+
+                        <div class="col-xs-12 breakLine"></div>
+                        <div class="col-xs-6 nopadding">Tel 1</div><input placeholder="Tel 1" type="text" ng-model="advisor.contact.tel1" class="col-xs-6 nopadding textEditable" />
+                        <div class="col-xs-6 nopadding">Tel 2</div><input placeholder="Tel 2" type="text" ng-model="advisor.contact.tel2" class="col-xs-6 nopadding textEditable" />
+
+                        <div class="col-xs-12 breakLine"></div>
+                        <div class="col-xs-6 nopadding">Email 1</div><input placeholder="Email 1" type="text" ng-model="advisor.contact.email" required class="col-xs-6 nopadding textEditable" />
+                        <div class="col-xs-6 nopadding">Email 2</div><input placeholder="Email 2" type="text" ng-model="advisor.contact.email2" class="col-xs-6 nopadding textEditable" />
+                      
+                    </div>
+
+                    <div class="col-xs-12 remindersCard" style="margin-top: 20px;">
+                        <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left; padding-left: 0px;">Banking Details</div>
+
+                      
+                        <div class="col-xs-6 nopadding">Bank Name</div>
+                        <select class="col-xs-6 nopadding textEditable" ng-model="advisor.bankName" style="float: right;"
+                                ng-options="bank.name for bank in Banks track by bank.id"></select>
+
+                        <div class="col-xs-6 nopadding">Bank Branch Code</div>
+                        <select class="col-xs-6 nopadding textEditable" ng-model="advisor.branchCode" style="float: right;"
+                                ng-options="bankCode.name for bankCode in BankCode track by bankCode.id"></select>
+
+                        <div class="col-xs-6 nopadding">Account Type</div><input placeholder="Account Type" type="text" ng-model="advisor.accountType" class="col-xs-6 nopadding textEditable" />
+                        <div class="col-xs-6 nopadding">Account Number</div><input placeholder="Account Number" type="text" ng-model="advisor.accountNumber" class="col-xs-6 nopadding textEditable" />
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xs-1"></div>
+
+            <div class="col-xs-6">
+
+                <div class="col-xs-10 nopadding">
+                    <div class="col-xs-12 remindersCards nopadding" style="padding-top: 45px;">
+                        <div class="col-xs-12 remindersCard" style="margin-top: 0px;">
+                            <div class="col-xs-12 uberbreak" ng-repeat="address in advisor.contact.addresses">
+                                <div class="col-xs-2 btn crossButton" style="float: right;" title="Delete Document" ng-click="deleteAddress($index)" ng-disabled="!editingAdvisorDetail">X</div>
+                                <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left;">Address Info</div>
+
+
+                                <div class="col-xs-6 nopadding">Address Type:</div>
+
+                                <select ng-class="address.addressType== null ? 'validationError' : ''" class="col-xs-6 nopadding textEditable" ng-model="address.addressType" style="float: right;"
+                                        ng-options="addressType.name for addressType in AddressTypes track by addressType.id" ng-disabled="!editingAdvisorDetail"></select>
+                                <div class="col-xs-6 nopadding">Description:</div><input ng-model="address.description" placeholder="Description" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingAdvisorDetail" />
+
+                                <div class="col-xs-12 breakLine"></div>
+
+                                <div class="col-xs-6 nopadding">Street 1:</div><input ng-model="address.street1" placeholder="Street 1" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingAdvisorDetail" />
+                                <div class="col-xs-6 nopadding">Street 2:</div><input ng-model="address.street2" placeholder="Street 2" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingAdvisorDetail" />
+                                <div class="col-xs-6 nopadding">Street 3:</div><input ng-model="address.street3" placeholder="Street 3" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingAdvisorDetail" />
+
+                                <div class="col-xs-12 breakLine"></div>
+
+                                <div class="col-xs-6 nopadding">Suburb:</div><input ng-model="address.suburb" placeholder="Suburb" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingAdvisorDetail" />
+                                <div class="col-xs-6 nopadding">Postal Code:</div><input ng-model="address.postalCode" placeholder="Postal Code" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingAdvisorDetail" />
+                                <div class="col-xs-6 nopadding">City:</div><input ng-model="address.city" placeholder="City" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingAdvisorDetail" />
+                                <div class="col-xs-6 nopadding">Map Url:</div><input ng-model="address.mapUrl" placeholder="Map Url" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingAdvisorDetail" />
+                                <div class="col-xs-12 breakLine"></div>
+
+                                <div class="col-xs-6 nopadding">Province:</div>
+                                <select class="col-xs-6 nopadding textEditable" ng-model="address.province" style="float: right;"
+                                        ng-options="prov.name for prov in Province track by prov.id" ng-disabled="!editingAdvisorDetail">
+                                    >
+
+                                    <option value="">Choose a Province:</option>
+                                  
+                                </select>
+
+
+
+
+                                <div class="col-xs-6 nopadding">Country:</div>
+                                <select class="col-xs-6 nopadding textEditable" ng-model="address.country" style="float: right;"
+                                        ng-options="cntry.name for cntry in Country track by cntry.id" ng-disabled="!editingAdvisorDetail">
+                                    <option value="">Choose a Country:</option>
+                        
+
+                                </select>
+
+                            </div>
+
+                        </div>
+                        <!--button class="btn btn-sm btn-primary nextButtonRegister" style="float: right;" ng-click="addAnotherAddress()">Add Address</!--button-->
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1"></div>
+                <div class="col-xs-10 nopadding">
+                    <div class="col-xs-12 remindersCards nopadding" style="padding-top: 45px;">
+                        <div class="col-xs-12 remindersCard" style="margin-top: 0px;">
+                            <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left;">Employer Info</div>
+
+                            <div class="col-xs-6 nopadding"> Company </div>
+                            <div class="col-xs-6 nopadding"> {{advisor.Company.name}} </div>
+
+                            <div class="col-xs-6 nopadding">VAT Number</div><div class="col-xs-6 nopadding">{{advisor.Company.vatNumber}}</div>
+                           
+                            <div class="col-xs-6 nopadding">Image Url</div><div class="col-xs-6 nopadding">{{advisor.Company.imageUrl}} </div>
+                            <div class="col-xs-6 nopadding">FSP Number:</div><div class="col-xs-6 nopadding">{{advisor.Company.fsbNumber}}</div>
+                            <div class="col-xs-12" style="text-align: center;" ng-if="advisor.Company.ImageUrl != null && advisor.Company.ImageUrl != ''">
+                                <img class="col-xs-12" ng-src="{{ advisor.Company.ImageUrl.length > 7 ? advisor.Company.ImageUrl : '' }}" />
+                            </div>
+                            <pre>
+                                Contact Person:
+                                Name: {{advisor.Company.contactDetails.title + " " + advisor.Company.contactDetails.firstName + " " + advisor.Company.contactDetails.lastName}}
+                                Email: {{advisor.Company.contactDetails.email}}
+                                Work Tel:{{advisor.Company.contactDetails.telWork1}}
+                                Tel: {{advisor.Company.contactDetails.telWork1}}
+                                Cell: {{advisor.Company.contactDetails.cell1}}
+                                Job Title: {{advisor.Company.contactDetails.jobTitle}}
+                                </pre>
+                     
+                        </div>
+                        <button ng-class="newAdvisorForm0.$invalid?'disabledButton' :''" class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right;" ng-click="!newAdvisorForm0.$invalid && gotoPage(1)">Next</button>
+                    </div>
+                </div>
+                <div class="col-xs-1"></div>
+            </div>
+
+        </div>
+    </form>
+
+    <form name="newAdvisorForm1">
+        <!--------------------------------------------------FSB/CMS Documents------------------------------------>
+        <div class="row registerAdvisor margin-v-30" ng-if="registerItem == 3 ? true : false">
+
+           
+            <h3>Representative Registered!!!</h3>
+            <div class="col-xs-12 remindersCards nopadding">
+                <h3 class="col-xs-12 cardHeading nopadding" style="margin-top:10px">Upload required documents</h3>
+                <div ng-model="advisor.advisorType" ng-repeat="advisorType in advisorTypes" ng-show="advisorType.id==advisor.advisorType.id">
+
+                    <div class="col-xs-12 remindersCard" style="margin-top: 20px;" ng-repeat="doc in advisorType.documentTypes track by $index" file-dropzone="[application/pdf, image/png, image/jpeg, image/gif]" file="doc.file" file-name="doc.location" data-max-file-size="10">
+                        <h4 class="col-xs-12 cardHeading nopadding">{{doc.name}}</h4>
+                        <div>
+                            <div class="col-xs-12">
+                                <div class="col-xs-4 newDocumentCard dragAndDrop text-center">
+                                    <img ng-src="{{getDocumentPic(doc)}}" class="iconImage" />
+                                    <h4 class="col-xs-12 dragAndDrop" ng-if="!doc.originalFileName">Please Drag and Drop <br />document here.</h4>
+                                </div>
+                                <div class="col-xs-8">
+                                    <input class="col-xs-12" placeholder="Note" style="margin-top: 8px;margin-bottom: 20px" ng-model="doc.title"  />
+                                    <div>
+                                        <span style="margin-left:30px"></span>Valid from: <input datepicker
+                                                                                                 ng-model="doc.validFromDate" />
+
+                                        <span style="margin-left:60px"></span> Until: <input datepicker
+                                                                                             ng-model="doc.validToDate" />
+                                    </div>
+
+                                    <div>{{dateFrom}}</div>
+                                    <div ng-show="doc.location && !doc.uploaded" style="font-size:x-large;margin-top:30px">Submit<input type="checkbox" style="width:20px;height:20px;margin-left:20px;margin-top:40px;" ng-model="Submitted"></div>
+
+                                    <div class="col-xs-12 nopadding" style="margin-top: 2px;">
+                                        <div class="col-xs-10 nopadding selectedDocument">{{doc.location}}</div>
+                                        <button class="col-xs-2 nopadding btn btn-sm btn-primary" style="float:right" title="Upload Document"
+                                                ng-click="uploadDocument(advisor.id,doc.id, doc,Submitted)" ng-show="Submitted">
+                                            Upload
+                                        </button>
+                                        <div class="col-xs-2 nopadding selectedDocument text-center check" style="color: white; background-color:darkgreen;" ng-show="doc.uploaded"><span>&#x2714;</span> Thank you.</div>
+                                        <div class="col-xs-2 nopadding selectedDocument text-center check" style="color: white; background-color:red;" ng-show="doc.notUploaded"><span>&#10060;</span>Not uploaded.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right;" ng-click="gotoPage(7)">Next</button>
+
+        </div>
+    </form>
+    <!--------------------------------------------------License------------------------------------>
+
+    <div class="row registerAdvisor" ng-if="registerItem == 1 ? true : false">
+
+
+
+        <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right;margin-bottom:30px" ng-click="gotoPage(6)">Back</button>
+        <div class="col-xs-6 remindersCards nopadding" style="padding-top:20px;padding-bottom:20px">
+            <div class="col-xs-12 remindersCard" style="margin-top: 0px;">
+                <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left; padding-left: 0px;">Representative Details</div>
+                <div class="col-xs-6 nopadding">FSP Code</div><input placeholder="FSP Code" type="text" ng-model="advisor.fsbCode" class="col-xs-6 nopadding textEditable" required />
+                <div class="col-xs-6 nopadding">CMS Code</div><input type="text" ng-model="advisor.cmsCode" class="col-xs-6 nopadding textEditable" />
+
+            </div>
+        </div>
+
+
+       
+        <div class="col-xs-12 remindersCards nopadding" style="padding-top: 0px;padding-bottom:20px"  ng-if="advisor.advisorType.id!=3 && advisor.advisorType.id!=4 && advisor.advisorType.id!=6 && advisor.advisorType.id!=7">
+            <div class="col-xs-12 remindersCard" style="margin-top: 0px;" >
+                <h4 class="col-xs-12">Licenses:</h4>
+                <div class="col-xs-8">
+                    <select class="col-xs-6 nopadding textEditable"
+                            ng-model="chosenLicenseCategoryId" ng-change="getLicenseTypes(chosenLicenseCategoryId)"
+                            ng-options="licenseCategory.id as licenseCategory.name for licenseCategory in licenseCategories | orderBy:licenseCategory.subCategoryId track by licenseCategory.id" required>
+                        <option value="">Choose FSB Category:</option>
+                    </select>
+                    <select class="col-xs-6 nopadding textEditable"
+                            ng-model="chosenLicenseTypeId" ng-show="chosenLicenseCategoryId"
+                            ng-options="licenseType.id as licenseType.description for licenseType in licenseTypes track by licenseType.id" required>
+                        <option value="">Choose FSB License:</option>
+                    </select>
+
+
+
+                </div>
+                <div class="col-xs-4">
+                    <button class="col-xs-3 btn btn-sm btn-primary" ng-click="addLicenseToAdvisor(advisor, chosenLicenseTypeId)">Add</button>
+                    <!-- <div class="col-xs-2 activityStatus" style="margin-top:15px; float:right"><button class="pull-right btn btn-sm btn-primary" style="float:right" ng-click="deleteLicence(advisor, chosenLicenseTypeId)">Delete</button></div> -->
+                </div>
+
+                <div class="col-xs-12">
+                    <h4 class="col-xs-12">{{advisor.advisorType.title}} {{advisor.contact.FirstName + " " + advisor.contact.LastName}} is licensed for:</h4>
+                    <div ng-repeat="license in advisor.licenses | orderBy:license.licenseCategoryId track by license.id">
+                        <div style="font-size:x-large;margin-top:20px">Category: {{license.licenseCategoryId}} - {{license.description}}</div>
+                        <div class="col-xs-2 activityStatus" style="margin-top: -39px; float:right"><button class="pull-right btn btn-sm btn-primary" style="float:right" ng-click="deleteLicence(advisor, license)">Delete</button></div>
+                    </div>
+                </div>
+
+               
+
+
+            </div>
+        </div>
+        <div class="col-xs-12" ng-if="advisor.advisorType.id!=3 && advisor.advisorType.id!=4 && advisor.advisorType.id!=6 && advisor.advisorType.id!=7">
+            <button ng-class="(advisor.licenses.length == 0)?'disabledButton':''" class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right;" ng-click="advisor.licenses.length > 0 && gotoPage(3)">Next</button>
+        </div>
+        <div class="col-xs-12" ng-if="advisor.advisorType.id!=1 && advisor.advisorType.id!=2  && advisor.advisorType.id!=5">
+            <button  class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right;" ng-click="gotoPage(3)">Next</button>
+        </div>
+    </div>
+
+
+
+
+
+    <!--------------------------------------------------Products------------------------------------>
+
+    <div class="row registerAdvisor" ng-if="registerItem == 7 ? true : false">
+        <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right;" ng-click="gotoPage(3)">Back</button>
+        <div class="col-xs-12 remindersCards nopadding" style="padding-top: 0px;padding-bottom:20px">
+            <Div ng-if="advisor.advisorType.id!=3 && advisor.advisorType.id!=4 && advisor.advisorType.id!=6 && advisor.advisorType.id!=7" style="font-size:large;margin-bottom:30px">{{advisor.contact.firstName + " " + advisor.contact.lastName}} is licensed for the following products:</Div>
+            <Div ng-if="advisor.advisorType.id!=1 && advisor.advisorType.id!=2  && advisor.advisorType.id!=5" style="font-size:large;margin-bottom:30px">{{advisor.contact.firstName + " " + advisor.contact.lastName + " " + advisor.id}} is not licensed for any products.</Div>
+            <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" ng-if="advisor.advisorType.id!=1 && advisor.advisorType.id!=2  && advisor.advisorType.id!=5"style="float: right;" ng-click="gotoPage(4)">Next</button>
+            <div ng-if="advisor.advisorType.id!=3 && advisor.advisorType.id!=4 && advisor.advisorType.id!=6 && advisor.advisorType.id!=7">
+            <select class="col-xs-6 nopadding textEditable"
+                    ng-model="chosenSupplier"
+                    ng-options="supplier.id as supplier.name for supplier in suppliers track by supplier.id" ng-change="getProducts(chosenSupplier)" required>
+                <option value="" >Choose Supplier:</option>
+            </select>
+                </div>
+                <div ng-repeat="product in availableProducts | orderBy: product.licenseType.licenseCategoryId" ng-if="advisor.advisorType.id!=3 && advisor.advisorType.id!=4 && advisor.advisorType.id!=6 && advisor.advisorType.id!=7 && product === availableProducts[0]">
+                    <div class="col-xs-12 remindersCard" style="margin-top: 20px;">
+                        <div class="col-xs-12">
+
+
+                            <div class="col-xs-12"><h4>Category: {{product.licenseType.licenseCategoryId}} - {{product.licenseType.subCategory}} - {{product.licenseType.description}}</h4></div>
+                            <div class="col-xs-12">
+                                <div>
+                                    <div class="col-xs-12" >Supplier: {{product.supplier.name}}</div>
+                                    <input type="text" class="col-xs-12" style="margin-top: 15px; border: solid 4px #90caf9; font-size:x-large" ng-model="product.name" placeholder="Add adviser code..." />
+                                    <div class="col-xs-12 remindersCards">
+
+                                        <div class="col-xs-6 nopadding" style="font-size:medium;margin-top:30px">
+                                            Share percentage:
+                                        </div>
+
+                                        <div class="col-xs-6 nopadding" style="font-size:medium;margin-top:30px">
+                                            <input class="col-xs-6 nopadding textEditable" placeholder="share percentage" type="text" ng-model="advisorShare" ng-change="checkPercentage(product,advisorShare)"/> %
+                                            <div class="col-xs-2 nopadding selectedDocument text-center check" style="color: white; background-color:red;float:right" ng-show="product.incorrectEntry" ><span>&#10060;</span>Invalid</div>
+                                        </div>
+
+                                        <div style="margin-top:80px">
+                                            <span></span>Commission share Valid from: <input datepicker value="2001-01-01" ng-model="validCommissionFromDate" />
+
+                                            <span style="margin-left:60px"></span>Commission share Valid  Until: <input datepicker value="2001-01-01" ng-model="validCommissionToDate" />
+                                        </div>
+
+                                        <div style="font-size:medium;margin-top:30px">Under Supervision<input type="checkbox" style="width:20px;height:20px;margin-left:20px;margin-top:40px;" ng-model="underSupervision"></div>
+
+
+                                        <div class="col-xs-6" ng-show="underSupervision">
+
+                                            <div style="font-size:x-large;margin-top:30px">Select a Supervisor:</div>
+
+                                            <input size="100" list="clientList" type="search" placeholder="Type atleast 4 characters" ng-model="searchTerm" ng-change="doSearchUnderSupervision(searchTerm)" style="margin-top:15px; margin-left:50px">
+                                            <div style="margin-top:60px;font-size:medium" ng-show="(!!searchTerm && searchTerm.trim().length >= 4)">You have selected  <span style="font-weight:800">{{advisorSupervisor.firstName + ' ' + advisorSupervisor.lastName +'('+ advisorSupervisor.idNumber +')' }}</span></div>
+                                            <!--<select style="margin-top:30px" ng-model="advisorSupervisor"
+                                                    ng-options="advisor.contact as (advisor.contact.firstName + ' ' + advisor.contact.lastName ) for advisor in advisors track by advisor.id">
+                                                <option value="">-- Please select a user --</option>
+                                            </select>-->
+
+                                            <div style="margin-top:30px">
+                                                <span></span>Valid from: <input datepicker value="2001-01-01" ng-model="validSupervisionFromDate" />
+
+                                                <span style="margin-left:60px"></span>Valid  Until: <input datepicker value="2001-01-01" ng-model="validSupervisionToDate" />
+                                            </div>
+
+                                            
+
+                                        </div>
+
+                                        <div class="col-xs-2 nopadding selectedDocument text-center check" style="color: white; background-color:darkgreen;" ng-show="product.uploaded"><span>&#x2714;</span> Saved.</div>
+                                        <div class="col-xs-2 nopadding selectedDocument text-center check" style="color: white; background-color:red;" ng-show="product.notUploaded"><span>&#10060;</span>Not Saved.</div>
+
+                                        <button class="col-xs-1 nopadding btn btn-sm btn-success" title="Save" style="float: right;" ng-show="!product.incorrectEntry"  ng-click="PostAdvisorShare(product,advisor.id,product.licenseType.id,product.licenseType.supplierName,product.name,advisorShare,validCommissionFromDate,validCommissionToDate,underSupervision,advisorIdPast,validSupervisionFromDate,validSupervisionToDate)">
+                                            Save
+                                        </button>
+
+                                     
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button ng-if="advisor.advisorType.id!=3 && advisor.advisorType.id!=4 && advisor.advisorType.id!=6 && advisor.advisorType.id!=7" class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right;" ng-click="addAllowance()">Add Allowance</button>
+
+                <div class="col-xs-12 remindersCard" style="margin-top: 20px;" ng-show="addAllowanceStatus">
+                    <div class="col-xs-6 nopadding" style="font-size:x-large">
+                        Allowance Amount:
+                    </div>
+                    <div class="col-xs-6 nopadding" style="font-size:medium">
+                        <input class="col-xs-6 nopadding textEditable" style="margin-top:10px; margin-right:10px" placeholder="Allowance Amount" type="text" ng-model="advisor.allowance" ng-change="checkRightAmount(advisor.allowance)" />
+                        <div class="col-xs-2" style="color: white; background-color:red; margin-right:160px;" ng-show="allowanceIncorrect"><span>&#10060;</span>Invalid</div>
+                    </div>
+
+                    <div class="col-xs-2 nopadding selectedDocument text-center check" style="color: white; background-color:darkgreen;margin-top:30px" ng-show="uploadedAllowance "><span>&#x2714;</span> Saved.</div>
+                    <div class="col-xs-2 nopadding selectedDocument text-center check" style="color: white; background-color:red;margin-top:30px" ng-show="notUploadedAllowance "><span>&#10060;</span>Not Saved.</div>
+
+                    <button class="col-xs-1 nopadding btn btn-sm btn-success" title="Save" style="float: right;" ng-click="putAdvisorAllowance(advisor.user.advisorId,advisor.allowance)">
+                        Save
+                    </button>
+
+
+                </div>
+
+
+               
+            </div>
+            <div class="col-xs-12">
+            <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" ng-if="savedProduct" style="float: right;" ng-click="gotoPage(4)">Next</button>
+        </div>
+    </div>
+    <!--------------------------------------------------Summary and Submit------------------------------------------------->
+
+
+    <div class="row registerAdvisor" ng-if="registerItem == 4 ? true : false">
+        
+        <div class="col-xs-6">
+            <h3 class="col-xs-12 smallHeading" style="padding-left: 10px; padding-right: 10px;">Registration of the new Representative</h3>
+            <div class="col-xs-12 remindersCards summaryCards" style="padding-top: 0px;">
+                <div class="col-xs-12 remindersCard " style="padding-top: 0px;padding-bottom:20px">
+                    <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left;">Summary of Representative Details</div>
+                    <div class="col-xs-6 nopadding">Representative Type:</div><input type="text" ng-model="advisor.advisorType.title" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                   
+                    <div class="col-xs-6 nopadding">Job Title</div><input placeholder="Job Description" type="text" ng-model="advisor.contact.jobTitle" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+
+                    <div class="col-xs-6 nopadding">Title:</div>
+                    <select class="col-xs-6 nopadding textEditable" ng-model="advisor.contact.contactTitle" style="float: right;"
+                            ng-options="title.name for title in Titles track by title.id" ng-disabled="true"></select>
+                    <div class="col-xs-6 nopadding">First Name:</div><input type="text" ng-model="advisor.contact.firstName" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                    <div class="col-xs-6 nopadding">Last Name:</div><input type="text" ng-model="advisor.contact.lastName" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                    <div class="col-xs-6 nopadding">Id Number:</div><input type="text" ng-model="advisor.contact.idNumber " class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                    <div class="col-xs-6 nopadding">FSB Number:</div><input type="text" ng-model="advisor.fsbCode" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                    <div class="col-xs-6 nopadding">CMS Number:</div><input type="text" ng-model="advisor.cmsCode" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                    <div class="col-xs-6 nopadding">Tax Directive Rate:</div><input type="text" ng-model="advisor.taxDirectiveRate" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                </div>
+            </div>
+
+            <div class="col-xs-12 remindersCards summaryCards" style="padding-top: 0px;">
+                <div class="col-xs-12 remindersCard">
+                    <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left;">Summary of Company Info</div>
+                    <div class="col-xs-6 nopadding">Company Name:</div><input type="text" ng-model="advisor.company.name" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                    <div class="col-xs-6 nopadding">Company Url Image:</div><input type="text" ng-model="advisor.company.imageUrl" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                    <div class="col-xs-6 nopadding">Company VAT Number:</div><input type="text" ng-model="advisor.company.vatNumber" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                    <div class="col-xs-6 nopadding">Company FSB Number:</div><input type="text" ng-model="advisor.company.fsbNumber " class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                    <div class="col-xs-12" style="text-align: center;" ng-if="advisor.company.imageUrl != null && advisor.company.imageUrl != ''"><img class="col-xs-12" ng-src="{{ advisor.company.imageUrl != null && advisor.company.imageUrl != '' ? advisor.company.imageUrl : '' }}" /></div>
+               
+                </div>
+            </div>
+
+            <div class="col-xs-12 remindersCards summaryCards" style="padding-top: 0px;">
+                <div class="col-xs-12 remindersCard">
+                    <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left;">Summary of Banking Info</div>
+                    <div class="col-xs-6 nopadding">Bank Name</div>
+                    <select class="col-xs-6 nopadding textEditable" ng-model="advisor.bankName" style="float: right;"
+                            ng-options="bank.name for bank in Banks track by bank.id" ng-disabled="true"></select>
+
+                    <div class="col-xs-6 nopadding">Bank Branch Code</div>
+                    <select class="col-xs-6 nopadding textEditable" ng-model="advisor.branchCode" style="float: right;"
+                            ng-options="bankCode.name for bankCode in BankCode track by bankCode.id" ng-disabled="true"></select>
+
+                    <div class="col-xs-6 nopadding">Account Type:</div><input type="text" ng-model="advisor.accountType" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                    <div class="col-xs-6 nopadding">Account Number:</div><input type="text" ng-model="advisor.accountNumber" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xs-6">
+            <div class="col-xs-12  remindersCards summaryCards" style="padding-top: 30px;">
+                <div class="col-xs-12 remindersCard" style="margin-top: 0px">
+                    <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left;">Summary of Contact Info</div>
+                    <div class="col-xs-6 nopadding">
+                        Contact Type
+                    </div>
+                    <select class="col-xs-6 nopadding textEditable" ng-model="advisor.contact.ContactType"
+                            ng-options="ContactType.name for ContactType in contactTypes track by ContactType.id" ng-disabled="true"></select>
+                    <div class="col-xs-6 nopadding">Cell 1:</div><input type="text" ng-model="advisor.contact.cell1" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                    <div class="col-xs-6 nopadding">Cell 2:</div><input type="text" ng-model="advisor.contact.cell2" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+
+
+                    <div class="col-xs-6 nopadding">Tel 1:</div><input type="text" ng-model="advisor.contact.tel1 " class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+                    <div class="col-xs-6 nopadding">Tel 2:</div><input type="text" ng-model="advisor.contact.tel2 " class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+
+
+                    <div class="col-xs-6 nopadding">Email 1:</div><input type="text" ng-model="advisor.contact.email" class="col-xs-6 nopadding textEditable" ng-disabled="true" required />
+                    <div class="col-xs-6 nopadding">Email 2:</div><input type="text" ng-model="advisor.contact.email2" class="col-xs-6 nopadding textEditable" ng-disabled="true" />
+
+
+
+                </div>
+            </div>
+        </div>
+        <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right" ng-click="gotoPage(5)">Submit</button>
+
+
+    </div>
+
+
+</div>

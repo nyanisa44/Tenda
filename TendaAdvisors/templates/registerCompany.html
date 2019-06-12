@@ -1,0 +1,204 @@
+﻿<form name="newAdvisorForm0">
+    <div class="row registerAdvisor margin-v-30" ng-if="registerItem == 0 ? true : false">
+
+        <div class="col-xs-6">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-10 nopadding">
+                <h3 class="col-xs-12 smallHeading">Registration of the new Comapany</h3>
+                <div class="col-xs-12 remindersCards nopadding" style="padding-top: 0px;padding-bottom:20px">
+                    <div class="col-xs-12 remindersCard" style="margin-top: 0px;">
+                        <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left; padding-left: 0px;">Company Details</div>
+
+                        <div class="col-xs-6 nopadding">FSP Type</div>
+
+                        <select class="col-xs-6 nopadding textEditable" ng-model="advisor.advisorType"  ng-disabled="cantEdit"
+                                ng-options="advisorType.title for advisorType in advisorTypes | orderBy:'title' track by advisorType.id"></select>
+                        <div class="col-xs-6 nopadding">FSP No</div><input ng-class="advisor.fsbCode == null ? 'validationError' : ''" placeholder="FSP No" type="text" ng-model="advisor.fsbCode"  class="col-xs-6 nopadding textEditable" required />
+
+                        <div class="col-xs-6 nopadding">FSP Name</div><input ng-class="advisor.contact.FirstName == null ? 'validationError' : ''" placeholder="Company Name" style="float:right" type="text" ng-model="advisor.contact.FirstName" class="col-xs-4 nopadding textEditable" ng-change="checkCharaters(advisor.contact.FirstName)" required />
+                        <div class="col-xs-2 nopadding " style="color: white; background-color:red;float:left" ng-show="incorrectEntry"><span>&#10060;</span>!</div>
+                        <div class="col-xs-6 nopadding">Registration Number</div><input placeholder="Registration Number" ng-class="advisor.regNumber == null ? 'validationError' : ''" type="text" ng-model="advisor.regNumber"
+                                                                                        class="col-xs-6 nopadding textEditable" required />
+                        <div class="col-xs-6 nopadding">Date Authorised</div><input datepicker placeholder="Date Authorised" ng-class="advisor.dateAuthorized == null ? 'validationError' : ''" ng-model="advisor.dateAuthorized"
+                                                                                    class="col-xs-6 nopadding textEditable" required />
+                        <div class="col-xs-6 nopadding">Compliance Officer</div><input placeholder="Compliance Officer" ng-class="advisor.complianceOfficer == null ? 'validationError' : ''" type="text" ng-model="advisor.complianceOfficer"
+                                                                                       class="col-xs-6 nopadding textEditable" required />
+                        <div class="col-xs-6 nopadding">Compliance Officer Number</div><input placeholder="Complaince Officer Number" ng-class="advisor.complianceOffficerNumber == null ? 'validationError' : ''" type="text" ng-model="advisor.complianceOffficerNumber"
+                                                                                              class="col-xs-6 nopadding textEditable" required />
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12 remindersCard" style="margin-top: 0px;">
+                    <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left; padding-left: 0px;">Company Contact Info</div>
+                    <div class="col-xs-6 nopadding">Contact Person</div><input placeholder="Contact Person" type="text" ng-model="advisor.contact.LastName" class="col-xs-6 nopadding textEditable" required />
+                    <div class="col-xs-6 nopadding">Cell 1</div><input placeholder="Cell 1" type="text" ng-model="advisor.Contact.Cell1" class="col-xs-6 nopadding textEditable" />
+                    <div class="col-xs-6 nopadding">Cell 2</div><input placeholder="Cell 2" type="text" ng-model="advisor.Contact.Cell2" class="col-xs-6 nopadding textEditable" />
+                  
+                    <div class="col-xs-12 breakLine"></div>
+                    <div class="col-xs-6 nopadding">Tel 1</div><input placeholder="Tel 1" type="text" ng-model="advisor.Contact.Tel1" class="col-xs-6 nopadding textEditable" />
+                    <div class="col-xs-6 nopadding">Tel 2</div><input placeholder="Tel 2" type="text" ng-model="advisor.Contact.Tel2" class="col-xs-6 nopadding textEditable" />
+                    
+                    <div class="col-xs-12 breakLine"></div>
+                    <div class="col-xs-6 nopadding">Email 1</div><input placeholder="Email 1" type="text" ng-model="advisor.contact.Email" class="col-xs-6 nopadding textEditable" required />
+                    <div class="col-xs-6 nopadding">Email 2</div><input placeholder="Email 2" type="text" ng-model="advisor.contact.Email2" class="col-xs-6 nopadding textEditable" />
+                    <!--<button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: left;" ng-click="gotoPage(0)">Back</button><button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right;" ng-click="gotoPage(2)">Next</button>-->
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="col-xs-6">
+
+            <div class="col-xs-10 nopadding">
+                <div class="col-xs-12 remindersCards nopadding" style="padding-top: 45px;">
+
+                    <div class="col-xs-12 remindersCard" style="margin-top: 0px;">
+                        <div class="col-xs-12 uberbreak" ng-repeat="address in advisor.contact.addresses">
+                            <div class="col-xs-2 btn crossButton" style="float: right;" title="Delete Document" ng-click="deleteAddress($index)" ng-disabled="!editingAdvisorDetail">X</div>
+                            <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left;">
+                                Company  Address Info
+                            </div>
+
+
+                            <div class="col-xs-6 nopadding">Address Type:</div>
+
+                            <select ng-class="address.addressType== null ? 'validationError' : ''" class="col-xs-6 nopadding textEditable" ng-model="address.addressType" style="float: right;"
+                                    ng-options="addressType.name for addressType in AddressTypes track by addressType.id" ng-disabled="!editingAdvisorDetail"></select>
+                            <div class="col-xs-6 nopadding" style="float:left">Description:</div><input ng-model="address.description" placeholder="Description" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingAdvisorDetail" />
+
+                            <div class="col-xs-12 breakLine"></div>
+
+                            <div class="col-xs-6 nopadding">Street 1:</div><input ng-model="address.street1" placeholder="Street 1" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingAdvisorDetail" />
+                            <div class="col-xs-6 nopadding">Street 2:</div><input ng-model="address.street2" placeholder="Street 2" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingAdvisorDetail" />
+                            <div class="col-xs-6 nopadding">Street 3:</div><input ng-model="address.street3" placeholder="Street 3" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingAdvisorDetail" />
+
+                            <div class="col-xs-12 breakLine"></div>
+
+                            <div class="col-xs-6 nopadding">Suburb:</div><input ng-model="address.suburb" placeholder="Suburb" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingAdvisorDetail" />
+                            <div class="col-xs-6 nopadding">Postal Code:</div><input ng-model="address.postalCode" placeholder="Postal Code" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingAdvisorDetail" />
+                            <div class="col-xs-6 nopadding">City:</div><input ng-model="address.city" placeholder="City" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingAdvisorDetail" />
+                            <div class="col-xs-6 nopadding">Map Url:</div><input ng-model="address.mapUrl" placeholder="Map Url" type="text" class="col-xs-6 nopadding textEditable" ng-disabled="!editingAdvisorDetail" />
+                            <div class="col-xs-12 breakLine"></div>
+
+                            <div class="col-xs-6 nopadding">Province:</div>
+
+
+                            <select class="col-xs-6 nopadding textEditable" ng-model="address.province" style="float: right;"
+                                   ng-options="prov.name for prov in Province track by prov.id" ng-disabled="!editingAdvisorDetail">
+                               <option value="">Choose a Province:</option>
+                            </select>
+
+
+
+                            <div class="col-xs-6 nopadding">Country:</div>
+                            <select class="col-xs-6 nopadding textEditable" ng-model="address.country" style="float: right;"
+                                    ng-options="cntry.name for cntry in Country track by cntry.id" ng-disabled="!editingAdvisorDetail">
+                               <option value="">Choose a Country:</option>
+
+                            </select>
+
+
+                        </div>
+                        <!--<button class="btn btn-sm btn-primary nextButtonRegister" style="float: right;" ng-click="addAnotherAddress()">Add Address</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6 remindersCards nopadding" style="padding-top: 10px;padding-bottom:20px">
+            <div class="col-xs-12 remindersCard" style="margin-top: 0px;">
+                <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left; padding-left: 0px;">Login Details</div>
+
+                <div class="col-xs-6 nopadding">Username</div><input placeholder="Username" type="text" ng-model="advisor.User.Username" class="col-xs-6 nopadding textEditable" ng-minlength="6" required />
+                <div class="col-xs-6 nopadding">Password</div><input placeholder="Password" type="text" ng-model="advisor.User.Password" class="col-xs-6 nopadding textEditable" ng-minlength="6" required ng-change="advisor.User.passwordChanged = true" />
+
+                <div style="font-size:large;color:red"> Please SELECT the Role </div>
+                <div style="position: relative;display: inline-block; min-width: 50%;float:right">
+                    <label><input type="radio" name="firstchoice" ng-model="advisorRole.isAdmin" value="false" required>Admin</label><br />
+                    <!--<label><input type="radio" name="firstchoice" ng-model="advisorRole.isAdvisor" value="true">Advisor</label><br />-->
+                </div>
+            </div>
+        </div>
+
+        <button ng-class="newAdvisorForm0.$invalid?'disabledButton' :''" class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right;" ng-click="!newAdvisorForm0.$invalid && gotoPage(1)">Next</button>
+    </div>
+
+</form>
+
+
+
+
+    <div class="row registerAdvisor margin-v-30" ng-if="registerItem == 1 ? true : false">
+        <!--<button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right;" ng-click="gotoPage(0)">Back</button>-->
+        <div class="col-xs-12 remindersCards nopadding">
+            <h3 class="col-xs-12 cardHeading nopadding" style="margin-top:10px">Upload required documents</h3>
+            <div ng-model="advisor.advisorType" ng-repeat="advisorType in advisorTypes" ng-if="advisorType.id==5" ng-show="advisorType.id==advisor.advisorType.id">
+
+                <div class="col-xs-12 remindersCard" style="margin-top: 20px;" ng-repeat="doc in advisorType.documentTypes track by $index" file-dropzone="[application/pdf, image/png, image/jpeg, image/gif]" file="doc.file" file-name="doc.location" data-max-file-size="10">
+                    <h4 class="col-xs-12 cardHeading nopadding">{{doc.name}}</h4>
+                    <div>
+                        <div class="col-xs-12">
+                            <div class="col-xs-4 newDocumentCard dragAndDrop text-center">
+                                <img ng-src="{{getDocumentPic(doc)}}" class="iconImage" />
+                                <h4 class="col-xs-12 dragAndDrop" ng-if="!doc.originalFileName">Please Drag and Drop <br />document here.</h4>
+                            </div>
+                            <div class="col-xs-8">
+                                <input class="col-xs-12" placeholder="Note" style="margin-top: 8px;margin-bottom: 20px" ng-model="doc.title" ng-disabled="doc.uploaded" />
+                                <div>
+                                    <span style="margin-left:30px"></span>Valid from: <input datepicker
+                                                                                             ng-model="doc.validFromDate" />
+
+                                    <span style="margin-left:60px"></span> Until: <input datepicker
+                                                                                         ng-model="doc.validToDate" />
+                                </div>
+
+                                <div>{{dateFrom}}</div>
+
+
+
+                                <!--------------------------------->
+
+                                <div ng-show="doc.location && !doc.uploaded" style="font-size:x-large;margin-top:30px">Submit<input type="checkbox" style="width:20px;height:20px;margin-left:20px;margin-top:40px;" ng-model="Submitted"></div>
+
+                                <div class="col-xs-12 nopadding" style="margin-top: 2px;">
+                                    <div class="col-xs-10 nopadding selectedDocument">{{doc.location}}</div>
+                                    <button class="col-xs-2 nopadding btn btn-sm btn-primary" style="float:right" title="Upload Document"
+                                            ng-click="uploadDocument(advisor.id,doc.id, doc,Submitted)" ng-show="Submitted">
+                                        Upload
+                                    </button>
+                                    <div class="col-xs-2 nopadding selectedDocument text-center check" style="color: white; background-color:darkgreen;" ng-show="doc.uploaded"><span>&#x2714;</span> Thank you.</div>
+                                    <div class="col-xs-2 nopadding selectedDocument text-center check" style="color: white; background-color:red;" ng-show="doc.notUploaded"><span>&#10060;</span>Not uploaded.</div>
+                                </div>
+                                <!--------------------------------->
+
+                               <!-- <div class="col-xs-12 nopadding" style="margin-top: 2px;">
+                                    <div class="col-xs-10 nopadding selectedDocument">{{doc.location}}</div>
+                                    <button class="col-xs-2 nopadding btn btn-sm btn-primary" style="float:right" title="Upload Document"
+                                            ng-click="uploadDocument(advisor.id,doc.id, doc)" ng-show="doc.location && !doc.uploaded">
+                                        Upload
+                                    </button>
+                                    <div class="col-xs-2 nopadding selectedDocument text-center check" style="color: white; background-color:darkgreen;" ng-show="doc.uploaded"><span>&#x2714;</span> Thank you.</div>
+                                    <div class="col-xs-2 nopadding selectedDocument text-center check" style="color: white; background-color:red;" ng-show="doc.notUploaded"><span>&#10060;</span>Not uploaded.</div>
+                                </div>
+                                -------------->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+          
+            <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right" ng-click="gotoPage(2)">Submit</button>
+        </div>
+
+
+
+    </div>

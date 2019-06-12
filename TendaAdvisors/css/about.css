@@ -1,0 +1,171 @@
+﻿html, body, #page-wrapper, #wrapper
+{
+	height: 100%;
+	background: #fff;
+}
+
+body, p, input
+{
+	font-size: 12pt;
+}
+
+body, p, input, div
+{
+	color: black;
+}
+
+
+
+.contactInfo
+{
+	font-size: 10pt;
+	font-style: normal;
+	font-weight:100
+   
+
+}
+
+.disclosure
+{
+	font-size: 12pt;
+	font-style: oblique;
+	text-align:center;
+	font-weight:600;
+	background-color:lightsteelblue;
+}
+
+.title
+{
+	font-size: 12pt;
+	font-style: normal;
+	text-align:center;
+	
+}
+
+.container-fluid
+{
+	max-width: 1024px;
+	position: relative;
+	height: 100%;
+}
+
+a
+{
+	color: black;
+}
+
+.row
+{
+	position: absolute;
+	top: 50%; left: 50%;
+	transform: translate(-50%,-50%);
+	height: 600px;
+	width: 100%;
+	padding: 0px;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.FullLogoContainer
+{
+	text-align: center;
+}
+
+
+
+
+.RightLine
+{
+	height:1000px;
+	border-right: 2px solid grey;
+    
+}
+
+.fullLogo
+{
+	width: 260px;
+	background: #fff;
+}
+
+.largePadding
+{
+	padding-top: 50px;
+}
+
+.col-sm-5
+{
+	padding-top: 4%;
+	padding-bottom: 4%;
+}
+
+.leftBar
+{
+	padding-left: 4.333%;
+}
+
+.rightBar
+{
+	padding-right: 3.333%;
+}
+
+.horizontalLine
+{
+	height: 2px;
+	background: grey;
+	display: none;
+	margin-left: 2%;
+	margin-left: 2%;
+	width: 96%;
+}
+
+@media screen and (max-width: 767px)
+{
+	.fullLogo
+	{
+		width: 260px;
+	}
+	
+	.col-sm-1
+	{
+		display: none;
+	}
+	
+	.row
+	{
+		margin: 0;
+		top: 0%;
+		transform: translate(-50%,-0%);
+		padding-top: 40px;
+		padding-bottom: 0px;
+	}
+	
+	.leftBar, .rightBar
+	{
+		padding-left: 10%;
+		padding-right: 10%;
+	}
+	
+	.col-sm-5
+	{
+		padding-top: 0;
+		padding-bottom: 20px;
+	}
+	
+	.horizontalLine
+	{
+		display: block;
+	}
+	
+	.rightBar
+	{
+		padding-top: 5px;
+	}
+}
+
+@media screen and (max-width: 480px)
+{
+	.descriptionWithImage img
+	{
+		max-height: 250px;
+	}
+}

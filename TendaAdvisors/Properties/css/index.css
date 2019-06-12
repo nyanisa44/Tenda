@@ -1,0 +1,181 @@
+html, body, #page-wrapper, #wrapper
+{
+	height: 100%;
+	background: #0d47a1;
+}
+
+body, p, input, div
+{
+	font-size: 12pt;
+}
+
+body, p, input, div
+{
+	color: white;
+}
+
+.container-fluid
+{
+	max-width: 1024px;
+	position: relative;
+	height: 100%;
+}
+
+a
+{
+	color: black;
+}
+
+.row
+{
+	position: absolute;
+	top: 50%; left: 50%;
+	transform: translate(-50%,-50%);
+	height: 600px;
+	width: 100%;
+	padding: 0px;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.loginInputFields ul
+{
+	list-style: none;
+	padding: 0;
+	text-align: center;
+}
+
+.loginInputFields ul li, #username, #password
+{
+	width: 100%;
+}
+
+#username, #password
+{
+	border: none;
+	border-bottom: 2px solid grey;
+    background: transparent;
+	outline: none;
+}
+
+#submitButton
+{
+	margin-top: 40px;
+	border-radius: 2px;
+	padding: 10px 54px 10px 54px;
+
+    -webkit-box-shadow: 3px 3px 10px -1px rgba(48,48,48,1);
+    -moz-box-shadow: 3px 3px 10px -1px rgba(48,48,48,1);
+    box-shadow: 3px 3px 10px -1px rgba(48,48,48,1);
+    border: none;
+}
+
+#submitButton:hover
+{
+	background-color: #286091;
+}
+
+#password
+{
+	margin-top: 40px;
+}
+
+.FullLogoContainer
+{
+	text-align: center;
+}
+
+.RightLine
+{
+	height: 100%;
+	border-right: 2px solid grey;
+}
+
+.fullLogo
+{
+	width: 260px;
+    background: #fff;
+}
+
+.largePadding
+{
+	padding-top: 50px;
+}
+
+.col-sm-5
+{
+	padding-top: 10%;
+    padding-bottom: 10%;
+}
+
+.leftBar
+{
+	padding-left: 8.333%;
+}
+
+.rightBar
+{
+	padding-right: 8.333%;
+}
+
+.horizontalLine
+{
+	height: 2px;
+	background: grey;
+	display: none;
+	margin-left: 2%;
+    margin-left: 2%;
+    width: 96%;
+}
+
+@media screen and (max-width: 767px)
+{
+	.fullLogo
+	{
+		width: 260px;
+	}
+	
+	.col-sm-1
+	{
+		display: none;
+	}
+	
+	.row
+	{
+		margin: 0;
+		top: 0%;
+		transform: translate(-50%,-0%);
+		padding-top: 40px;
+		padding-bottom: 0px;
+	}
+	
+	.leftBar, .rightBar
+	{
+		padding-left: 10%;
+		padding-right: 10%;
+	}
+	
+	.col-sm-5
+	{
+		padding-top: 0;
+		padding-bottom: 20px;
+	}
+	
+	.horizontalLine
+	{
+		display: block;
+	}
+	
+	.rightBar
+	{
+		padding-top: 20px;
+	}
+}
+
+@media screen and (max-width: 480px)
+{
+	.descriptionWithImage img
+	{
+		max-height: 250px;
+	}
+}

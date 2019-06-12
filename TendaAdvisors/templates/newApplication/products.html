@@ -1,0 +1,126 @@
+﻿
+<h3 class="col-xs-12 smallHeading" ng-if="isNewApplication">Step 2: Application Products</h3>
+<div class="col-xs-12 registrationDescription" ng-if="isNewApplication">
+    You can compile your deals here. Select a Supplier and an associated Product.
+    <br />You can also create combination deals or packages by repeating the selection process
+</div>
+
+<div name="one" class="col-xs-12 remindersCards" ng-if="isNewApplication">
+    <div class="col-xs-12 remindersCard">
+        <div class="col-xs-12 col-sm-6">
+            <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left;">Supplier Details</div>
+            <div ng-if="duplicateSupplier"
+                 class="paddingTop">
+                <span class="invalid">{{supplierDuplicateError}}</span>
+            </div>
+            <select class="col-xs-12 textEditable"
+                    ng-class="duplicateSupplierClass"
+                    name="singleSelect"
+                    ng-model="application.supplierId"
+                    style="float: right;"
+                    ng-change="updateProducts(application.supplierId)">
+                <option ng-repeat="supplier in suppliers" value="{{ supplier.id }}">{{ supplier.name }}</option>
+            </select>
+        </div>
+
+        <div class="col-xs-12 remindersCard">
+            <div>
+                <div class="col-xs-5 nopadding ">
+                    <input class="nopadding textEditable"
+                           placeholder="Client Member#"
+                           type="text"
+                           ng-model="application.memberNumber"/>
+                </div>
+             </div>
+         </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="col-xs-12 cardHeading cardVia cardViaBolder nopadding" style="text-align: left;">Product Details</div>
+            <select class="col-xs-7 nopadding textEditable"
+                    name="singleSelect"
+                    ng-model="application.product_Id"
+                    style="float: right;"
+                    ng-change="productChange(application.product_Id)"
+                    ng-class="noProductSelected ? 'validationError' : ''">
+                <option ng-repeat="prod in products" value="{{ prod.id }}" ng-if="prod.supplier.id == application.supplierId ? true : false">{{ prod.name }}</option>
+            </select>Supplier: {{ application.supplierId }}, Product: {{ application.product_Id }}
+        </div>
+
+    </div>
+    <div class="col-xs-12">
+        <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister"
+                style="float: left;"
+                ng-click="gotoPage(0)">Back
+        </button>
+        <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister"
+                style="float: right;"
+                ng-click="gotoPage(2)"
+                ng-disabled="duplicateSupplier || noProductSelected">Next
+        </button>
+    </div>
+</div>
+
+<!--If is existing application-->
+<div name="two" class="col-xs-12 remindersCards nopadding" ng-if="!isNewApplication">
+    <div class="col-xs-12 col-sm-12">
+        <button class="col-xs-3 btn btn-sm btn-primary" style="float: right;" ng-click="editOrSaveforMemberNumber(true)" ng-if="!isNewApplication && editingApplicationDetail">Save</button>
+        <button class="col-xs-3 btn btn-sm btn-primary" style="float: right;" ng-click="editOrSaveforMemberNumber(false)" ng-if="!isNewApplication && editingApplicationDetail">Cancel</button>
+        <button class="col-xs-3 btn btn-sm btn-primary" style="float: right;" ng-click="editOrSaveforMemberNumber(false)" ng-if="!isNewApplication && !editingApplicationDetail">Edit</button>
+    </div>
+
+    <div class="no-padding-left col-xs-12 no-padding-right" ng-show="errorMessage && errorMessage.length > 0">
+        <div class="bg-danger">
+            {{errorMessage}}
+        </div>
+    </div>
+   
+    <div class="col-xs-12 remindersCard"
+         ng-repeat="supplier in application.suppliers track by $index ">
+        <div class="col-xs-12">
+            <h4 class="col-xs-12 activityCode"
+                ng-if="!isNewApplication">
+                Current Supplier:
+            </h4>
+            <div class="col-xs-12 bottomTopMargin"
+                 ng-show="editingApplicationDetail">
+                <div class="col-xs-6 col-sm-6">
+                    <select class="col-xs-6 nopadding textEditable"
+                            name="singleSelect"
+                            ng-model="application.supplierId"
+                            ng-change="updateProducts(application.supplierId)">
+                        <option ng-repeat="supplierselect in suppliers"
+                                value="{{ supplierselect.id }}">
+                            {{ supplierselect.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <h3 ng-hide="editingApplicationDetail"
+                class="col-xs-12 activityName">
+                {{supplier.name}}
+            </h3>
+        </div>
+        <div class="col-xs-12">
+            <span class="col-xs-2">Member Number:</span>
+            <input class="col-xs-3 textEditable"
+                    placeholder="Client Member#"
+                    ng-disabled="!editingApplicationDetail"
+                    type="text"
+                    ng-model="application.memberNumber" />
+            <div class="col-xs-12"
+                 ng-repeat="applicationSupplier in application.applicationSuppliers | filter : {supllierId: supplier.Id}"
+                 ng-if="applicationSupplier.supplierId == supplier.id">
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <span class="col-xs-2">Product:</span>
+            <select class="textEditable col-xs-3"
+                    id="productSelect"
+                    ng-disabled="!editingApplicationDetail"
+                    name="productSelect"
+                    ng-model="CurrentProduct"
+                    ng-change="updateProduct(CurrentProduct)"
+                    ng-options="prod.name for prod in ProductList | orderBy:'id' track by prod.id">
+            </select>
+        </div>
+    </div>
+</div>

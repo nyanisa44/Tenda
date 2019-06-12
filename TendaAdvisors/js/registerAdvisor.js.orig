@@ -1,0 +1,292 @@
+﻿
+
+tendaApp.controller('registerAdvisorController', ['$scope', 'advisorService', 'detailsService', '$state', function ($scope, advisorService,detailsService, $state) {
+
+    $scope.registerItem = 0;//Start at the beginning
+    /*"documentTypeId":0*/
+    /*$scope.application = { "products": [{ "id": 0, "supplier": { "id": 0 } }], "client": { "addresses": [{ "id": 0 }] } };*/
+    $scope.advisor = { "advisorDocuments": [{ "documentTypeId": 0 }], "licenses": [], "contact": { "addresses": [{ "id": 0 }] } };
+    $scope.uploadSucces = "Not Uploaded";
+    $scope.companies = [];
+
+    //Licenses
+    $scope.advisorTypes = [];
+    $scope.licenseCategories = [];
+    $scope.licenseTypes = [];
+    $scope.chosenLicenseCategoryId = 0;
+    $scope.chosenLicenseTypeId = 0;
+    $scope.advisor.CmsCode = "BR";
+    $scope.advisor.Company = { "id": 1 };
+    $scope.advisor.advisorType = { "id": 2 };
+    $scope.advisor.advisorStatus = { "id": 2 };
+    $scope.advisor.contact = { "ContactType": { "id": 1 }, "addresses": [{ "addressType": { "id": 3 }, "country":{"id":1}}] };
+    //$scope.advisor.Contact = $scope.advisor.contact; //Why are there two? case sensitive...
+    $scope.AddressTypes = {};
+    $scope.Province = {};
+    $scope.Country = {};
+    $scope.Addresses = {};
+    
+   
+    
+
+  /*if ($state.params.advisors == null) {
+    $scope.suppliers = 0;
+    $scope.availableProducts = [];
+    /*  
+    if ($state.params.advisors == null) {
+
+    $state.go('registerAdvisor');
+    return;
+    }
+     */
+
+   
+
+    $scope.gotoPage = function gotoPage(page) {
+
+        if (page === 0 || page === 1 || page === 2) {
+            $scope.registerItem = page;
+        } else if ($scope.advisor.licenses && $scope.advisor.licenses.length > 0  && page == 3) {
+            $scope.registerItem = page;
+            $scope.availableProducts = $scope.fetchProductsByLicenses($scope.advisor.licenses);
+            //$scope.fetchSuppliersByLicenses($scope.advisor.licenses);
+        } else if (page == 4) {
+            $scope.registerItem = page;
+        } else if ($scope.advisor && page == 5) {
+            advisorService.CreateAdvisor($scope.advisor).then(function succeeded(companies) {
+                console.log(companies);
+                $scope.advisor = companies.data;
+                $state.go('advisors');
+            }, function failure(errormessage) {
+                console.log(errormessage);
+                $scope.registerItem = 4;
+            });
+            
+        } else {
+            $scope.registerItem = page;
+        }
+    }
+
+    $scope.addLicenseToAdvisor = function (advisor, licenseId) {
+        var licenseFound = false;
+        for (id in advisor.licenses) {
+            if (advisor.licenses[id].id == licenseId) {
+                licenseFound = true;
+            }
+        }
+
+        if(!licenseFound) {
+            for (id in $scope.licenseTypes) {
+                if ($scope.licenseTypes[id].id == licenseId) {
+                    advisor.licenses.push($scope.licenseTypes[id]);
+                }
+            }
+        }
+        console.log(advisor.licenses);
+    }
+
+    $scope.doSearch = function doSearch(searchWhere) {
+        console.log("Search for companies containing: " + searchWhere);
+        $scope.getCompanies(searchWhere);
+    }
+
+    //Get Address Types:
+    detailsService.GetAddressTypes().then(function succeeded(success) {
+        console.log(success);
+
+        $scope.AddressTypes = success.data;
+
+    }, function failure(errormessage) {
+        console.log(errormessage);
+    });
+
+    //Get Provinces
+    detailsService.GetProvinces().then(function succeeded(success) {
+        console.log(success);
+        $scope.Province = success.data;
+
+    }, function failure(errormessage) {
+        console.log(errormessage);
+    });
+
+    //Get Countries
+    detailsService.GetCountries().then(function succeeded(success) {
+        console.log(success);
+
+        $scope.Country = success.data;
+
+    }, function failure(errormessage) {
+        console.log(errormessage);
+    });
+    
+    //getCompanies
+    $scope.getCompanies = function getCompanies(searchQuery) {
+        advisorService.GetCompanies(searchQuery).then(function succeeded(companies) {
+            console.log(companies);
+            $scope.companies = companies.data;
+        }, function failure(errormessage) {
+            console.log(errormessage);
+        });
+    }
+    $scope.getCompanies("");
+
+    //get Suppliers & Products (for certain licenses only)
+    $scope.fetchProductsByLicenses = function fetchSuppliersByLicenses(licenseList) {
+        advisorService.FetchProductsByLicenses(licenseList).then(
+            function succeeded(products) {
+                console.log(products);
+                $scope.availableProducts = products.data;
+                return products.data;
+            },
+            function failure(errormessage) {
+                console.log(errormessage);
+            }
+        );
+    }
+
+    //get License Types
+    $scope.getLicenseTypes = function getLicenseTypes(advisorTypeId) {
+        advisorService.GetLicenseTypes(advisorTypeId).then(
+            function succeeded(licenseTypes) {
+                console.log(licenseTypes);
+                $scope.licenseTypes = licenseTypes.data;
+            },
+            function failure(errormessage) {
+                console.log(errormessage);
+            }
+        );
+    }
+    $scope.getLicenseTypes($scope.advisor.advisorTypeId);
+
+
+    //AdvisorDocuments
+    advisorService.GetAdvisorDocuments().then(function succeeded(advisorDocument) {
+        //console.log(queries.data);
+        if (advisorDocument.length == 0) {
+            console.log("There are no Queries");
+            return;
+        }
+
+        $scope.advisorDocument = advisorDocument.data;
+
+    }, function failure(errormessage) {
+        console.log(errormessage);
+    });
+
+
+
+
+    //get License Categories and License Types
+    $scope.getLicenseCategories = function getLicenseCategories(advisorTypeId) {
+        advisorService.GetLicenseCategories(advisorTypeId).then(
+            function succeeded(licenseCategories) {
+                console.log(licenseCategories.data);
+                $scope.licenseCategories = licenseCategories.data;
+            },
+            function failure(errormessage) {
+                console.log(errormessage);
+            }
+        );
+    }
+    $scope.getLicenseCategories($scope.advisor.advisorTypeId);
+
+    //getContactTypes
+    advisorService.GetContactTypes().then(function succeeded(contactTypes) {
+        //console.log(queries.data);
+        if (contactTypes.length === 0) {
+            console.log("There are no Queries");
+            return;
+        }
+
+        $scope.contactTypes = contactTypes.data;
+
+    }, function failure(errormessage) {
+        console.log(errormessage);
+    });
+
+
+    //Select a picture icon to fit the document:
+    $scope.getDocumentPic = function getDocumentPic(pic) {
+       
+            return "img/picIcon.png";
+
+     
+    }
+
+    $scope.uploadDocument = function uploadDocument(advisorId, documentTypeID, document) {
+       
+        //advisorId, documentTypeId and base64 file data (api/AdvisorDocuments/' + advisorId + '/DocumentTypeId/' + documentId)
+        advisorService.PostAdvisorDocument(advisorId, documentTypeID, document)
+            .then(function succeeded(success) {
+                console.log(success);
+                document.uploaded = true;
+                document = success.data;
+                console.log(document);
+            },
+           function failure(errormessage) {
+               console.log(errormessage);
+               document.notUploaded = true;
+           });
+    }
+
+<<<<<<< HEAD
+ 
+=======
+    //when you want to leave
+
+
+    $scope.gotoAdvisor = function gotoAdvisor()
+    {
+        var result=confirm('Are you sure you want to exit adding a new Advisor?');
+
+        if (result==true)
+        {
+            $state.go('advisors');
+        }
+    }
+    
+   
+
+>>>>>>> 1bdf1d7b9a0854a529bbf5c129c773a6aea63e25
+    //getContactTypes
+    advisorService.GetAdvisorTypes().then(function succeeded(advisorTypes) {
+        //console.log(queries.data);
+        if (advisorTypes.length === 0) {
+            console.log("There are no Queries");
+            return;
+        }
+
+        $scope.advisorTypes = advisorTypes.data;
+    }, function failure(errormessage) {
+        console.log(errormessage);
+    });
+
+    advisorService.GetAdvisorStatuses().then(function succeeded(advisorStatuses) {
+        //console.log(queries.data);
+        if (advisorStatuses.length === 0) {
+            console.log("There are no Statuses");
+            return;
+        }
+
+        $scope.advisorStatuses = advisorStatuses.data;
+    }, function failure(errormessage) {
+        console.log(errormessage);
+    });
+
+}]);
+
+
+
+Date.prototype.yyyymmdd = function (padding, time) {
+    time = time ? time : false;
+    var mm = this.getMonth() + 1; // getMonth() is zero-based
+    var dd = this.getDate();
+
+    var dateString = [this.getFullYear(), (mm < 10 ? '0' : '') + mm, (dd < 10 ? '0' : '') + dd].join(padding); // padding
+    if (time) {
+        dateString += " " + this.getHours() + ":" + this.getMinutes();
+    }
+    return dateString;
+};
+var today = new Date(Date.parse("2016/07/01", true));
+

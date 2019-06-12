@@ -1,0 +1,1168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4765A578-0145-4054-9FB2-CD15090BEEB4}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TendaAdvisors</RootNamespace>
+    <AssemblyName>TendaAdvisors</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+      </Objects>
+    </PublishDatabaseSettings>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Outlook.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Outlook.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Http.Tracing, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Tracing.5.2.3\lib\net45\System.Web.Http.Tracing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.WebApi, Version=5.2.3.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.WebAPI.5.2.3\lib\net45\Unity.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="App_Start\UnityResolver.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Business\Calculations.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\AddressTypesController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdvisorDocumentsController.cs" />
+    <Compile Include="Controllers\AdvisorsController.cs" />
+    <Compile Include="Controllers\AdvisorShareUnderSupervisionsController.cs" />
+    <Compile Include="Controllers\AdvisorStatusController.cs" />
+    <Compile Include="Controllers\AdvisorSupplierCodesController.cs" />
+    <Compile Include="Controllers\AdvisorTypesController.cs" />
+    <Compile Include="Controllers\AnnualTaxBracketsController.cs" />
+    <Compile Include="Controllers\ApplicationDocumentsController.cs" />
+    <Compile Include="Controllers\ApplicationsController.cs" />
+    <Compile Include="Controllers\ApplicationStatusController.cs" />
+    <Compile Include="Controllers\ApplicationTypesController.cs" />
+    <Compile Include="Controllers\BankBranchCodesController.cs" />
+    <Compile Include="Controllers\BankNamesController.cs" />
+    <Compile Include="Controllers\BaseApiController.cs" />
+    <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\CommisionStatementController.cs" />
+    <Compile Include="Controllers\CompaniesController.cs" />
+    <Compile Include="Controllers\ContactTitlesController.cs" />
+    <Compile Include="Controllers\ContactTypesController.cs" />
+    <Compile Include="Controllers\CountriesController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\ImportTypesController.cs" />
+    <Compile Include="Controllers\LicensesController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ProvincesController.cs" />
+    <Compile Include="Controllers\QueriesController.cs" />
+    <Compile Include="Controllers\QueryTypesController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\SuppliersController.cs" />
+    <Compile Include="Controllers\SystemSettingsController.cs" />
+    <Compile Include="Controllers\TransactionsController.cs" />
+    <Compile Include="Controllers\UnmatchedCommissionsController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\IdentityExtensions.cs" />
+    <Compile Include="Migrations\201608241407431_Initial.cs" />
+    <Compile Include="Migrations\201608241407431_Initial.Designer.cs">
+      <DependentUpon>201608241407431_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608251251322_ModelChange1.cs" />
+    <Compile Include="Migrations\201608251251322_ModelChange1.Designer.cs">
+      <DependentUpon>201608251251322_ModelChange1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609011356547_Advisors2LicenseTypes.cs" />
+    <Compile Include="Migrations\201609011356547_Advisors2LicenseTypes.Designer.cs">
+      <DependentUpon>201609011356547_Advisors2LicenseTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608251347065_Link-LicenseCategories-To-LicenseTypes.cs" />
+    <Compile Include="Migrations\201608251347065_Link-LicenseCategories-To-LicenseTypes.Designer.cs">
+      <DependentUpon>201608251347065_Link-LicenseCategories-To-LicenseTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609020858062_ChangeProductSupplierDependency.cs" />
+    <Compile Include="Migrations\201609020858062_ChangeProductSupplierDependency.Designer.cs">
+      <DependentUpon>201609020858062_ChangeProductSupplierDependency.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609081152463_changes.cs" />
+    <Compile Include="Migrations\201609081152463_changes.Designer.cs">
+      <DependentUpon>201609081152463_changes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609082013033_CommisionStatement.cs" />
+    <Compile Include="Migrations\201609082013033_CommisionStatement.Designer.cs">
+      <DependentUpon>201609082013033_CommisionStatement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609121021112_Update.cs" />
+    <Compile Include="Migrations\201609121021112_Update.Designer.cs">
+      <DependentUpon>201609121021112_Update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609201350075_tax.cs" />
+    <Compile Include="Migrations\201609201350075_tax.Designer.cs">
+      <DependentUpon>201609201350075_tax.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609211141027_CommisionStatement1.cs" />
+    <Compile Include="Migrations\201609211141027_CommisionStatement1.Designer.cs">
+      <DependentUpon>201609211141027_CommisionStatement1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609211152055_Settings.cs" />
+    <Compile Include="Migrations\201609211152055_Settings.Designer.cs">
+      <DependentUpon>201609211152055_Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609211240035_CommisionImport.cs" />
+    <Compile Include="Migrations\201609211240035_CommisionImport.Designer.cs">
+      <DependentUpon>201609211240035_CommisionImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609220809334_ComissionRunUpdates.cs" />
+    <Compile Include="Migrations\201609220809334_ComissionRunUpdates.Designer.cs">
+      <DependentUpon>201609220809334_ComissionRunUpdates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609220845268_CommisionProductMap.cs" />
+    <Compile Include="Migrations\201609220845268_CommisionProductMap.Designer.cs">
+      <DependentUpon>201609220845268_CommisionProductMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609220941328_ProductCommisionUpdates.cs" />
+    <Compile Include="Migrations\201609220941328_ProductCommisionUpdates.Designer.cs">
+      <DependentUpon>201609220941328_ProductCommisionUpdates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609221253551_CommissionTax.cs" />
+    <Compile Include="Migrations\201609221253551_CommissionTax.Designer.cs">
+      <DependentUpon>201609221253551_CommissionTax.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609280944160_Banking.cs" />
+    <Compile Include="Migrations\201609280944160_Banking.Designer.cs">
+      <DependentUpon>201609280944160_Banking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609281146217_AdvisorSuplierCode.cs" />
+    <Compile Include="Migrations\201609281146217_AdvisorSuplierCode.Designer.cs">
+      <DependentUpon>201609281146217_AdvisorSuplierCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609281215534_AdvisorSupplierLink.cs" />
+    <Compile Include="Migrations\201609281215534_AdvisorSupplierLink.Designer.cs">
+      <DependentUpon>201609281215534_AdvisorSupplierLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609281231374_AdvisorSupplierCode_foreignKeys.cs" />
+    <Compile Include="Migrations\201609281231374_AdvisorSupplierCode_foreignKeys.Designer.cs">
+      <DependentUpon>201609281231374_AdvisorSupplierCode_foreignKeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609290648108_ApplicationSupplier.cs" />
+    <Compile Include="Migrations\201609290648108_ApplicationSupplier.Designer.cs">
+      <DependentUpon>201609290648108_ApplicationSupplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609290658310_RemoveApplicationMemberNumber.cs" />
+    <Compile Include="Migrations\201609290658310_RemoveApplicationMemberNumber.Designer.cs">
+      <DependentUpon>201609290658310_RemoveApplicationMemberNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610020802434_CollectionAdvisorLicenseType.cs" />
+    <Compile Include="Migrations\201610020802434_CollectionAdvisorLicenseType.Designer.cs">
+      <DependentUpon>201610020802434_CollectionAdvisorLicenseType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610040926247_ApplicationTypeAdded.cs" />
+    <Compile Include="Migrations\201610040926247_ApplicationTypeAdded.Designer.cs">
+      <DependentUpon>201610040926247_ApplicationTypeAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610041116098_DocumentsToApplicationTypes.cs" />
+    <Compile Include="Migrations\201610041116098_DocumentsToApplicationTypes.Designer.cs">
+      <DependentUpon>201610041116098_DocumentsToApplicationTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610041356353_FixAppID.cs" />
+    <Compile Include="Migrations\201610041356353_FixAppID.Designer.cs">
+      <DependentUpon>201610041356353_FixAppID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610061349326_ApplicationDTOAddingAdvisorStatus.cs" />
+    <Compile Include="Migrations\201610061349326_ApplicationDTOAddingAdvisorStatus.Designer.cs">
+      <DependentUpon>201610061349326_ApplicationDTOAddingAdvisorStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610270943213_userchanges.cs" />
+    <Compile Include="Migrations\201610270943213_userchanges.Designer.cs">
+      <DependentUpon>201610270943213_userchanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610271341326_supportnulladvisertouser.cs" />
+    <Compile Include="Migrations\201610271341326_supportnulladvisertouser.Designer.cs">
+      <DependentUpon>201610271341326_supportnulladvisertouser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610271417378_supportnulladvisertouserreverted.cs" />
+    <Compile Include="Migrations\201610271417378_supportnulladvisertouserreverted.Designer.cs">
+      <DependentUpon>201610271417378_supportnulladvisertouserreverted.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610281005053_contactTtiles.cs" />
+    <Compile Include="Migrations\201610281005053_contactTtiles.Designer.cs">
+      <DependentUpon>201610281005053_contactTtiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610281251515_TitleDrop.cs" />
+    <Compile Include="Migrations\201610281251515_TitleDrop.Designer.cs">
+      <DependentUpon>201610281251515_TitleDrop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611021632474_advisorTitle.cs" />
+    <Compile Include="Migrations\201611021632474_advisorTitle.Designer.cs">
+      <DependentUpon>201611021632474_advisorTitle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611021747399_advisorBankNames.cs" />
+    <Compile Include="Migrations\201611021747399_advisorBankNames.Designer.cs">
+      <DependentUpon>201611021747399_advisorBankNames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611061401261_adviserTypeAdmin.cs" />
+    <Compile Include="Migrations\201611061401261_adviserTypeAdmin.Designer.cs">
+      <DependentUpon>201611061401261_adviserTypeAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611061610563_bankBranchCode.cs" />
+    <Compile Include="Migrations\201611061610563_bankBranchCode.Designer.cs">
+      <DependentUpon>201611061610563_bankBranchCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611071027588_undersuperviosn.cs" />
+    <Compile Include="Migrations\201611071027588_undersuperviosn.Designer.cs">
+      <DependentUpon>201611071027588_undersuperviosn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611090934392_advisorSupervision.cs" />
+    <Compile Include="Migrations\201611090934392_advisorSupervision.Designer.cs">
+      <DependentUpon>201611090934392_advisorSupervision.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611090951357_ReverseAdvisorSupervision.cs" />
+    <Compile Include="Migrations\201611090951357_ReverseAdvisorSupervision.Designer.cs">
+      <DependentUpon>201611090951357_ReverseAdvisorSupervision.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611091022586_adviserSupervisor.cs" />
+    <Compile Include="Migrations\201611091022586_adviserSupervisor.Designer.cs">
+      <DependentUpon>201611091022586_adviserSupervisor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611091028595_ReverseAdvisorSupervisionTwo.cs" />
+    <Compile Include="Migrations\201611091028595_ReverseAdvisorSupervisionTwo.Designer.cs">
+      <DependentUpon>201611091028595_ReverseAdvisorSupervisionTwo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611091051278_test.cs" />
+    <Compile Include="Migrations\201611091051278_test.Designer.cs">
+      <DependentUpon>201611091051278_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611091109164_testAgain.cs" />
+    <Compile Include="Migrations\201611091109164_testAgain.Designer.cs">
+      <DependentUpon>201611091109164_testAgain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611091254475_AllowanceDates.cs" />
+    <Compile Include="Migrations\201611091254475_AllowanceDates.Designer.cs">
+      <DependentUpon>201611091254475_AllowanceDates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611100625172_removAllowanceFromLicenses.cs" />
+    <Compile Include="Migrations\201611100625172_removAllowanceFromLicenses.Designer.cs">
+      <DependentUpon>201611100625172_removAllowanceFromLicenses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611100708008_allowanceForAdviser.cs" />
+    <Compile Include="Migrations\201611100708008_allowanceForAdviser.Designer.cs">
+      <DependentUpon>201611100708008_allowanceForAdviser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611110816053_dateToCommision.cs" />
+    <Compile Include="Migrations\201611110816053_dateToCommision.Designer.cs">
+      <DependentUpon>201611110816053_dateToCommision.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611141037586_nullableDtaes.cs" />
+    <Compile Include="Migrations\201611141037586_nullableDtaes.Designer.cs">
+      <DependentUpon>201611141037586_nullableDtaes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611141054213_nullableDates.cs" />
+    <Compile Include="Migrations\201611141054213_nullableDates.Designer.cs">
+      <DependentUpon>201611141054213_nullableDates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611141058074_datetime.cs" />
+    <Compile Include="Migrations\201611141058074_datetime.Designer.cs">
+      <DependentUpon>201611141058074_datetime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611151052450_products.cs" />
+    <Compile Include="Migrations\201611151052450_products.Designer.cs">
+      <DependentUpon>201611151052450_products.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611151237484_productNameLength.cs" />
+    <Compile Include="Migrations\201611151237484_productNameLength.Designer.cs">
+      <DependentUpon>201611151237484_productNameLength.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611151249190_dateChanges.cs" />
+    <Compile Include="Migrations\201611151249190_dateChanges.Designer.cs">
+      <DependentUpon>201611151249190_dateChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611171744103_shareTable.cs" />
+    <Compile Include="Migrations\201611171744103_shareTable.Designer.cs">
+      <DependentUpon>201611171744103_shareTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611171811178_shareTableTwo.cs" />
+    <Compile Include="Migrations\201611171811178_shareTableTwo.Designer.cs">
+      <DependentUpon>201611171811178_shareTableTwo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611210938538_shareDouble.cs" />
+    <Compile Include="Migrations\201611210938538_shareDouble.Designer.cs">
+      <DependentUpon>201611210938538_shareDouble.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611211029597_AdvisorDtoSupplierProduct.cs" />
+    <Compile Include="Migrations\201611211029597_AdvisorDtoSupplierProduct.Designer.cs">
+      <DependentUpon>201611211029597_AdvisorDtoSupplierProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611211331476_advisorDTODateTime.cs" />
+    <Compile Include="Migrations\201611211331476_advisorDTODateTime.Designer.cs">
+      <DependentUpon>201611211331476_advisorDTODateTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611221055432_uploadedAddedToApplications.cs" />
+    <Compile Include="Migrations\201611221055432_uploadedAddedToApplications.Designer.cs">
+      <DependentUpon>201611221055432_uploadedAddedToApplications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611250739325_datesDocuments.cs" />
+    <Compile Include="Migrations\201611250739325_datesDocuments.Designer.cs">
+      <DependentUpon>201611250739325_datesDocuments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611301057587_other.cs" />
+    <Compile Include="Migrations\201611301057587_other.Designer.cs">
+      <DependentUpon>201611301057587_other.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611301111187_adviserShare.cs" />
+    <Compile Include="Migrations\201611301111187_adviserShare.Designer.cs">
+      <DependentUpon>201611301111187_adviserShare.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611301137400_adviserShareList.cs" />
+    <Compile Include="Migrations\201611301137400_adviserShareList.Designer.cs">
+      <DependentUpon>201611301137400_adviserShareList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612020027039_decimalAllowance.cs" />
+    <Compile Include="Migrations\201612020027039_decimalAllowance.Designer.cs">
+      <DependentUpon>201612020027039_decimalAllowance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612020114276_doubleIncome.cs" />
+    <Compile Include="Migrations\201612020114276_doubleIncome.Designer.cs">
+      <DependentUpon>201612020114276_doubleIncome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701251331463_added foreign key field to Application.cs" />
+    <Compile Include="Migrations\201701251331463_added foreign key field to Application.Designer.cs">
+      <DependentUpon>201701251331463_added foreign key field to Application.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701261113171_Renamed product field on applications.cs" />
+    <Compile Include="Migrations\201701261113171_Renamed product field on applications.Designer.cs">
+      <DependentUpon>201701261113171_Renamed product field on applications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702011502379_Added Advisor column on supplier for commision import.cs" />
+    <Compile Include="Migrations\201702011502379_Added Advisor column on supplier for commision import.Designer.cs">
+      <DependentUpon>201702011502379_Added Advisor column on supplier for commision import.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702011513000_Changed advisorColumn to advisor Name and added surname column.cs" />
+    <Compile Include="Migrations\201702011513000_Changed advisorColumn to advisor Name and added surname column.Designer.cs">
+      <DependentUpon>201702011513000_Changed advisorColumn to advisor Name and added surname column.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702141444210_Changed limit on Contact firstname to 50.cs" />
+    <Compile Include="Migrations\201702141444210_Changed limit on Contact firstname to 50.Designer.cs">
+      <DependentUpon>201702141444210_Changed limit on Contact firstname to 50.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703021153343_unmatchedCommissions.cs" />
+    <Compile Include="Migrations\201703021153343_unmatchedCommissions.Designer.cs">
+      <DependentUpon>201703021153343_unmatchedCommissions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703021201075_unmatchedCommissionsApplicationdb.cs" />
+    <Compile Include="Migrations\201703021201075_unmatchedCommissionsApplicationdb.Designer.cs">
+      <DependentUpon>201703021201075_unmatchedCommissionsApplicationdb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703030529459_addedSupplierNameToUnmatchedcommissionsTable.cs" />
+    <Compile Include="Migrations\201703030529459_addedSupplierNameToUnmatchedcommissionsTable.Designer.cs">
+      <DependentUpon>201703030529459_addedSupplierNameToUnmatchedcommissionsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706091159596_ApplicationAdvisorHistory.cs" />
+    <Compile Include="Migrations\201706091159596_ApplicationAdvisorHistory.Designer.cs">
+      <DependentUpon>201706091159596_ApplicationAdvisorHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706120900174_AddedReasonsToUnmatchedCommissions.cs" />
+    <Compile Include="Migrations\201706120900174_AddedReasonsToUnmatchedCommissions.Designer.cs">
+      <DependentUpon>201706120900174_AddedReasonsToUnmatchedCommissions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706150835584_ComissionFileStatus.cs" />
+    <Compile Include="Migrations\201706150835584_ComissionFileStatus.Designer.cs">
+      <DependentUpon>201706150835584_ComissionFileStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706191937437_newmigration.cs" />
+    <Compile Include="Migrations\201706191937437_newmigration.Designer.cs">
+      <DependentUpon>201706191937437_newmigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706211119445_EffectiveAdvisorDates.cs" />
+    <Compile Include="Migrations\201706211119445_EffectiveAdvisorDates.Designer.cs">
+      <DependentUpon>201706211119445_EffectiveAdvisorDates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708101007526_AdvisorNameUnmatechedCommissions.cs" />
+    <Compile Include="Migrations\201708101007526_AdvisorNameUnmatechedCommissions.Designer.cs">
+      <DependentUpon>201708101007526_AdvisorNameUnmatechedCommissions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711210931359_CommissionFileStatusSupplierId.cs" />
+    <Compile Include="Migrations\201711210931359_CommissionFileStatusSupplierId.Designer.cs">
+      <DependentUpon>201711210931359_CommissionFileStatusSupplierId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711220657430_CommissionImportFileId.cs" />
+    <Compile Include="Migrations\201711220657430_CommissionImportFileId.Designer.cs">
+      <DependentUpon>201711220657430_CommissionImportFileId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711280717185_UnmatchedAndCommissionSupplierId.cs" />
+    <Compile Include="Migrations\201711280717185_UnmatchedAndCommissionSupplierId.Designer.cs">
+      <DependentUpon>201711280717185_UnmatchedAndCommissionSupplierId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711280725302_AdvisorShareUnderSupervisionSupplierId.cs" />
+    <Compile Include="Migrations\201711280725302_AdvisorShareUnderSupervisionSupplierId.Designer.cs">
+      <DependentUpon>201711280725302_AdvisorShareUnderSupervisionSupplierId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712040658366_CommissionApprovalDateApprovalStatus.cs" />
+    <Compile Include="Migrations\201712040658366_CommissionApprovalDateApprovalStatus.Designer.cs">
+      <DependentUpon>201712040658366_CommissionApprovalDateApprovalStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712050819360_CommFromAndToApprovalDate.cs" />
+    <Compile Include="Migrations\201712050819360_CommFromAndToApprovalDate.Designer.cs">
+      <DependentUpon>201712050819360_CommFromAndToApprovalDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904170753104_MemberExceptionList.cs" />
+    <Compile Include="Migrations\201904170753104_MemberExceptionList.Designer.cs">
+      <DependentUpon>201904170753104_MemberExceptionList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905021419131_ApplicationAdvisorEdiHistory.cs" />
+    <Compile Include="Migrations\201905021419131_ApplicationAdvisorEdiHistory.Designer.cs">
+      <DependentUpon>201905021419131_ApplicationAdvisorEdiHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905021606569_AdvisoryEditHistoryFixes.cs" />
+    <Compile Include="Migrations\201905021606569_AdvisoryEditHistoryFixes.Designer.cs">
+      <DependentUpon>201905021606569_AdvisoryEditHistoryFixes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Controllers\ContactsController.cs" />
+    <Compile Include="Models\AdministrationLogs.cs" />
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\AddressType.cs" />
+    <Compile Include="Models\Admin\ApplicationWithMemberDTO.cs" />
+    <Compile Include="Models\Admin\ProcessDTO.cs" />
+    <Compile Include="Models\Advisor.cs" />
+    <Compile Include="Models\Advisor2LicenseTypes.cs" />
+    <Compile Include="Models\AdvisorDocument.cs" />
+    <Compile Include="Models\AdvisorShareUnderSupervision.cs" />
+    <Compile Include="Models\AdvisorStatus.cs" />
+    <Compile Include="Models\AdvisorSupplierCode.cs" />
+    <Compile Include="Models\AdvisorType.cs" />
+    <Compile Include="Models\AnnualTaxBracket.cs" />
+    <Compile Include="Models\Application.cs" />
+    <Compile Include="Models\ApplicationAdvisorEditHistory.cs" />
+    <Compile Include="Models\ApplicationAdvisorHistory.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\ApplicationDocument.cs" />
+    <Compile Include="Models\ApplicationStatus.cs" />
+    <Compile Include="Models\ApplicationSupllier.cs" />
+    <Compile Include="Models\ApplicationType.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\BankBranchCodes.cs" />
+    <Compile Include="Models\BankNames.cs" />
+    <Compile Include="Models\CommissionFileStatus.cs" />
+    <Compile Include="Models\CommissionStatement.cs" />
+    <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\MemberListException.cs" />
+    <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\ContactTitles.cs" />
+    <Compile Include="Models\ContactType.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\DocumentType.cs" />
+    <Compile Include="Models\DTO\AdvisorShareDTO.cs" />
+    <Compile Include="Models\DTO\CommissionDTO.cs" />
+    <Compile Include="Models\DTO\DashboardDTO.cs" />
+    <Compile Include="Models\ImportFile.cs" />
+    <Compile Include="Models\ImportType.cs" />
+    <Compile Include="Models\LicenseCategories.cs" />
+    <Compile Include="Models\LicenseType.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Province.cs" />
+    <Compile Include="Models\Query.cs" />
+    <Compile Include="Models\QueryType.cs" />
+    <Compile Include="Models\Response\AddressTypeResponse.cs" />
+    <Compile Include="Models\Response\AdvisorContactResponse.cs" />
+    <Compile Include="Models\Response\AdvisorDetailResponse.cs" />
+    <Compile Include="Models\Response\AdvisorCompanyAdvisorResponse.cs" />
+    <Compile Include="Models\Response\AdvisorCompanyAdvisorResponseId.cs" />
+    <Compile Include="Models\Response\AdvisorDocumentResponse.cs" />
+    <Compile Include="Models\Response\AdvisorDocumentsResponse.cs" />
+    <Compile Include="Models\Response\AdvisorLicenseResponse.cs" />
+    <Compile Include="Models\Response\AdvisorResponse.cs" />
+    <Compile Include="Models\Response\AdvisorTypeResponse.cs" />
+    <Compile Include="Models\Response\ApplicationReportResponse.cs" />
+    <Compile Include="Models\Response\ApplicationResponse.cs" />
+    <Compile Include="Models\Response\BankBranchCodeResponse.cs" />
+    <Compile Include="Models\Response\BankNameResponse.cs" />
+    <Compile Include="Models\Response\BasicApplicationResponse.cs" />
+    <Compile Include="Models\Response\BasicContactResponse.cs" />
+    <Compile Include="Models\Response\BasicSupplierResponse.cs" />
+    <Compile Include="Models\Response\ClientsListItem.cs" />
+    <Compile Include="Models\Response\clientsResponse.cs" />
+    <Compile Include="Models\Response\CommissionStatementResponse.cs" />
+    <Compile Include="Models\Response\CommissionTransactionRep.cs" />
+    <Compile Include="Models\Response\CommReportResp.cs" />
+    <Compile Include="Models\Response\CompanyAdvisorResponse.cs" />
+    <Compile Include="Models\Response\ContactResponse.cs" />
+    <Compile Include="Models\Response\ContactTitleResponse.cs" />
+    <Compile Include="Models\Response\CountryResponse.cs" />
+    <Compile Include="Models\Response\DocumentTypeResponse.cs" />
+    <Compile Include="Models\Response\GetAdvisorsResp.cs" />
+    <Compile Include="Models\Response\ImportFileResponseStatus.cs" />
+    <Compile Include="Models\Response\KeyCompanyAdvisorResponse.cs" />
+    <Compile Include="Models\Response\KeyCompanyAdvisorResponseId.cs" />
+    <Compile Include="Models\Response\LicenseTypeResponse.cs" />
+    <Compile Include="Models\Response\MemberCommissionPayed.cs" />
+    <Compile Include="Models\Response\NotCompanyContactsResponse.cs" />
+    <Compile Include="Models\Response\ProductResponse.cs" />
+    <Compile Include="Models\Response\ProfileDetailsResponse.cs" />
+    <Compile Include="Models\Response\ProvinceResponse.cs" />
+    <Compile Include="Models\Response\QueryResponse.cs" />
+    <Compile Include="Models\Response\RepListResponse.cs" />
+    <Compile Include="Models\Response\SupplierResponse.cs" />
+    <Compile Include="Models\Response\UnmatchedCommissionsResponse.cs" />
+    <Compile Include="Models\Supplier.cs" />
+    <Compile Include="Models\SupplierLicenseTypes.cs" />
+    <Compile Include="Models\SystemSetting.cs" />
+    <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Models\UnmatchedCommissions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Providers\ApplicationRoleManager.cs" />
+    <Compile Include="Providers\ApplicationSignInManager.cs" />
+    <Compile Include="Providers\ApplicationUserManager.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\User.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Site.css" />
+    <Content Include="img\Eddie-01.png" />
+    <Content Include="js\annualTaxBracket.js" />
+    <Content Include="js\basicClientDetails.js" />
+    <Content Include="js\company.js" />
+    <Content Include="js\companyDetail.js" />
+    <Content Include="js\factory.js" />
+    <Content Include="js\Model.js" />
+    <Content Include="js\newClient.js" />
+    <Content Include="js\registerCompany.js" />
+    <Content Include="Properties\css\about.css" />
+    <Content Include="Properties\css\bootstrap-theme.min.css" />
+    <Content Include="Properties\css\bootstrap.min.css" />
+    <Content Include="Properties\css\index.css" />
+    <Content Include="img\picIcon.png" />
+    <Content Include="img\Tendahealth logo.png" />
+    <Content Include="img\Tendahealthlogo-02.svg" />
+    <Content Include="Properties\css\loading-bar.css" />
+    <Content Include="Properties\css\loading-bar.min.css" />
+    <Content Include="Properties\css\main.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="img\Tenda_Header.png" />
+    <Content Include="Index.html" />
+    <Content Include="js\about.js" />
+    <Content Include="js\advisor.js" />
+    <Content Include="js\advisors.js" />
+    <Content Include="js\api\jquery.js" />
+    <Content Include="js\admin.js" />
+    <Content Include="js\clients.js" />
+    <Content Include="js\custom\angular-ui-router.min.js" />
+    <Content Include="js\custom\angular.min.js" />
+    <Content Include="js\custom\ngStorage.min.js" />
+    <Content Include="js\queries.js" />
+    <Content Include="js\profile.js" />
+    <Content Include="js\newApplication.js" />
+    <Content Include="js\registerAdvisor.js" />
+    <Content Include="js\applicationDetail.js" />
+    <Content Include="js\commission.js" />
+    <Content Include="js\application.js" />
+    <Content Include="js\custom\index.js" />
+    <Content Include="js\dashboard.js" />
+    <Content Include="js\login.js" />
+    <Content Include="js\main.js" />
+    <Content Include="js\services\advisor.js" />
+    <Content Include="js\services\admin.js" />
+    <Content Include="js\services\clients.js" />
+    <Content Include="js\services\commisssion.js" />
+    <Content Include="js\services\Details.js" />
+    <Content Include="js\services\application.js" />
+    <Content Include="js\services\auth.js" />
+    <Content Include="js\services\values.js" />
+    <None Include="Properties\PublishProfiles\Release.pubxml" />
+    <None Include="Properties\PublishProfiles\ReneMachine.pubxml" />
+    <None Include="Properties\PublishProfiles\STACYtENDAtest.pubxml" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\loading-bar.js" />
+    <Content Include="Scripts\loading-bar.min.js" />
+    <Content Include="templates\about.html" />
+    <Content Include="templates\admin.html" />
+    <Content Include="templates\admin\suppliersProducts.html" />
+    <Content Include="templates\admin\logs.html" />
+    <Content Include="templates\admin\users.html" />
+    <Content Include="templates\advisors.html" />
+    <Content Include="templates\admin\process.html" />
+    <Content Include="templates\admin\settings.html" />
+    <Content Include="templates\admin\import.html" />
+    <Content Include="templates\advisor\detail.html" />
+    <Content Include="templates\basicClientDetails.html" />
+    <Content Include="templates\clients.html" />
+    <Content Include="templates\company.html" />
+    <Content Include="templates\companyDetail.html" />
+    <Content Include="templates\newApplication\checkExistingClient.html" />
+    <Content Include="templates\newClient.html" />
+    <Content Include="templates\profile.html" />
+    <Content Include="templates\newApplication\products.html" />
+    <Content Include="templates\newApplication\documents.html" />
+    <Content Include="templates\newApplication\summary.html" />
+    <Content Include="templates\newApplication\clientDetails.html" />
+    <Content Include="templates\queries.html" />
+    <Content Include="templates\advisor.html" />
+    <Content Include="templates\newApplication.html" />
+    <Content Include="templates\applicationDetail.html" />
+    <Content Include="templates\commission.html" />
+    <Content Include="templates\application.html" />
+    <Content Include="templates\dashboard.html" />
+    <Content Include="templates\login.html" />
+    <Content Include="templates\registerAdvisor.html" />
+    <Content Include="templates\registerCompany.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\Request\" />
+    <Folder Include="Views\Config\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\Testing.pubxml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201608241407431_Initial.resx">
+      <DependentUpon>201608241407431_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608251251322_ModelChange1.resx">
+      <DependentUpon>201608251251322_ModelChange1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609011356547_Advisors2LicenseTypes.resx">
+      <DependentUpon>201609011356547_Advisors2LicenseTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608251347065_Link-LicenseCategories-To-LicenseTypes.resx">
+      <DependentUpon>201608251347065_Link-LicenseCategories-To-LicenseTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609020858062_ChangeProductSupplierDependency.resx">
+      <DependentUpon>201609020858062_ChangeProductSupplierDependency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609081152463_changes.resx">
+      <DependentUpon>201609081152463_changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609082013033_CommisionStatement.resx">
+      <DependentUpon>201609082013033_CommisionStatement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609121021112_Update.resx">
+      <DependentUpon>201609121021112_Update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609201350075_tax.resx">
+      <DependentUpon>201609201350075_tax.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609211141027_CommisionStatement1.resx">
+      <DependentUpon>201609211141027_CommisionStatement1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609211152055_Settings.resx">
+      <DependentUpon>201609211152055_Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609211240035_CommisionImport.resx">
+      <DependentUpon>201609211240035_CommisionImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609220809334_ComissionRunUpdates.resx">
+      <DependentUpon>201609220809334_ComissionRunUpdates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609220845268_CommisionProductMap.resx">
+      <DependentUpon>201609220845268_CommisionProductMap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609220941328_ProductCommisionUpdates.resx">
+      <DependentUpon>201609220941328_ProductCommisionUpdates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609221253551_CommissionTax.resx">
+      <DependentUpon>201609221253551_CommissionTax.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609280944160_Banking.resx">
+      <DependentUpon>201609280944160_Banking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609281146217_AdvisorSuplierCode.resx">
+      <DependentUpon>201609281146217_AdvisorSuplierCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609281215534_AdvisorSupplierLink.resx">
+      <DependentUpon>201609281215534_AdvisorSupplierLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609281231374_AdvisorSupplierCode_foreignKeys.resx">
+      <DependentUpon>201609281231374_AdvisorSupplierCode_foreignKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609290648108_ApplicationSupplier.resx">
+      <DependentUpon>201609290648108_ApplicationSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609290658310_RemoveApplicationMemberNumber.resx">
+      <DependentUpon>201609290658310_RemoveApplicationMemberNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610020802434_CollectionAdvisorLicenseType.resx">
+      <DependentUpon>201610020802434_CollectionAdvisorLicenseType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610040926247_ApplicationTypeAdded.resx">
+      <DependentUpon>201610040926247_ApplicationTypeAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610041116098_DocumentsToApplicationTypes.resx">
+      <DependentUpon>201610041116098_DocumentsToApplicationTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610041356353_FixAppID.resx">
+      <DependentUpon>201610041356353_FixAppID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610061349326_ApplicationDTOAddingAdvisorStatus.resx">
+      <DependentUpon>201610061349326_ApplicationDTOAddingAdvisorStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610270943213_userchanges.resx">
+      <DependentUpon>201610270943213_userchanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610271341326_supportnulladvisertouser.resx">
+      <DependentUpon>201610271341326_supportnulladvisertouser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610271417378_supportnulladvisertouserreverted.resx">
+      <DependentUpon>201610271417378_supportnulladvisertouserreverted.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610281005053_contactTtiles.resx">
+      <DependentUpon>201610281005053_contactTtiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610281251515_TitleDrop.resx">
+      <DependentUpon>201610281251515_TitleDrop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611021632474_advisorTitle.resx">
+      <DependentUpon>201611021632474_advisorTitle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611021747399_advisorBankNames.resx">
+      <DependentUpon>201611021747399_advisorBankNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611061401261_adviserTypeAdmin.resx">
+      <DependentUpon>201611061401261_adviserTypeAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611061610563_bankBranchCode.resx">
+      <DependentUpon>201611061610563_bankBranchCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611071027588_undersuperviosn.resx">
+      <DependentUpon>201611071027588_undersuperviosn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611090934392_advisorSupervision.resx">
+      <DependentUpon>201611090934392_advisorSupervision.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611090951357_ReverseAdvisorSupervision.resx">
+      <DependentUpon>201611090951357_ReverseAdvisorSupervision.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611091022586_adviserSupervisor.resx">
+      <DependentUpon>201611091022586_adviserSupervisor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611091028595_ReverseAdvisorSupervisionTwo.resx">
+      <DependentUpon>201611091028595_ReverseAdvisorSupervisionTwo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611091051278_test.resx">
+      <DependentUpon>201611091051278_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611091109164_testAgain.resx">
+      <DependentUpon>201611091109164_testAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611091254475_AllowanceDates.resx">
+      <DependentUpon>201611091254475_AllowanceDates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611100625172_removAllowanceFromLicenses.resx">
+      <DependentUpon>201611100625172_removAllowanceFromLicenses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611100708008_allowanceForAdviser.resx">
+      <DependentUpon>201611100708008_allowanceForAdviser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611110816053_dateToCommision.resx">
+      <DependentUpon>201611110816053_dateToCommision.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611141037586_nullableDtaes.resx">
+      <DependentUpon>201611141037586_nullableDtaes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611141054213_nullableDates.resx">
+      <DependentUpon>201611141054213_nullableDates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611141058074_datetime.resx">
+      <DependentUpon>201611141058074_datetime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611151052450_products.resx">
+      <DependentUpon>201611151052450_products.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611151237484_productNameLength.resx">
+      <DependentUpon>201611151237484_productNameLength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611151249190_dateChanges.resx">
+      <DependentUpon>201611151249190_dateChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611171744103_shareTable.resx">
+      <DependentUpon>201611171744103_shareTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611171811178_shareTableTwo.resx">
+      <DependentUpon>201611171811178_shareTableTwo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611210938538_shareDouble.resx">
+      <DependentUpon>201611210938538_shareDouble.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611211029597_AdvisorDtoSupplierProduct.resx">
+      <DependentUpon>201611211029597_AdvisorDtoSupplierProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611211331476_advisorDTODateTime.resx">
+      <DependentUpon>201611211331476_advisorDTODateTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611221055432_uploadedAddedToApplications.resx">
+      <DependentUpon>201611221055432_uploadedAddedToApplications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611250739325_datesDocuments.resx">
+      <DependentUpon>201611250739325_datesDocuments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611301057587_other.resx">
+      <DependentUpon>201611301057587_other.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611301111187_adviserShare.resx">
+      <DependentUpon>201611301111187_adviserShare.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611301137400_adviserShareList.resx">
+      <DependentUpon>201611301137400_adviserShareList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612020027039_decimalAllowance.resx">
+      <DependentUpon>201612020027039_decimalAllowance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612020114276_doubleIncome.resx">
+      <DependentUpon>201612020114276_doubleIncome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701251331463_added foreign key field to Application.resx">
+      <DependentUpon>201701251331463_added foreign key field to Application.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701261113171_Renamed product field on applications.resx">
+      <DependentUpon>201701261113171_Renamed product field on applications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702011502379_Added Advisor column on supplier for commision import.resx">
+      <DependentUpon>201702011502379_Added Advisor column on supplier for commision import.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702011513000_Changed advisorColumn to advisor Name and added surname column.resx">
+      <DependentUpon>201702011513000_Changed advisorColumn to advisor Name and added surname column.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702141444210_Changed limit on Contact firstname to 50.resx">
+      <DependentUpon>201702141444210_Changed limit on Contact firstname to 50.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703021153343_unmatchedCommissions.resx">
+      <DependentUpon>201703021153343_unmatchedCommissions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703021201075_unmatchedCommissionsApplicationdb.resx">
+      <DependentUpon>201703021201075_unmatchedCommissionsApplicationdb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703030529459_addedSupplierNameToUnmatchedcommissionsTable.resx">
+      <DependentUpon>201703030529459_addedSupplierNameToUnmatchedcommissionsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706091159596_ApplicationAdvisorHistory.resx">
+      <DependentUpon>201706091159596_ApplicationAdvisorHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706120900174_AddedReasonsToUnmatchedCommissions.resx">
+      <DependentUpon>201706120900174_AddedReasonsToUnmatchedCommissions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706150835584_ComissionFileStatus.resx">
+      <DependentUpon>201706150835584_ComissionFileStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706191937437_newmigration.resx">
+      <DependentUpon>201706191937437_newmigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706211119445_EffectiveAdvisorDates.resx">
+      <DependentUpon>201706211119445_EffectiveAdvisorDates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708101007526_AdvisorNameUnmatechedCommissions.resx">
+      <DependentUpon>201708101007526_AdvisorNameUnmatechedCommissions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711210931359_CommissionFileStatusSupplierId.resx">
+      <DependentUpon>201711210931359_CommissionFileStatusSupplierId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711220657430_CommissionImportFileId.resx">
+      <DependentUpon>201711220657430_CommissionImportFileId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711280717185_UnmatchedAndCommissionSupplierId.resx">
+      <DependentUpon>201711280717185_UnmatchedAndCommissionSupplierId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711280725302_AdvisorShareUnderSupervisionSupplierId.resx">
+      <DependentUpon>201711280725302_AdvisorShareUnderSupervisionSupplierId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712040658366_CommissionApprovalDateApprovalStatus.resx">
+      <DependentUpon>201712040658366_CommissionApprovalDateApprovalStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712050819360_CommFromAndToApprovalDate.resx">
+      <DependentUpon>201712050819360_CommFromAndToApprovalDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904170753104_MemberExceptionList.resx">
+      <DependentUpon>201904170753104_MemberExceptionList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905021419131_ApplicationAdvisorEdiHistory.resx">
+      <DependentUpon>201905021419131_ApplicationAdvisorEdiHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905021606569_AdvisoryEditHistoryFixes.resx">
+      <DependentUpon>201905021606569_AdvisoryEditHistoryFixes.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53273</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:53273/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

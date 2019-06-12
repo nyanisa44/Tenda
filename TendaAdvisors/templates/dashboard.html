@@ -1,0 +1,249 @@
+﻿<div class="row">
+    <div class="col-xs-12 imageIcon">
+        <div class="col-xs-12">
+            <div class="displayInlineClass profileWelcomeHeading" ng-if="dashboard.advisor.contact" style="float:left"> Welcome back {{dashboard.advisor.contact.firstName}} {{dashboard.advisor.contact.lastName}}.</div>
+            <div class="displayInlineClass profileLastLoggedOn"></div>
+        </div>
+    </div>
+</div>
+
+<div class="row registerAdvisor" ng-if="registerItem == 0 ? true : false" style="margin-top:90px">
+    <div class="row">
+        <div class="col-xs-12 ">
+            <div class="col-xs-12 nopadding" style="margin-bottom:20px">
+                <h3 class="smallHeading" style="margin-bottom:20px">Overview</h3>
+                <div class="col-xs-2"><div class="circleWithText PendingCircle" ng-click="gotoPage(2)" ng-if="Supervisor || !AdvisorLog">{{ applicationPendingCount }} Pending</div></div>
+                <div class="col-xs-2"><div class="circleWithText PendingCircle" ng-click="gotoPage(2)" ng-if="AdvisorLog">{{ applicationPendingCountForAdvisor }} Pending</div></div>
+
+                <center>
+                    <div class="col-xs-2"><div class="circleWithText PrimaryCircle" ng-click="gotoPage(3)" ng-if="Supervisor || !AdvisorLog">{{ applicationNewCount }} New</div></div>
+                    <div class="col-xs-2"><div class="circleWithText PrimaryCircle" ng-click="gotoPage(3)" ng-if="AdvisorLog">{{ applicationNewCountForAdvisor}} New</div></div>
+                </center>
+
+                <div class="col-xs-2"><div class="circleWithText ActiveCircle" ng-click="gotoPage(1)" ng-if="Supervisor || !AdvisorLog">{{ applicationCompleteCount}} Complete</div></div>
+                <div class="col-xs-2"><div class="circleWithText ActiveCircle" ng-click="gotoPage(1)" ng-if="AdvisorLog">{{ applicationCompleteCountForAdvisor}} Complete</div></div>
+            </div>
+            <div class="col-xs-12 nopadding" style="padding-top: 12px;">
+                <div class="col-xs-12 remindersCards nopadding hoverable">
+                    <button class="col-xs-12 btn btn-sm btn-primary " ng-click="gotoPage(4)" ng-if="Supervisor || !AdvisorLog">Expired Advisers Documents : {{ calculateSumExpired(AdvisorDocuments) }}</button>
+                    <button class="col-xs-12 btn btn-sm btn-primary " ng-click="gotoPage(4)" ng-if="AdvisorLog">Expired Advisers Documents : {{ calculateSumExpiredAdvisor(AdvisorDocumentsForAdvisor) }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-------------------------------------------------Applications---------------------------------------------------------------->
+<div class="row registerAdvisor" ng-if="registerItem == 1 ? true : false" style="margin-top:90px">
+    <span class="btn btn-sm btn-primary" style="float:right;" ng-click="allApplicationsClicked()">View All</span>
+
+    <h4 style="font-size:x-large;color:red;margin-top:40px;margin-left:40px ">Search:</h4>
+    <div class="row" style="margin-top:12px;margin-left:38px">
+        <div class="col-xs-12">
+            <input size="100" list="clientList" type="search" placeholder="Type atleast 4 characters" ng-model="searchTerm" style="margin-top:15px;">
+        </div>
+    </div>
+    <div class="col-xs-12 nopadding" style="padding-top: 40px;">
+        <div class="col-xs-12 remindersCards nopadding hoverable">
+            <h3 class="col-xs-12 subHeading">Latest Activity</h3>
+            <div class="col-xs-12 remindersCard " ng-if="Supervisor || !AdvisorLog" ng-repeat="app in applicationComplete|filter:searchTerm" ng-click="applicationClicked(app.id)">
+                <div class="col-xs-12">
+                    <div class="col-xs-3 activityCode" style="font-size:large;color:orangered;margin-bottom:10px">{{app.product_Supplier_Name}}</div>
+                    <h4 class="col-xs-6  activityCode" style="font-size:large;color:blue;float:right">{{app.advisorName}}  {{app.advisorSurName}}  {{app.advisorIdnumber}}</h4>
+                </div>
+                <div class="col-xs-3" style="font-style:italic">
+                    <div class="col-xs-12 activityCode">{{ app.client.firstName }} {{ app.client.lastName }}</div>
+                    <div class="col-xs-12 activityCode">{{ app.client.idNumber }}</div>
+                </div>  
+            </div>
+            <div class="col-xs-12 remindersCard " ng-if="AdvisorLog" ng-repeat="app in applicationCompleteForAdvisor|filter:searchTerm" ng-click="applicationClicked(app.id)">
+                <div class="col-xs-12">
+                    <div class="col-xs-3 activityCode" style="font-size:large;color:orangered;margin-bottom:10px">{{app.product_Supplier_Name}}</div>
+                    <h4 class="col-xs-6  activityCode" style="font-size:large;color:blue;float:right">{{app.advisorName}}  {{app.advisorSurName}}  {{app.advisorIdnumber}}</h4>
+                </div>
+                <div class="col-xs-3" style="font-style:italic">
+                    <div class="col-xs-12 activityCode">{{ app.client.firstName }} {{ app.client.lastName }}</div>
+                    <div class="col-xs-12 activityCode">{{ app.client.idNumber }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right;" ng-click="gotoPage(0)">Back</button>
+</div>
+
+<!------------------------------------------------------------------Pending------------------------------------------------------------------->
+<div class="row registerAdvisor" ng-if="registerItem == 2 ? true : false" style="margin-top:90px">
+   <span class="btn btn-sm btn-primary" style="float:right;" ng-click="allApplicationsClicked()">View All</span>
+    <h4 style="font-size:x-large;color:red;margin-top:40px;margin-left:40px ">Search:</h4>
+
+    <div class="row" style="margin-top:12px;margin-left:38px">
+        <div class="col-xs-12">
+            <input size="100" list="clientList" type="search" placeholder="Type atleast 4 characters" ng-model="searchTerm"  style="margin-top:15px;">
+        </div>
+    </div>
+
+    <div class="col-xs-12 nopadding" style="padding-top: 40px;">
+        <div class="col-xs-12 remindersCards nopadding hoverable">
+            <h3 class="col-xs-12 subHeading">Latest Activity</h3>
+            <div class="col-xs-12 remindersCard "
+                 ng-if="Supervisor || !AdvisorLog"
+                 ng-repeat="app in applicationPending |filter:searchTerm"
+                 ng-click="applicationClicked(app.id)">
+                <div class="col-xs-12">
+                    <div class="col-xs-3 activityCode" style="font-size:large;color:orangered;margin-bottom:10px">{{app.product_Supplier_Name}}</div>
+                    <h4 class="col-xs-6  activityCode" style="font-size:large;color:blue;float:right">{{app.advisorName}}  {{app.advisorSurName}}  {{app.advisorIdnumber}}</h4>
+                </div>
+                <div class="col-xs-3" style="font-style:italic">
+                    <div class="col-xs-12 activityCode">{{ app.client.firstName }} {{ app.client.lastName }}</div>
+                    <div class="col-xs-12 activityName">ID: {{ app.client.idNumber }}</div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 remindersCard " ng-if="AdvisorLog" ng-repeat="app in applicationPendingForAdvisor |filter:searchTerm" ng-click="applicationClicked(app.id)">
+                <div class="col-xs-12">
+                    <div class="col-xs-3 activityCode" style="font-size:large;color:orangered;margin-bottom:10px">{{app.product_Supplier_Name}}</div>
+                    <h4 class="col-xs-6  activityCode" style="font-size:large;color:blue;float:right">{{app.advisorName}}  {{app.advisorSurName}}  {{app.advisorIdnumber}}</h4>
+                </div>
+                <div class="col-xs-3" style="font-style:italic">
+                    <div class="col-xs-12 activityCode">{{ app.client.firstName }} {{ app.client.lastName }}</div>
+                    <div class="col-xs-12 activityName">ID: {{ app.client.idNumber }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right;" ng-click="gotoPage(0)">Back</button>
+</div>
+
+<!------------------------------------------------------------------New------------------------------------------------------------------->
+<div class="row registerAdvisor" ng-if="registerItem == 3 ? true : false" style="margin-top:90px">
+    <span class="btn btn-sm btn-primary" style="float:right;" ng-click="allApplicationsClicked()">View All</span>
+    <h4 style="font-size:x-large;color:red;margin-top:40px;margin-left:40px ">Search:</h4>
+    <div class="row" style="margin-top:12px;margin-left:38px">
+        <div class="col-xs-12">
+            <input size="100"
+                   list="clientList"
+                   type="search"
+                   placeholder="Type atleast 4 characters"
+                   ng-model="searchTerm"
+                   style="margin-top:15px;">
+        </div>
+    </div>
+
+    <div class="col-xs-12 nopadding" style="padding-top: 40px;">
+        <div class="col-xs-12 remindersCards nopadding">
+            <h3 class="col-xs-12 subHeading">Latest Activity</h3>
+
+            <div class="col-xs-12 bottomTopMargin"
+                 ng-if="Supervisor || !AdvisorLog"
+                 ng-repeat="app in applicationNew |filter:searchTerm">
+                <div class="col-xs-12 remindersCard">
+                    <div class="col-xs-6 activityCode">
+                        {{app.product_Supplier_Name}}
+                    </div>
+                    <div class="col-xs-6 activityName">
+                        {{app.advisorName}}  {{app.advisorSurName}}  {{app.advisorIdnumber}}
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="col-xs-12 nopadding">{{ app.client.firstName }} {{ app.client.lastName }}</div>
+                        <div class="col-xs-12 nopadding">ID: {{ app.client.idNumber }}</div>
+                    </div>
+                    <div class="col-xs-12"
+                         ng-class="moveToCompleteSuccess ? 'valid' : 'invalid'"
+                         ng-attr-id="{{'card' + app.id}}">
+                    </div>
+                </div> 
+                <button class="dashboardActionButtonView" ng-click="applicationClicked(app.id)">
+                    <i class="fa fa-eye"></i>
+                </button>
+                <button class="dashboardActionButtonComplete" ng-click="applicationCompleted(app.id, app.applicationType_Id)">
+                    <i class="fa fa-check"></i>
+                </button>
+                <button class="dashboardActionButtonDelete" ng-click="applicationRemoved(app.id)">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+
+            <div class="col-xs-10 bottomTopMargin"
+                 ng-if="AdvisorLog"
+                 ng-repeat="app in applicationNewForAdvisor |filter:searchTerm">
+                <div class="col-xs-12 remindersCard">
+                    <div class="col-xs-6 activityCode">
+                        {{app.product_Supplier_Name}}
+                    </div>
+                    <div class="col-xs-6 activityName">
+                        {{app.advisorName}}  {{app.advisorSurName}}  {{app.advisorIdnumber}}
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="col-xs-12 nopadding">{{ app.client.firstName }} {{ app.client.lastName }}</div>
+                        <div class="col-xs-12 nopadding">ID: {{ app.client.idNumber }}</div>
+                    </div>
+                </div>
+                <button class="dashboardActionButtonView" ng-click="applicationClicked(app.id)">
+                    <i class="fa fa-eye"></i>
+                </button>
+                <button class="dashboardActionButtonComplete" ng-click="applicationCompleted(app.id, app.applicationType_Id)">
+                    <i class="fa fa-check"></i>
+                </button>
+                <button class="dashboardActionButtonDelete" ng-click="applicationRemoved(app.id)">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right;" ng-click="gotoPage(0)">Back</button>
+</div>
+
+<!----------------------------------------------------------------Inactive--------------------------------------------------------------------->
+<div class="row registerAdvisor" ng-if="registerItem == 99? true : false" style="margin-top:90px">
+    <div class="col-xs-12 nopadding" style="padding-top: 12px;">
+        <div class="col-xs-12 remindersCards nopadding hoverable">
+            <h3 class="col-xs-12 subHeading">Latest Activity</h3>
+            <div class="col-xs-12 remindersCard " ng-repeat="apps in applications" ng-if="apps.applicationStatus.id==5 && apps.advisor.advisorStatus.id==6" ng-click="applicationClicked(apps.id)">
+                <h4 class="col-xs-12 col-sm-8 cardHeading">Application Id: {{apps.id}}</h4><div class="col-xs-12 col-xs-4 cardHeading cardVia">{{dashboard.advisor.company.name}}</div>
+                <p class="col-xs-12">Created Date: {{apps.advisor.createdDate}}</p>
+                <p class="col-xs-12">Modified Date: {{apps.advisor.modifiedDate}}</p>
+            </div>
+        </div>
+    </div>
+    <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right;" ng-click="gotoPage(0)">Back</button>
+</div>
+
+<!--------------------------------------------------------Expired Documents--------------------------------------------------------->
+<div class="row registerAdvisor" ng-if="registerItem == 4 ? true : false" style="margin-top:90px">
+    <div class="col-xs-12 remindersCards nopadding hoverable">
+        <h3 class="col-xs-12 subHeading">Latest Activity</h3>
+        <div class="col-xs-12 remindersCard"  ng-repeat="advDoc in AdvisorDocuments" ng-if="advDoc.expired && (Supervisor || !AdvisorLog)">
+            <h4 class="col-xs-12 col-sm-8 cardHeading" style="color:orangered">{{advDoc.advisorName}}   {{advDoc.advisorLastname}}  {{advDoc.advisorIdNumber}}</h4>
+            <h4 class="col-xs-12 col-sm-8 cardHeading" ng-click="AdvisorAppClicked(advDoc.documentId)"><a>{{advDoc.documentTypeName}} : {{advDoc.documentTitle}} :{{advDoc.title}}</a></h4>
+            <div class="col-xs-12 col-xs-4 cardHeading cardVia">{{dashboard.advisor.company.name}}</div>
+            <p class="col-xs-12">This document is <span style="font-size:large;font-weight:600">Expired </span></p>
+            <p class="col-xs-12" style="margin-top:30px">Valid From: <span style="font-size:large;font-weight:600">{{advDoc.validFromDate}}</span></p>
+            <p class="col-xs-12" style="margin-top:10px">Valid To: <span style="font-size:large;font-weight:600">{{advDoc.validToDate}}</span></p>
+        </div>
+
+        <div class="col-xs-12 remindersCard" ng-repeat="advDoc in AdvisorDocumentsForAdvisor" ng-if="advDoc.isExpired && AdvisorLog">
+            <h4 class="col-xs-12 col-sm-8 cardHeading" style="color:orangered">{{advDoc.advisorName}}   {{advDoc.advisorLastname}}  {{advDoc.advisorIdNumber}}</h4>
+            <h4 class="col-xs-12 col-sm-8 cardHeading" ng-click="AdvisorAppClicked(advDoc.documentId)"><a>{{advDoc.documentTypeName}} : {{advDoc.documentTitle}} :{{advDoc.title}}</a></h4>
+            <div class="col-xs-12 col-xs-4 cardHeading cardVia">{{dashboard.advisor.company.name}}</div>
+            <p class="col-xs-12">This document is <span style="font-size:large;font-weight:600">Expired </span></p>
+            <p class="col-xs-12" style="margin-top:30px">Valid From: <span style="font-size:large;font-weight:600">{{advDoc.validFromDate}}</span></p>
+            <p class="col-xs-12" style="margin-top:10px">Valid To: <span style="font-size:large;font-weight:600">{{advDoc.validToDate}}</span></p>
+        </div>
+        <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right;" ng-click="gotoPage(0)">Back</button>
+    </div>
+</div>
+
+<!--------------------------------------------------------Advisers Under supervision Complete--------------------------------------------------------->
+<div class="row registerAdvisor" ng-if="registerItem == 5 ? true : false" style="margin-top:90px">
+    <div class="col-xs-12 remindersCards nopadding hoverable">
+        <h3 class="col-xs-12 subHeading">Latest Activity</h3>
+        <div class="col-xs-12 remindersCard" ng-repeat="advDoc in AdvisorDocuments" ng-if="advDoc.expired">
+            <h4 class="col-xs-12 col-sm-8 cardHeading" ng-click="AdvisorAppClicked(advDoc.id)"><a>{{advDoc.title}}</a></h4>
+            <div class="col-xs-12 col-xs-4 cardHeading cardVia">{{dashboard.advisor.company.name}}</div>
+            <p class="col-xs-12">This document is <span style="font-size:large;font-weight:600">Expired </span></p>
+            <p class="col-xs-12" style="margin-top:30px">Valid From: <span style="font-size:large;font-weight:600">{{advDoc.validFromDate}}</span></p>
+            <p class="col-xs-12" style="margin-top:10px">Valid To: <span style="font-size:large;font-weight:600">{{advDoc.validToDate}}</span></p>
+        </div>
+        <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister" style="float: right;" ng-click="gotoPage(0)">Back</button>
+    </div>
+</div>

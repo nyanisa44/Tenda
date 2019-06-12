@@ -1,0 +1,394 @@
+﻿
+var tendaApp = angular.module('tendaApp', ['ui.router', 'ngStorage']);
+var currentPage = 0;
+
+
+//configure routing
+//we're using ui-router. see https://git.io/vKlAd
+tendaApp.config(['$stateProvider', '$locationProvider', function ($stateProvider, $locationProvider) {
+
+    $stateProvider
+         .state('about', {
+             url: '/about',
+             templateUrl: 'templates/about.html',
+             controller: 'aboutController'
+         })
+        .state('dashboard', {
+            url: '/',
+            templateUrl: 'templates/dashboard.html',
+            controller: 'dashboardController'
+        })
+        .state('login', {
+            url: '/login',
+            templateUrl: 'templates/login.html',
+            controller: 'loginController'
+        })
+        .state('application', {
+            url: '/application',
+            templateUrl: 'templates/application.html',
+            controller: 'applicationController'
+        })
+        .state('commission', {
+            url: '/commission',
+            templateUrl: 'templates/commission.html',
+            controller: 'commissionController'
+        })
+        .state('applicationDetail', {
+            url: '/application/applicationDetail/',
+            views: {
+                '': {
+                    templateUrl: 'templates/applicationDetail.html'
+                },
+                'clientDetails@applicationDetail': {
+                    templateUrl: 'templates/newApplication/clientDetails.html'
+                },
+                'products@applicationDetail': {
+                    templateUrl: 'templates/newApplication/products.html'
+                },
+                'documents@applicationDetail': {
+                    templateUrl: 'templates/newApplication/documents.html'
+                },
+                'queries@applicationDetail': {
+                    //url: '/application/applicationDetail/queries',
+                    templateUrl: 'templates/queries.html',
+                    controller: 'queriesController'
+                }
+            },
+            params: { 'application': null }
+        })
+        .state('newApplication', {
+            url: '/application/newApplication',
+            views: {
+                '': {
+                    templateUrl: 'templates/newApplication.html'
+                },
+                'clientDetails@newApplication': {
+                    templateUrl: 'templates/newApplication/clientDetails.html'
+                },
+                'products@newApplication': {
+                    templateUrl: 'templates/newApplication/products.html'
+                },
+                'documents@newApplication': {
+                    templateUrl: 'templates/newApplication/documents.html'
+                },
+                'summary@newApplication': {
+                    templateUrl: 'templates/newApplication/summary.html'
+                }
+            }
+        })
+        .state('registerAdvisor', {
+            url: '/registerAdvisor',
+            templateUrl: 'templates/registerAdvisor.html',
+            controller: 'registerAdvisorController',
+    
+        })
+        .state('advisor', {
+            url: '/advisor/:advisorId/:section',
+            templateUrl: 'templates/advisor.html',
+            controller: 'advisorController',
+            views: {
+                '': {
+                    templateUrl: 'templates/advisor.html'
+                },
+                'detail@advisor': {
+                    templateUrl: 'templates/advisor/detail.html'
+                },
+            },
+            params: { 'advisor': null }
+        })
+        .state('advisors', {
+            url: '/advisors',
+            templateUrl: 'templates/advisors.html',
+            controller: 'advisorsController',
+
+        })
+        .state('profile', {
+            url: '/profile',
+            templateUrl: 'templates/profile.html',
+            controller: 'profileController',
+            params: { 'advisor': 0 }
+        })
+        .state('clients', {
+            url: '/clients',
+            templateUrl: 'templates/clients.html',
+            controller: 'clientsController',
+
+        })
+        .state('admin', {
+            url: '/admin/',
+            views: {
+                '': {
+                    templateUrl: 'templates/admin.html'
+                },
+                'import@admin': {
+                    templateUrl: 'templates/admin/import.html'
+                },
+                'process@admin': {
+                    templateUrl: 'templates/admin/process.html'
+                },
+                'settings@admin': {
+                    templateUrl: 'templates/admin/settings.html'
+                },
+            },
+            params: { 'admin': null }
+        });
+
+    /* .state('queries', {
+         url: '/application/applicationDetail/queries',
+         templateUrl: 'templates/queries.html',
+         controller: 'queriesController',
+         params: { 'application': null }
+     });*/
+
+    $locationProvider.html5Mode(true);
+}]);
+
+tendaApp.run(['$rootScope', '$state', 'authService', function ($rootScope, $state, authService) {
+
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+        var loggedIn = !!authService.currentuser;
+
+        //if the user is not logged in go to login page instead
+        if (!loggedIn) {
+            if (toState.controller != "loginController")
+            {
+                event.preventDefault();
+                $state.go('login');
+                currentPage = 5;//login state
+            }
+        }
+        else if (toState.controller == "dashboardController") {
+            currentPage = 0;//dashboard state
+        }
+        else if (toState.controller == "applicationController") {
+            currentPage = 1;//application state
+        }
+        else if (toState.controller == "applicationDetailController") {
+            //currentPage = 1;//application state
+        }
+        else if (toState.controller == "newApplicationController") {
+            currentPage = 1;//application state
+        }
+        else if (toState.controller == "registerAdvisorController") {//Just make sure about this
+            currentPage = 1;//register advisor state
+        }
+        else if (toState.controller == "commissionController") {
+            currentPage = 2;//commission state
+        }
+        else if (toState.controller == "profileController") {
+            currentPage = 3;//profile state
+        }
+        else if (toState.controller == "advisorsController") {
+            currentPage = 6;//advisors list page
+        }
+        else if (toState.controller == "adminController") {
+            currentPage = 7;//admin state
+        }
+        else if (toState.controller == "advisorController") {
+            currentPage = 8;//advisor detail page
+        }
+<<<<<<< HEAD
+        else if (toState.controller == "aboutController") {
+            currentPage = 9;//advisor detail page
+=======
+        else if (toState.controller == "clientsController") {
+            currentPage = 9;//clients list page
+>>>>>>> a1aedf2bde554d8da0c648fb17b4f42d4cb24d15
+        }
+    });
+
+}]);
+
+
+//all other controllers will reside inside this controller
+tendaApp.controller('mainController', ['$scope', '$state', 'authService', 'valuesService', function ($scope, $state, authService, valuesService) {
+    $scope.logout = function logout() {
+        currentPage = 5;
+        authService.logout();
+        $state.go('login');
+        linkClicked();
+    };
+
+    $scope.testApi = function testApi() {
+        console.log("making api calls");
+
+        //this chains a bunch of api calls
+        valuesService.getAll().then(function (data) {
+
+            console.log("first call returned", data);
+
+            valuesService.add('hello').then(function (data) {
+                console.log("second call returned", data);
+                if (data.id) {
+
+                    valuesService.getAll().then(function (data) {
+
+                        console.log("third call returned", data);
+
+                        valuesService.clear().then(function (data) {
+
+                            console.log("fourth call returned", data);
+
+                            valuesService.getAll().then(function (data) {
+
+                                console.log("fifth call returned", data);
+
+                            });
+
+                        });
+
+                    });
+                }
+            });
+
+        });
+    }
+
+    $scope.dashboard = function dashboard() {
+        currentPage = 0;
+        $state.go('dashboard');
+        linkClicked();
+    }
+
+    $scope.application = function application() {
+        currentPage = 1;
+        $state.go('application');
+        linkClicked();
+    }
+
+    $scope.commission = function commission() {
+        currentPage = 2;
+        $state.go('commission');
+        linkClicked();
+    }
+
+    $scope.registerAdvisor = function registerAdvisor() {
+        currentPage = 1;
+        $state.go('registerAdvisor');
+        linkClicked();
+    }
+
+    $scope.profile = function profile() {
+        currentPage = 3;
+        $state.go('profile');
+        linkClicked();
+    }
+
+    //advisor detail
+    $scope.advisor = function advisor() {
+        currentPage = 8;
+        $state.go('advisor');
+        linkClicked();
+    }
+
+    //advisors list
+    $scope.advisors = function advisors() {
+        currentPage = 6;
+        $state.go('advisors');
+        linkClicked();
+    }
+
+    $scope.admin = function admin() {
+        currentPage = 7;
+        $state.go('admin');
+        linkClicked();
+    }
+
+<<<<<<< HEAD
+    $scope.about = function about() {
+        currentPage = 9;
+        $state.go('about');
+=======
+    //clients list
+    $scope.clients = function clients() {
+        currentPage = 9;
+        $state.go('clients');
+>>>>>>> a1aedf2bde554d8da0c648fb17b4f42d4cb24d15
+        linkClicked();
+    }
+
+
+    
+
+    $scope.currentSelectedPage = function currentSelectedPage(n) {
+        if (currentPage == n)
+            return "currentSelectedPage";
+        return "";
+    }
+
+}]);
+
+tendaApp.directive('fileDropzone', function () {
+    return {
+        restrict: 'A',
+        scope: {
+            file: '=',
+            fileName: '='
+        },
+        link: function (scope, element, attrs) {
+            var checkSize, isTypeValid, processDragOverOrEnter, validMimeTypes;
+            processDragOverOrEnter = function (event) {
+                if (event != null) {
+                    event.preventDefault();
+                }
+                event.dataTransfer.effectAllowed = 'copy';
+                return false;
+            };
+            validMimeTypes = attrs.fileDropzone;
+            checkSize = function (size) {
+                var _ref;
+                if (((_ref = attrs.maxFileSize) === (void 0) || _ref === '') || (size / 1024) / 1024 < attrs.maxFileSize) {
+                    return true;
+                } else {
+                    alert("File must be smaller than " + attrs.maxFileSize + " MB");
+                    return false;
+                }
+            };
+            isTypeValid = function (type) {
+                if ((validMimeTypes === (void 0) || validMimeTypes === '') || validMimeTypes.indexOf(type) > -1) {
+                    return true;
+                } else {
+                    alert("Invalid file type.  File must be one of following types " + validMimeTypes);
+                    return false;
+                }
+            };
+            element.bind('dragover', processDragOverOrEnter);
+            element.bind('dragenter', processDragOverOrEnter);
+            return element.bind('drop', function (event) {
+                var file, name, reader, size, type;
+                if (event != null) {
+                    event.preventDefault();
+                }
+                reader = new FileReader();
+                reader.onload = function (evt) {
+                    if (checkSize(size) && isTypeValid(type)) {
+                        return scope.$apply(function () {
+                            scope.file = evt.target.result;
+                            //if (angular.isString(scope.fileName)) {
+                                return scope.fileName = name;
+                            //}
+                        });
+                    }
+                };
+                file = event.dataTransfer.files[0];
+                name = file.name;
+                type = file.type;
+                size = file.size;
+                reader.readAsDataURL(file);
+                return false;
+            });
+        }
+    };
+});
+
+function linkClicked()
+{
+    $("#bs-example-navbar-collapse-1").slideUp();
+}
+
+Date.prototype.yyyymmdd = function (padding) {
+    var mm = this.getMonth() + 1; // getMonth() is zero-based
+    var dd = this.getDate();
+
+    return [this.getFullYear(), (mm < 10 ? '0' : '') + mm, (dd < 10 ? '0' : '') + dd].join(padding); // padding
+};

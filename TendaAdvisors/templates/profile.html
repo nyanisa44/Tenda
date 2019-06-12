@@ -1,0 +1,120 @@
+﻿<div class="row">
+    <div class="col-xs-12 imageIcon">
+        <div class="col-xs-12">
+            <div class="displayInlineClass profileWelcomeHeading"
+                 style="float:left">{{advisor.contact.contactTitle.name}} {{ advisor.contact.firstName }} {{ advisor.contact.lastName }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin-top:90px">
+    <h3 class="col-xs-12 smallHeading"
+        style="padding-left: 10px; padding-right: 10px;">Adviser Information
+    </h3>
+    <form name="editProfileForm">
+        <div class="col-xs-12 col-sm-6 remindersCards summaryCards" style="padding-top: 0px;">
+            <div class="col-xs-12 remindersCard" style="margin-top: 0px;">
+                <div class="col-xs-12 nopadding">
+                    <div class="cardHeading cardVia cardViaBolder"
+                         ng-class="{ 'col-xs-9': notAdvisorEditing, 'col-xs-6': !notAdvisorEditing }"
+                         style="float: left; text-align: left;">
+                        Summary of Adviser Details
+                    </div>
+                    <button class="col-xs-3 pull-right btn btn-sm btn-primary"
+                            ng-click="editAdvisorPageAndSave(false)"
+                            ng-show="notAdvisorEditing">
+                        Edit
+                    </button>
+                    <button class="col-xs-3 pull-right btn btn-sm btn-primary"
+                            ng-class="{ 'disabledButton': editProfileForm.$invalid }"
+                            ng-click="!editProfileForm.$invalid && editAdvisorPageAndSave(true)"
+                            ng-hide="notAdvisorEditing">
+                        Save
+                    </button>
+                    <button class="col-xs-3 pull-right btn btn-sm btn-danger"
+                            ng-click="cancelEdit()"
+                            ng-hide="notAdvisorEditing">
+                        Cancel
+                    </button>
+                </div>
+                <div class="col-xs-6 nopadding">Title:</div>
+                <select class="col-xs-6 nopadding textEditable"
+                        ng-model="advisor.contactTitle_Name"
+                        style="float: right;"
+                        ng-disabled="notAdvisorEditing"
+                        ng-options="name as name for name in Titles">
+                </select>
+
+
+                <div class="col-xs-6 nopadding">
+                    Name:
+                </div>
+                <input type="text" placeholder="Name" ng-model="advisor.firstName"  style="float:right"class="col-xs-4 nopadding textEditable" ng-change="checkCharaters(advisor.firstName)"ng-disabled="notAdvisorEditing" ng-required="!notAdvisorEditing" />
+                <div class="col-xs-2 nopadding " style="color: white; background-color:red;float:left" ng-show="incorrectEntry"><span>&#10060;</span>!</div>
+
+                <div class="col-xs-6 nopadding">
+                    Last Name
+                </div>
+                <input type="text" placeholder="Last Name" ng-model="advisor.lastName" ng-change="advisorTextChange(advisor.lastName)" class="col-xs-6 nopadding textEditable" ng-disabled="notAdvisorEditing" ng-required="!notAdvisorEditing" />
+
+                <div class="col-xs-6 nopadding">
+                    ID Number
+                </div>
+                <input type="text" placeholder="ID Number" ng-model="advisor.idNumber" ng-change="advisorTextChange(advisor.idNumber)" class="col-xs-6 nopadding textEditable" ng-disabled="!cantEdit" ng-required="!notAdvisorEditing" ng-minlength="13" ng-maxlength="13" />
+
+             
+            </div>
+
+              </div>
+
+
+        <div class="col-xs-12 col-sm-6 remindersCards summaryCards" style="padding-top: 0px;">
+            <div class="col-xs-12 remindersCard" style="margin-top: 0px">
+                <div class="col-xs-12 cardHeading cardVia cardViaBolder" style="text-align: left;">
+                    Summary of Contact Info
+                </div>
+                
+                <div class="col-xs-6 nopadding">
+                    Cell 1:
+                </div>
+                <input type="text" placeholder="Cellphone number 1" ng-model="advisor.cell1" ng-change="advisorTextChange(advisor.cell1 )" class="col-xs-6 nopadding textEditable" ng-disabled="notAdvisorEditing" ng-required="!notAdvisorEditing" ng-minlength="10" ng-maxlength="15" />
+
+                <div class="col-xs-6 nopadding">
+                    Cell 2:
+                </div>
+                <input type="text" placeholder="Cellphone number 2" ng-model="advisor.cell2" ng-change="advisorTextChange(advisor.cell2 )" class="col-xs-6 nopadding textEditable" ng-disabled="notAdvisorEditing" ng-minlength="10" ng-maxlength="15" />
+
+             
+
+                <div class="col-xs-12 breakLine"></div>
+
+                <div class="col-xs-6 nopadding">
+                    Tel 1:
+                </div>
+                <input type="text" placeholder="Telephone number 1" ng-model="advisor.tel1" ng-change="advisorTextChange(advisor.tel1 )" class="col-xs-6 nopadding textEditable" ng-disabled="notAdvisorEditing" ng-required="!notAdvisorEditing" ng-minlength="10" ng-maxlength="15" />
+
+                <div class="col-xs-6 nopadding">
+                    Tel 2:
+                </div>
+                <input type="text" placeholder="Telephone number 2" ng-model="advisor.tel2" ng-change="advisorTextChange(advisor.tel2 )" class="col-xs-6 nopadding textEditable" ng-disabled="notAdvisorEditing" ng-minlength="10" ng-maxlength="15" />
+
+               
+                <div class="col-xs-12 breakLine"></div>
+
+                <div class="col-xs-6 nopadding">
+                    Email 1:
+                </div>
+                <input type="email" placeholder="Email 1" ng-model="advisor.email" ng-change="advisorTextChange(advisor.email)" class="col-xs-6 nopadding textEditable" ng-disabled="notAdvisorEditing" ng-required="!notAdvisorEditing" ng-pattern="emailRegex" />
+
+                <div class="col-xs-6 nopadding">
+                    Email 2:
+                </div>
+                <input type="email" placeholder="Email 2" ng-model="advisor.email2" ng-change="advisorTextChange(advisor.email2)" class="col-xs-6 nopadding textEditable" ng-disabled="notAdvisorEditing" ng-pattern="emailRegex" />
+
+
+            </div>
+        </div>
+    </form>
+</div>
+

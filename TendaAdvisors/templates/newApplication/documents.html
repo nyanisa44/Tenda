@@ -1,0 +1,187 @@
+﻿<div ng-if="isNewApplication">
+    <h3 class="col-xs-12 smallHeading">Step 3: Document Upload</h3>
+    <div class="col-xs-12 registrationDescription">
+        Supporting documents are to be uploaded here.
+    </div>
+</div>
+
+<div class="col-xs-12 remindersCards summaryCards">
+    <div class="col-xs-12 col-sm-6 remindersCards summaryCards">
+        <div class="col-xs-12 remindersCard">
+            <div class="col-xs-12 cardHeading cardVia cardViaBolder"
+                 style="text-align: left;">
+                Required Documents
+            </div>
+            <ul ng-model="CurrentAppType">
+                <li style="color:red;"
+                    ng-repeat="doc in CurrentAppType.documentTypes track by $index">
+                    {{doc.name}}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- - - - - - - - - - - - - - Uploaded DOCUMENTS - - - - - - - - - - - - - -->
+    <div class="col-xs-12 col-sm-6 remindersCards summaryCards">
+        <div class="col-xs-12 remindersCard pull"
+             style="float:right">
+            <div class="col-xs-12 cardHeading cardVia cardViaBolder"
+                 style="text-align: left;">Uploaded Documents</div>
+            <div ng-model="application.applicationDocuments">
+                <ul ng-repeat="appDocs in  application.applicationDocuments">
+                    <li>
+                        <a ng-click="AppClicked(appDocs.id)">
+                            {{appDocs.documentTypeName}}:
+                            <span style="margin-left:20px"></span>{{appDocs.name}}:<span style="margin-left:20px"></span>{{appDocs.title}}
+                        </a>
+                        <span class="btn btn-sm btn-danger addMarginTopBottom"
+                                ng-click="deleteApplicationDocuments(appDocs.id,appDocs.applicationId,appDocs.documentTypeId)">
+                            Delete
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-12 remindersCards nopadding"
+     ng-model="application.product"
+     ng-if="isNewApplication">
+    <h3 class="col-xs-12 cardHeading nopadding"
+        style="margin-top:10px;">
+        Upload required documents
+    </h3>
+    
+    <div ng-model="CurrentAppType"
+         ng-repeat="applicationType in appTypes"
+         ng-show="applicationType.id == application.applicationType.id"
+         ng-change="updateApplicationType(CurrentAppType)">
+        <div class="col-xs-12 remindersCard"
+             style="margin-top: 20px;"
+             ng-repeat="doc in CurrentAppType.documentTypes track by $index"
+             file-dropzone="[application/pdf, image/png, image/jpeg, image/gif]"
+             file="doc.file"
+             file-name="doc.location"
+             data-max-file-size="10">
+            <h4 class="col-xs-12 cardHeading nopadding">{{doc.name}}</h4>
+
+            <div>
+                <div class="col-xs-12">
+                    <div class="col-xs-4 newDocumentCard dragAndDrop text-center">
+                        <img ng-src="{{getDocumentPic(doc)}}" class="iconImage" />
+                        <h4 class="col-xs-12 dragAndDrop" ng-if="!doc.originalFileName">Please Drag and Drop <br />document here.</h4>
+                    </div>
+                    <div class="col-xs-8">
+                        <input class="col-xs-12" placeholder="Note" style="margin-top: 8px;margin-bottom: 20px" ng-model="doc.title" />
+                        <div>
+                            <span style="margin-left:30px"></span>Valid from: <input datepicker ng-model="doc.validFromDate" />
+                            <span style="margin-left:60px"></span> Until: <input datepicker ng-model="doc.validToDate" />
+                        </div>
+
+                        <div>{{dateFrom}}</div>
+
+                        <div ng-show="doc.location && !doc.uploaded"
+                             style="font-size:x-large; margin-top:30px;">
+                            Submit
+                            <input type="checkbox"
+                                   style="width:20px; height:20px; margin-left:20px; margin-top:40px;"
+                                   ng-model="Submitted">
+                        </div>
+
+                        <div class="col-xs-12 nopadding" style="margin-top: 2px;">
+                            <div class="col-xs-10 nopadding selectedDocument">{{doc.location}}</div>
+                            <button class="col-xs-2 nopadding btn btn-sm btn-primary"
+                                    style="float:right;"
+                                    title="Upload Document"
+                                    ng-click="uploadDocument(application.id,application.product_Id,doc.id, doc,Submitted)"
+                                    ng-show="Submitted">
+                                Upload
+                            </button>
+                            <div class="col-xs-2 nopadding selectedDocument text-center check"
+                                 style="color: white; background-color:darkgreen;"
+                                 ng-show="doc.uploaded">
+                                <span>&#x2714;</span> Thank you.
+                            </div>
+                            <div class="col-xs-2 nopadding selectedDocument text-center check"
+                                 style="color: white; background-color:red;"
+                                 ng-show="doc.notUploaded">
+                                <span>&#10060;</span>Not uploaded.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-12" ng-if="isNewApplication">
+    <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister"
+            style="float: right;"
+            ng-click="gotoPage(3)">
+        Next
+    </button>
+</div>
+
+<div class="col-xs-12 remindersCards nopadding"
+     ng-model="application.product"
+     ng-if="!isNewApplication">
+    <h3 class="col-xs-12 cardHeading nopadding" style="margin-top:10px;">
+        {{ CurrentProduct.name }} ({{ application.product_Supplier_Name }}):Upload Missing documents
+    </h3>
+    <div ng-model="CurrentAppType">
+        <div class="col-xs-12 remindersCard"
+             style="margin-top: 20px;"
+             ng-repeat="doc in CurrentAppType.documentTypes track by $index"
+             file-dropzone="[application/pdf, image/png, image/jpeg, image/gif]"
+             file="doc.file"
+             file-name="doc.location"
+             data-max-file-size="10">
+            <h4 class="col-xs-12 cardHeading nopadding">{{doc.name}}</h4>
+            <div>
+                <div class="col-xs-12">
+                    <div class="col-xs-4 newDocumentCard dragAndDrop text-center">
+                        <img ng-src="{{getDocumentPic(doc)}}" class="iconImage" />
+                        <h4 class="col-xs-12 dragAndDrop" ng-if="!doc.originalFileName">Please Drag and Drop <br />document here.</h4>
+                    </div>
+                    <div class="col-xs-8">
+                        <input class="col-xs-12" placeholder="Note" style="margin-top: 8px; margin-bottom: 20px;" ng-model="doc.title" />
+                        <div>
+                            <span style="margin-left:30px"></span>Valid from: <input datepicker ng-model="doc.validFromDate" />
+                            <span style="margin-left:60px"></span> Until: <input datepicker ng-model="doc.validToDate" />
+                        </div>
+
+                        <div ng-show="doc.location && !doc.uploaded"
+                             style="font-size: x-large; margin-top: 30px;">
+                            Submit
+                            <input type="checkbox"
+                                   style="width: 20px; height: 20px; margin-left: 20px; margin-top: 40px;"
+                                   ng-model="Submitted">
+                        </div>
+                        <div class="col-xs-12 nopadding" style="margin-top: 2px;">
+                            <div class="col-xs-10 nopadding selectedDocument">{{doc.location}}</div>
+                            <button class="col-xs-2 nopadding btn btn-sm btn-primary"
+                                    style="float: right;"
+                                    title="Upload Document"
+                                    ng-click="uploadDocument(application.id,application.product_Id,doc.id, doc,Submitted)" ng-show="Submitted">
+                                Upload
+                            </button>
+                            <div class="col-xs-2 nopadding selectedDocument text-center check"
+                                 style="color: white; background-color: darkgreen;"
+                                 ng-show="doc.uploaded">
+                                <span>&#x2714;</span> Thank you.
+                            </div>
+                            <div class="col-xs-2 nopadding selectedDocument text-center check"
+                                 style="color: white; background-color: red;"
+                                 ng-show="doc.notUploaded">
+                                <span>&#10060;</span>Not uploaded.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

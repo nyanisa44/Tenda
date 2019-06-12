@@ -1,0 +1,454 @@
+﻿
+<div class="col-xs-12"
+     ng-show="application.client.errorMessage && application.client.errorMessage.length > 0">
+    <div class="bg-danger">
+        {{application.client.errorMessage}}
+    </div>
+</div>
+<form name="clientDetailsForm">
+    <h3 class="col-xs-12 smallHeading"
+        ng-if="isNewApplication">
+        Step 1: Client Details
+    </h3>
+    <div class="col-xs-12">
+        <button class="col-xs-3 btn btn-sm btn-primary"
+                style="float: right;"
+                ng-click="editOrSave(true)"
+                ng-if="!isNewApplication && editingApplicationDetail">Save
+        </button>
+        <button class="col-xs-3 btn btn-sm btn-danger"
+                style="float: right;"
+                ng-click="editOrSave(false)"
+                ng-if="!isNewApplication && editingApplicationDetail">Cancel
+        </button>
+        <button class="col-xs-3 btn btn-sm btn-primary"
+                style="float: right;"
+                ng-click="editOrSave(false)"
+                ng-if="!isNewApplication && !editingApplicationDetail">Edit
+        </button>
+    </div>
+
+    <div class="col-xs-12">
+        <button class="col-xs-3 btn btn-sm btn-primary pull-right"
+                ng-click="setAdvisorChange(true)"
+                ng-if="!isNewApplication && editingApplicationDetail && !advisorChange">
+            Change Adviser
+        </button>
+        <button class="col-xs-3 btn btn-sm btn-success pull-right"
+                ng-click="updateAdvisorDetails()"
+                ng-if="advisorChange">
+            Save Adviser
+        </button>
+        <button class="col-xs-3 btn btn-sm btn-danger pull-right"
+                ng-click="setAdvisorChange(false)"
+                ng-if="advisorChange">
+            Cancel Adviser
+        </button>
+    </div>
+
+    <div class="col-xs-12 registrationDescription extraLargeRedFont"
+         ng-if="isNewApplication">
+        Please select an adviser
+    </div>
+  
+    <div ng-if="!isNewApplicaiton"
+         class="col-xs-6 addMarginTopBottom">
+        <h4 class="extraLargeRedFont col-xs-12">
+            Current Client:
+        </h4>
+        <div class="largeFont col-xs-12">
+            {{application.client.firstName}} {{application.client.lastName}} ({{application.client.idNumber}})
+        </div>
+
+        <h4 class="extraLargeRedFont col-xs-12">
+            Current Adviser:
+        </h4>
+        <div class="largeFont col-xs-12">
+            {{application.advisor.firstName}}{{application.advisor.name}} {{application.advisor.lastName}} ({{application.advisor.idNumber}})
+        </div>
+    </div>
+
+    <div class="col-xs-6 remindersCards"
+         ng-if="advisorChange">
+        <div class="col-xs-12 bottomTopMargin remindersCard"
+             ng-hide="!editingApplicationDetail">
+            <div class="col-xs-12 bottomTopMargin">
+                <strong>Choose new advisor</strong>
+                <input class="col-xs-12"
+                       size="10"
+                       list="clientListAdviser"
+                       type="search"
+                       placeholder="Type atleast 4 characters"
+                       ng-model="searchTermAdviser"
+                       ng-change="doSearchForNewAdviser(searchTermAdviser)">
+                <datalist id="clientListAdviser">
+                    <select ng-model="newAdvisor"
+                            ng-options="adv as (adv.name + ' ' +adv.lastName +'('+ adv.idNumber +')') for adv in advisors track by adv.idNumber + ' ' + adv.name + ' ' + adv.lastName"
+                            ng-disabled="!editingApplicationDetail || isNewApplication_check">
+                        <option value="">-- Please select a user --</option>
+                    </select>
+                </datalist>
+            </div>
+            <div class="col-xs-8 bottomTopMargin">
+                <strong>Previous Advisor Effective End Date:</strong>
+                <input ng-required="advisorChange"
+                       datepicker
+                       value="2001-01-01"
+                       class="col-xs-12 textEditable"
+                       ng-change="updateEffectiveEndDatePreviousAdvisor(effectiveEndDatePreviousAdvisor)"
+                       ng-model="effectiveEndDatePreviousAdvisor"
+                       ng-disabled="!editingApplicationDetail" />
+            </div>
+            <div class="col-xs-8">
+                <strong>New Advisor Effective Start Date:</strong>
+                <input ng-required="advisorChange"
+                       datepicker
+                       value="2001-01-01"
+                       class="col-xs-12 textEditable"
+                       ng-change="updateEffectiveStartDateNewAdvisor(effectiveStartDateNewAdvisor)"
+                       ng-model="effectiveStartDateNewAdvisor"
+                       ng-disabled="!editingApplicationDetail" />
+            </div>
+        </div>
+    </div>
+        
+    <div class="col-xs-12 registrationDescription"
+         ng-if="isNewApplication">Please provide your client details
+    </div>
+    <div class="col-xs-12">
+        <div class="col-xs-6 remindersCards">
+            <div class="col-xs-12 remindersCard">
+                <div class="col-xs-12 cardHeading cardVia cardViaBolder"
+                     style="text-align: left;">
+                    Application Details
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-4 nopadding">Application Type:</div>
+                    <select class="col-xs-8 nopadding textEditable"
+                            ng-model="CurrentAppType"
+                            ng-change="updateApplicationType(CurrentAppType)"
+                            style="float: right;"
+                            ng-disabled="!editingApplicationDetail"
+                            ng-options="applicationType.title for applicationType in appTypes track by applicationType.id" required></select>
+
+                    <div class="col-xs-4 nopadding">Application Status:</div>
+                    <select class="col-xs-8 nopadding textEditable"
+                            ng-model="CurrentAppStatus"
+                            ng-change="updateApplicationStatus(CurrentAppStatus)"
+                            style="float: right;"
+                            ng-disabled="!editingApplicationDetail"
+                            ng-options="applicationStatus.status for applicationStatus in appStatus track by applicationStatus.id" required></select>
+
+                    <div class="col-xs-4 nopadding">Effective Start Date:</div>
+                    <input datepicker
+                           value="2001-01-01"
+                           class="col-xs-8 nopadding textEditable"
+                           ng-change="updateEffectiveStartDate(effectiveStartDate)"
+                           ng-model="effectiveStartDate"
+                           ng-disabled="!editingApplicationDetail" />
+
+                    <div class="col-xs-4 nopadding">Effective End Date:</div>
+                    <input datepicker
+                           value="2001-01-01"
+                           class="col-xs-8 nopadding textEditable"
+                           ng-change="updateEffectiveEndDate(effectiveEndDate)"
+                           ng-model="effectiveEndDate"
+                           ng-disabled="!editingApplicationDetail" />
+
+                    <div ng-if="isNewApplication">
+                        <div class="col-xs-4 nopadding">Id Number/ Member Number</div>
+                        <input ng-class="application.client.idNumber == null ? 'validationError' : ''"
+                               placeholder="Id Number"
+                               type="text"
+                               class="col-xs-8 nopadding textEditable"
+                               ng-disabled="!editingApplicationDetail"
+                               required
+                               style="float:right"
+                               ng-model="application.client.idNumber"
+                               ng-change="checkDuplicateIds(application.client.idNumber)"
+                               list="idList"
+                               ng-model-options="{ debounce: 500 }">
+
+                        <div class="col-xs-2 nopadding"
+                             style="color: white; background-color:red; float:left"
+                             ng-show="duplicateIdNumbers">
+                            <span>&#10060;</span>Exists
+                        </div>
+
+                        <datalist id="idList">
+                            <option ng-repeat="contact in foundContacts">{{contact.idNumber}}</option>
+                        </datalist>
+
+                        <div class="col-xs-6 nopadding">Title:</div>
+                        <select class="col-xs-6 nopadding textEditable"
+                                ng-model="application.client.contactTitle"
+                                style="float: right;"
+                                ng-disabled="!editingApplicationDetail"
+                                ng-options="title.name for title in Titles track by title.id" required></select>
+
+                        <div class="col-xs-6 nopadding">First Name</div>
+                        <input ng-class="application.client.firstName == null ? 'validationError' : ''"
+                               ng-model="application.client.firstName"
+                               placeholder="First Name"
+                               style="float:right"
+                               ng-change="checkCharaters(application.client.firstName)"
+                               type="text"
+                               class="col-xs-4 nopadding textEditable"
+                               ng-disabled="!editingApplicationDetail" required />
+
+                        <div class="col-xs-2 nopadding"
+                             style="color: white; background-color:red; float:left;"
+                             ng-show="incorrectEntry">
+                            <span>&#10060;</span>!
+                        </div>
+
+                        <div class="col-xs-6 nopadding">Last Name</div>
+                        <input ng-class="application.client.lastName == null ? 'validationError' : ''"
+                               ng-model="application.client.lastName"
+                               placeholder="Last Name"
+                               type="text"
+                               class="col-xs-6 nopadding textEditable"
+                               ng-disabled="!editingApplicationDetail" required />
+
+                        <div class="col-xs-6 nopadding">Employer</div>
+                        <input ng-model="application.client.employerName"
+                               placeholder="Employer Name"
+                               type="text"
+                               class="col-xs-6 nopadding textEditable"
+                               ng-disabled="!editingApplicationDetail" />
+
+                        <div class="col-xs-6 nopadding">Job Title</div>
+                        <input ng-model="application.client.jobTitle"
+                               placeholder="Job Title"
+                               type="text"
+                               class="col-xs-6 nopadding textEditable"
+                               ng-disabled="!editingApplicationDetail" />
+
+                        <div class="col-xs-12 remindersCard">
+                            <div class="col-xs-12 cardHeading cardVia cardViaBolder"
+                                 style="text-align: left;">
+                                Contact Details
+                            </div>
+                            <div class="col-xs-6 nopadding">Cell 1</div>
+                            <input ng-model="application.client.cell1"
+                                   placeholder="Cell 1"
+                                   type="text"
+                                   class="col-xs-6 nopadding textEditable"
+                                   ng-disabled="!editingApplicationDetail" />
+                            <div class="col-xs-6 nopadding">Cell 2</div>
+                            <input ng-model="application.client.cell2"
+                                   placeholder="Cell 2"
+                                   type="text"
+                                   class="col-xs-6 nopadding textEditable"
+                                   ng-disabled="!editingApplicationDetail" />
+
+                            <div class="col-xs-12 breakLine"></div>
+                            <div class="col-xs-6 nopadding">Tel 1</div>
+                            <input ng-model="application.client.tel1"
+                                   placeholder="Tel 1"
+                                   type="text"
+                                   class="col-xs-6 nopadding textEditable"
+                                   ng-disabled="!editingApplicationDetail" />
+                            <div class="col-xs-6 nopadding">Tel 2</div>
+                            <input ng-model="application.client.tel2"
+                                   placeholder="Tel 2"
+                                   type="text"
+                                   class="col-xs-6 nopadding textEditable"
+                                   ng-disabled="!editingApplicationDetail" />
+
+                            <div class="col-xs-12 breakLine"></div>
+                            <div class="col-xs-6 nopadding">Email 1</div>
+                            <input ng-model="application.client.email"
+                                   placeholder="Email 1"
+                                   type="text"
+                                   class="col-xs-6 nopadding textEditable"
+                                   ng-disabled="!editingApplicationDetail" />
+                            <div class="col-xs-6 nopadding">Email 2</div>
+                            <input ng-model="application.client.email2"
+                                   placeholder="Email 2"
+                                   type="text"
+                                   class="col-xs-6 nopadding textEditable"
+                                   ng-disabled="!editingApplicationDetail" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 remindersCard pull"
+                 ng-if="!isNewApplicaiton"
+                 ng-show="applicationAdvisorEditHistory != null">
+                <div class="col-xs-12 cardHeading cardVia cardViaBolder"
+                     style="text-align: left; padding-right: 0;">
+                    Application Edit History
+                </div>
+
+                <table ng-repeat="appEditHistory in applicationAdvisorEditHistory">
+                    <tr>
+                        <td>
+                            Name: {{appEditHistory.advisorName}}({{appEditHistory.advisorIdNumber}})
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Date Edited: {{appEditHistory.dateEdited}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><br /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="pull-right col-xs-6 remindersCards"
+             ng-if="!isNewApplication"
+             ng-show="ApplicationAdvisorHistor != null">
+            <div class="col-xs-12 remindersCard">
+                <div class="col-xs-12 cardHeading cardVia cardViaBolder"
+                     style="text-align: left; padding-right: 0;">
+                    Application Adviser History
+                </div>
+                <table ng-repeat="appAdvi in  ApplicationAdvisorHistor">
+                    <tr>
+                        <td>
+                            Name: {{appAdvi.newAdviName}}({{appAdvi.newAdviIdNum}})
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Date Started: {{appAdvi.dateStarted}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Date Ended: {{appAdvi.dateEnded}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><br /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-6 remindersCards" style="padding-top: 0px;" ng-if="isNewApplication">
+        <div class="col-xs-12 remindersCard">
+            <div class="col-xs-12 uberbreak" ng-repeat="address in application.client.addresses">
+                <div class="col-xs-2 btn crossButton"
+                        style="float: right;"
+                        title="Delete Document"
+                        ng-click="deleteAddress($index)"
+                        ng-show="editingApplicationDetail">
+                    X
+                </div>
+                <div class="col-xs-12 cardHeading cardVia cardViaBolder"
+                        style="text-align: left;">
+                    Address {{ application.client.addresses.length > 1 ? $index + 1 : ""}}
+                </div>
+
+                <div class="col-xs-6 nopadding">Address Type:</div>
+                <select class="col-xs-6 nopadding textEditable"
+                        ng-model="address.addressType"
+                        style="float: right;"
+                        ng-disabled="!editingApplicationDetail"
+                        ng-options="addressType.name for addressType in AddressTypes track by addressType.id">
+                    <option ng-repeat="addressType in AddressTypes"
+                            value="{{ addressType.id }}">
+                        {{ addressType.name }}
+                    </option>
+                </select>
+                <div class="col-xs-6 nopadding">Description:</div>
+                <input ng-model="address.description"
+                        placeholder="Description"
+                        type="text"
+                        class="col-xs-6 nopadding textEditable"
+                        ng-disabled="!editingApplicationDetail" />
+
+                <div class="col-xs-12 breakLine"></div>
+                <div class="col-xs-6 nopadding">Street 1:</div>
+                <input ng-model="address.street1"
+                        placeholder="Street 1"
+                        type="text"
+                        class="col-xs-6 nopadding textEditable"
+                        ng-disabled="!editingApplicationDetail" />
+
+                <div class="col-xs-6 nopadding">Street 2:</div>
+                <input ng-model="address.street2"
+                        placeholder="Street 2"
+                        type="text"
+                        class="col-xs-6 nopadding textEditable"
+                        ng-disabled="!editingApplicationDetail" />
+
+                <div class="col-xs-6 nopadding">Street 3:</div>
+                <input ng-model="address.street3"
+                        placeholder="Street 3"
+                        type="text"
+                        class="col-xs-6 nopadding textEditable"
+                        ng-disabled="!editingApplicationDetail" />
+
+                <div class="col-xs-12 breakLine"></div>
+                <div class="col-xs-6 nopadding">Suburb:</div>
+                <input ng-model="address.suburb"
+                        placeholder="Suburb"
+                        type="text"
+                        class="col-xs-6 nopadding textEditable"
+                        ng-disabled="!editingApplicationDetail" />
+
+                <div class="col-xs-6 nopadding">Postal Code:</div>
+                <input ng-model="address.postalCode"
+                        placeholder="Postal Code"
+                        type="text"
+                        class="col-xs-6 nopadding textEditable"
+                        ng-disabled="!editingApplicationDetail" />
+
+                <div class="col-xs-6 nopadding">City:</div>
+                <input ng-model="address.city"
+                        placeholder="City"
+                        type="text"
+                        class="col-xs-6 nopadding textEditable"
+                        ng-disabled="!editingApplicationDetail" />
+
+                <div class="col-xs-6 nopadding">Map Url:</div>
+                <input ng-model="address.mapUrl"
+                        placeholder="Map Url"
+                        type="text"
+                        class="col-xs-6 nopadding textEditable"
+                        ng-disabled="!editingApplicationDetail" />
+                <div class="col-xs-12 breakLine"></div>
+
+                <div class="col-xs-6 nopadding">Province:</div>
+                <select class="col-xs-6 nopadding textEditable"
+                        ng-model="address.province"
+                        style="float: right;"
+                        ng-disabled="!editingApplicationDetail"
+                        ng-options="prov.name for prov in Province track by prov.id">
+                    <option ng-repeat="province in Province" value="{{ province.id }}">{{ province.name }}</option>
+                </select>
+
+                <div class="col-xs-6 nopadding">Country:</div>
+                <select class="col-xs-6 nopadding textEditable"
+                        ng-model="address.country"
+                        style="float: right;"
+                        ng-disabled="!editingApplicationDetail"
+                        ng-options="cntry.name for cntry in Country track by cntry.id">
+                    <option ng-repeat="country in Country" value="{{ country.id }}">{{ country.name }}</option>
+                </select>
+            </div>
+            <button class="btn btn-sm btn-primary nextButtonRegister"
+                    style="float: right;"
+                    ng-click="addAnotherAddress()"
+                    ng-disabled="!editingApplicationDetail">
+                Add Address
+            </button>
+        </div>
+    </div>
+
+    <div class="col-xs-12">
+        <button ng-show="!clientDetailsForm.$invalid"
+                class="col-xs-3 btn btn-sm btn-primary nextButtonRegister"
+                style="float: right;"
+                ng-click="!clientDetailsForm.$invalid && gotoPage(1)"
+                ng-if="isNewApplication">
+            Next
+        </button>
+    </div>
+</form>

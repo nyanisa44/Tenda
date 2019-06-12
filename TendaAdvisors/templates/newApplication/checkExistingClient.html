@@ -1,0 +1,104 @@
+﻿<div class="col-xs-12 remindersCard">
+    <div class="col-xs-12 cardHeading cardViaBolder">
+        Select an existing client
+    </div>
+    <div class="col-xs-6" style="margin-top:30px">
+        <input size="100"
+               list="clientList"
+               type="search"
+               placeholder="Type atleast 4 characters"
+               ng-model="searchTerm"
+               ng-change="doSearch(searchTerm)">
+        <datalist id="clientList">
+            <select ng-model="application.client"
+                    ng-options="client as (client.firstName + ' ' + client.lastName +'('+ client.idNumber +')') for client in contacts track by client.idNumber"
+                    ng-disabled="!editingApplicationDetail || isNewApplication_check">
+                <option value="" ng-show="!contact">-- Please select a user --</option>
+            </select>
+        </datalist>
+        <div style="margin-top:60px;font-size:medium" ng-show="(!!searchTerm && searchTerm.trim().length >= 4)">
+            You have selected  <span style="font-weight:800">{{(application.client.firstName + ' ' + application.client.lastName +'('+ application.client.idNumber +')') }}</span>
+        </div>
+    </div>
+    <div class="col-xs-2 btn btn-sm btn-primary"
+         style="margin-top:110px; float:left;"
+         ng-click="oldClient()">
+        Done
+    </div>
+</div>
+
+<div ng-show="notNewApplication_check ">
+    <div class="col-xs-12 remindersCard addMarginTopBottom">
+        <span class="pull col-xs-12">
+            <strong>Application details</strong>
+        </span>
+        <div class="col-xs-12">
+            <span class="pull col-xs-3">
+                Application Type:
+            </span>
+            <select class="col-xs-4 textEditable"
+                    ng-model="application.applicationType"
+                    ng-disabled="!editingApplicationDetail"
+                    ng-options="applicationType.title for applicationType in appTypes track by applicationType.id"></select>
+        </div>
+
+        <div class="col-xs-12">
+            <span class="pull col-xs-3">
+                Application Status:
+            </span>
+            <select class="col-xs-4 textEditable"
+                    ng-model="application.applicationStatus"
+                    ng-disabled="!editingApplicationDetail"
+                    ng-options="applicationStatus.status for applicationStatus in appStatus track by applicationStatus.id"></select>
+        </div>
+
+        <div class="col-xs-12">
+            <span class="col-xs-3">
+                Effective Start Date:
+            </span>
+            <input required
+                   datepicker
+                   value="2001-01-01"
+                   class="col-xs-4 textEditable"
+                   ng-change="updateEffectiveStartDate(effectiveStartDate)"
+                   ng-model="effectiveStartDate"
+                   ng-disabled="!editingApplicationDetail" />
+        </div>
+    </div>
+
+    <h4 class="extraLargeRedFont addMarginTopBottom">Adviser:</h4>
+
+    <div class="extraLargeFont"
+         ng-show="!editingApplicationDetail">
+        {{application.advisor.contact.firstName}} {{application.advisor.contact.lastName}} ({{application.advisor.contact.idNumber}})
+    </div>
+    <div class="col-xs-12 addMarginTopBottom"
+         ng-hide="!editingApplicationDetail">
+        <div class="col-xs-12">
+            <input size="100"
+                   list="clientListAdviser"
+                   type="search"
+                   placeholder="Type atleast 4 characters"
+                   ng-model="searchTermAdviser"
+                   ng-change="doSearchAdviser(searchTermAdviser)">
+            <datalist id="clientListAdviser">
+                <select ng-model="application.advisor"
+                        ng-options="adv as (adv.name + ' ' + adv.lastName +'('+ adv.idNumber +')') for adv in advisors track by adv.idNumber + ' ' + adv.name + ' ' + adv.lastName "
+                        ng-disabled="!editingApplicationDetail || isNewApplication_check">
+                    <option value="">-- Please select a user --</option>
+                </select>
+            </datalist>
+
+            <div class="largeFont"
+                 ng-show="(!!searchTermAdviser && searchTermAdviser.trim().length >= 4) && gotAdvisor">
+                You have selected  <span style="font-weight:800">{{application.advisor.name + ' ' + application.advisor.lastName +'('+ application.advisor.idNumber +')' }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12">
+        <button class="col-xs-3 btn btn-sm btn-primary nextButtonRegister pull-right" ng-click="gotoPage(1)">
+            Next
+        </button>
+    </div>
+</div>
